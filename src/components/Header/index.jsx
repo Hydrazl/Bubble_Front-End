@@ -21,7 +21,6 @@ export default function Header() {
 
                 <ul>
                     <li><ion-icon name="person-circle"></ion-icon>Seu Perfil</li>
-                    <li><ion-icon name="settings-outline"></ion-icon>Configurações</li>
                 </ul>
             </nav>
         </header>
