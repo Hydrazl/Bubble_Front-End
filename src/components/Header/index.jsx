@@ -1,9 +1,9 @@
+import './Header.css'
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faHouse, faCompass, faComments } from "@fortawesome/free-solid-svg-icons";
 import whiteBubbling from '../../assets/white_icon_bubbling.png'
 import blackBubbling from '../../assets/black_icon_bubbling.png'
-
-import './Header.css'
 
 export default function Header() {
     return (
@@ -23,6 +23,7 @@ export default function Header() {
 
                 <ul>
                     <li><ion-icon name="person-circle"></ion-icon>Seu Perfil</li>
+                    <li><ion-icon name="settings-outline"></ion-icon>Configurações</li>
                 </ul>
             </nav>
         </header>
