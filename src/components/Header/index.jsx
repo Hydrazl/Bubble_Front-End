@@ -3,12 +3,14 @@ import { faBell, faHouse, faCompass, faComments } from "@fortawesome/free-solid-
 import whiteBubbling from '../../assets/white_icon_bubbling.png'
 import blackBubbling from '../../assets/black_icon_bubbling.png'
 
+import './Header.css'
+
 export default function Header() {
     return (
         <header>
             <div>
                 <img src='black-logo.png' alt="logo" />
-                <p>BUBBLE</p>
+                <p className="teste">BUBBLE</p>
             </div>
             <nav>
                 <ul>
