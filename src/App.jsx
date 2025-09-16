@@ -1,6 +1,7 @@
-import { useState } from 'react'
+
 import './App.css'
 import Header from './components/Header'
+import Post from './components/Postagem'
 
 function App() {
   return (
@@ -8,6 +9,9 @@ function App() {
     <header>
       <Header/>
     </header>
+    <main>
+      <Post/>
+    </main>
     </>
   )
 }
