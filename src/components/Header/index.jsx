@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faHouse, faCompass, faComments } from "@fortawesome/free-solid-svg-icons";
-import whiteBubbling from '../../assets/white_icon_bubbling.png'
+// import whiteBubbling from '../../assets/white_icon_bubbling.png'
 import blackBubbling from '../../assets/black_icon_bubbling.png'
 
 export default function Header() {
@@ -10,7 +10,7 @@ export default function Header() {
                 <img src='black-logo.png' alt="logo" />
                 <p>BUBBLE</p>
             </div>
-            <nav>
+            <nav>git 
                 <ul>
                     <li><FontAwesomeIcon icon={faHouse} /> Início</li>
                     <li><img src={blackBubbling} alt="Borbulhando" /> Borbulhando</li>

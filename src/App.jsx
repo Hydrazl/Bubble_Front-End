@@ -1,6 +1,7 @@
-import { useState } from 'react'
+
 import './App.css'
 import Header from './components/Header'
+import Aside from './components/Aside-bolhas'
 
 function App() {
   return (
@@ -8,6 +9,11 @@ function App() {
     <header>
       <Header/>
     </header>
+
+    <aside>
+      <Aside/>
+    </aside>
+
     </>
   )
 }
