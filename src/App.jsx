@@ -10,7 +10,11 @@ function App() {
       <Header/>
     </header>
     <main>
-      <Post/>
+      <section className='post_roll'>
+        <article ><Post/></article>
+        <article><Post/></article>
+        <article><Post/></article>
+      </section>
     </main>
     </>
   )
