@@ -1,5 +1,33 @@
 @import 'tailwindcss';
 
-.teste {
-    @apply text-white;
+.content{
+    @apply p-4 fixed
+}
+
+.content li{
+    @apply cursor-pointer px-3 gap-2 flex w-full items-center transform transition duration-300 hover:bg-[var(--hover)]  hover:shadow-xl hover:scale-105 select-none;
+}
+
+.logo_content {
+    @apply flex rounded-xl w-57 h-16 bg-[var(--primary)] text-2xl font-semibold text-[var(--text)] justify-center items-center gap-2 ; 
+}
+
+.nav {
+    @apply flex flex-col rounded-xl w-57 bg-[var(--primary)] text-2xl font-semibold text-[var(--text)] items-start overflow-hidden; 
+}
+
+#pages_nav {
+    @apply my-7 pt-6 h-172 justify-start gap-10; 
+}
+
+#person_nav {
+    @apply h-28 justify-center gap-2 select-none; 
+}
+
+
+.pages_nav li {
+  @apply py-2 ; 
+}
+.person_nav li {
+  @apply py-1 ; 
 }
