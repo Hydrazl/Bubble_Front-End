@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 .content{
-    @apply p-4 fixed
+    @apply p-4 fixed absolute
 }
 
 .content li{
@@ -13,9 +13,7 @@
 .logo_content {
     @apply flex rounded-xl pl-4 w-57 h-16 bg-[var(--primary)] text-3xl font-semibold text-[var(--text)] items-center gap-2; 
 }
-.logo_content img{
-    @apply pr-1;
-}
+
 
 .nav {
     @apply flex flex-col rounded-xl w-57 bg-[var(--primary)] text-2xl font-semibold text-[var(--text)] items-center overflow-hidden ; 
