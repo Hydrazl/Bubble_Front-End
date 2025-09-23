@@ -1,8 +1,7 @@
 import './Header.css'
-
+import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faHouse, faCompass, faComments } from "@fortawesome/free-solid-svg-icons";
-
 import whiteBubbling from '../../assets/white_icon_bubbling.png'
 import blackBubbling from '../../assets/black_icon_bubbling.png'
 
@@ -29,7 +28,6 @@ export default function Header() {
                     </ul>
                 </nav>
             </div>
-        </header>
-        
+        </header>     
     );
 }

@@ -1,7 +1,11 @@
 @import 'tailwindcss';
-
 :root{
     --primary: #464646;
     --hover: #5f5f5f;
+    --bg: #1d1d1d;
     --text: #E5E5E5;
+}
+
+body{
+    @apply bg-[var(--bg)]
 }
