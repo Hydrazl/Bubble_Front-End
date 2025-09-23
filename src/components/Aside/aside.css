@@ -1,0 +1,13 @@
+@import 'tailwindcss';
+
+.container {
+    @apply text-[var(--text)] flex flex-col h-200 w-40 bg-[var(--primary)] right-0 top-0 fixed rounded-2xl my-20 mr-10;
+}
+
+.bubble{
+    @apply h-10 w-10 my-4
+}
+
+.bubble ion-icon{
+    @apply text-5xl
+} 

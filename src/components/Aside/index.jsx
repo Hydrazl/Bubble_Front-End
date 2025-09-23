@@ -7,36 +7,36 @@ import "./aside.css"
 export default function Aside() {
     return (
         <aside>
-            <div>
-                <div>
+            <div className="container">
+                <div className="bubble">
                     <FontAwesomeIcon icon={ faGithub } /> 
                 </div>
 
-                <div>
+                <div className="bubble">
                     <IonIcon icon={ rocketOutline } />
                 </div>
 
-                <div>
+                <div className="bubble">
                    <IonIcon icon={ airplaneOutline } />
                 </div>
 
-                <div>
+                <div className="bubble">
                    <ion-icon icon={ carSportOutline} />
                 </div>
 
-                <div>
+                <div className="bubble">
                    <ion-icon icon={ basketballOutline } />
                 </div>
 
-                <div>
+                <div className="bubble">
                    <ion-icon icon={ gameControllerOutline } />
                 </div>
 
-                <div>
+                <div className="bubble">
                    <ion-icon icon={ chatbubblesOutline } />
                 </div>
 
-                <div>
+                <div className="bubble">
                    <ion-icon icon={ footballOutline } />
                 </div>
             </div>
