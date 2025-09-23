@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faHouse, faCompass, faComments } from "@fortawesome/free-solid-svg-icons";
 // import whiteBubbling from '../../assets/white_icon_bubbling.png' Deixei em comentarios para não ficar vermelho o arquivo toda hr
