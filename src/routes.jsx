@@ -12,10 +12,10 @@ function AppRoutes() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Home />}></Route>
-                <Route path="/borbulhando" element={<Trending />}></Route>
+                <Route path="/trending" element={<Trending />}></Route>
                 <Route path="/explorer" element={<Explorer />}></Route>
-                <Route path="/bulhufas" element={<Chat />}></Route>
-                <Route path="/blops" element={<Notification />}></Route>
+                <Route path="/chat" element={<Chat />}></Route>
+                <Route path="/notifications" element={<Notification />}></Route>
                 <Route path="/profile" element={<Profile />}></Route>
                 <Route path="/settings" element={<Settings />}></Route>
             </Routes>
