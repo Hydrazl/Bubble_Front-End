@@ -6,6 +6,7 @@ import Chat from './pages/Chat';
 import Notification from "./pages/Notification";
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
+import Login from "./pages/Login/Join";
 
 function AppRoutes() {
     return (
@@ -17,6 +18,7 @@ function AppRoutes() {
                 <Route path="/chat" element={<Chat />}></Route>
                 <Route path="/notifications" element={<Notification />}></Route>
                 <Route path="/profile" element={<Profile />}></Route>
+                <Route path="/login" element={<Login />}></Route>
                 <Route path="/settings" element={<Settings />}></Route>
             </Routes>
         </BrowserRouter>
