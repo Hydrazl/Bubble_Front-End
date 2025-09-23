@@ -1,7 +1,5 @@
-
 import './App.css'
-import Header from './components/Header'
-import Post from './components/Postagem'
+import AppRoutes from './routes'
 
 function App() {
   return (
@@ -17,6 +15,7 @@ function App() {
       </section>
     </main>
     </>
+    <AppRoutes />
   )
 }
 
