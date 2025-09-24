@@ -9,3 +9,7 @@
 body{
     @apply bg-[var(--bg)]
 }
+
+input:focus {
+    @apply outline-none focus:ring-0;
+}

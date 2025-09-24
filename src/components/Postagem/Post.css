@@ -4,7 +4,7 @@
     @apply flex absolute flex-col items-center justify-center w-full h-full gap-15 my-202
 }
 .conteiner-post {
-    @apply flex flex-col my-20 p-3 px-5 rounded-2xl bg-[var(--primary)] text-[var(--text)] w-230 justify-self-center;
+    @apply flex flex-col my-10 mb-20 p-3 px-5 rounded-2xl bg-[var(--primary)] text-[var(--text)] w-230 justify-self-center;
 }
 .conteiner-perfil, .like, .coments, .display-like{
     @apply flex flex-row select-none 

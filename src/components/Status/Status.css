@@ -1,15 +1,19 @@
 @import "tailwindcss";
 
 .container-status{
-    @apply flex flex-row bg-[var(--primary)] h-10 w-200 justify-self-center mt-5 rounded-lg items-center justify-center text-[var(--text)]
+    @apply flex flex-row bg-[var(--primary)] h-12 w-230 justify-self-center mt-5 rounded-lg items-center justify-center text-[var(--text)]
 }
 
 .inside-line{
     @apply border-r-2 h-[65%]
 }
 
-#icon{
+#icons{
     @apply text-2xl mx-2 cursor-pointer
+}
+
+.music{
+    @apply text-[1px] 
 }
 
 #smile-icon{
@@ -21,5 +25,9 @@
 }
 
 .input-bubble{
+    @apply w-[90%] flex flex-row justify-between px-4 text-xl
+}
+
+.input-bubble input{
     @apply w-[90%] flex flex-row justify-between px-4 text-xl
 }

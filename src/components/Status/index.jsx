@@ -6,7 +6,7 @@ export default function Status() {
     return(
         <div className='container-status'>
             <div className="music">
-                <FontAwesomeIcon icon={ faMusic } id="icon"/>
+                <FontAwesomeIcon icon={ faMusic } id="icons"/>
             </div>
             <div className='inside-line'/>
             <div className="input-bubble">
