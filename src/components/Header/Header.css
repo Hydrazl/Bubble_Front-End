@@ -7,9 +7,11 @@
 .content li{
     @apply my-[-30] cursor-pointer px-3 gap-2 flex w-53 h-11 items-center transform transition duration-300 hover:bg-[var(--hover)] hover:scale-105 select-none rounded-xl text-[--text];
 }
+
 .content li:hover{
     box-shadow: 0 10px 6px -1px rgba(0, 0, 0, 0.3);
 }
+
 .logo_content {
     @apply flex rounded-xl pl-4 w-57 h-16 bg-[var(--primary)] text-3xl font-semibold text-[var(--text)] items-center gap-2; 
 }
@@ -17,6 +19,7 @@
 .nav {
     @apply flex flex-col rounded-xl w-57 bg-[var(--primary)] text-2xl font-semibold text-[var(--text)] items-center overflow-hidden ; 
 }
+
 #pages_nav {
     @apply my-7 pt-6 h-172 justify-start gap-10 ; 
 }
@@ -28,10 +31,10 @@
 .pages_nav li {
   @apply py-2 ; 
 }
+
 .person_nav li {
   @apply py-1 ;  
 }
-
 
 .borbulhando{
   @apply flex flex-row gap-2; 

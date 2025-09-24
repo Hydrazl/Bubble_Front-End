@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+.container-status{
+    @apply flex flex-row bg-[var(--primary)] h-10 w-200 justify-self-center mt-5 rounded-lg items-center justify-center text-[var(--text)]
+}
+
+.inside-line{
+    @apply border-r-2 h-[65%]
+}
+
+#icon{
+    @apply text-2xl mx-2 cursor-pointer
+}
+
+#smile-icon{
+    @apply text-2xl mr-[-.4rem] cursor-pointer
+}
+
+#arrow-icon{
+    @apply text-xl mx-2 rotate-45 mr-4 cursor-pointer
+}
+
+.input-bubble{
+    @apply w-[90%] flex flex-row justify-between px-4 text-xl
+}
