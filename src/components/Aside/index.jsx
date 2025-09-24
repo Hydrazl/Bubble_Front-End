@@ -1,8 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IonIcon } from "@ionic/react";
 import { airplaneOutline, rocketOutline, carSportOutline, basketballOutline, gameControllerOutline, chatbubblesOutline, footballOutline} from "ionicons/icons";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faGitAlt, faGithub, faJava, faPython, faSteam, faTiktok } from "@fortawesome/free-brands-svg-icons";
 import "./aside.css"
+import { faBasketball, faCar, faPlane, faRocket } from "@fortawesome/free-solid-svg-icons";
 
 export default function Aside() {
     return (
@@ -13,31 +14,31 @@ export default function Aside() {
                 </div>
 
                 <div className="bubble">
-                    <FontAwesomeIcon icon={ faGithub } id="icon"/> 
+                    <FontAwesomeIcon icon={ faRocket } id="icon"/> 
                 </div>
 
                 <div className="bubble">
-                    <FontAwesomeIcon icon={ faGithub } id="icon"/> 
+                    <FontAwesomeIcon icon={ faPlane } id="icon"/> 
                 </div>
 
                 <div className="bubble">
-                    <FontAwesomeIcon icon={ faGithub } id="icon"/> 
+                    <FontAwesomeIcon icon={ faGitAlt } id="icon"/> 
                 </div>
 
                 <div className="bubble">
-                    <FontAwesomeIcon icon={ faGithub } id="icon"/> 
+                    <FontAwesomeIcon icon={ faBasketball } id="icon"/> 
                 </div>
 
                 <div className="bubble">
-                    <FontAwesomeIcon icon={ faGithub } id="icon"/> 
+                    <FontAwesomeIcon icon={ faTiktok } id="icon"/> 
                 </div>
 
                 <div className="bubble">
-                    <FontAwesomeIcon icon={ faGithub } id="icon"/> 
+                    <FontAwesomeIcon icon={ faPython } id="icon"/> 
                 </div>
 
                 <div className="bubble">
-                    <FontAwesomeIcon icon={ faGithub } id="icon"/> 
+                    <FontAwesomeIcon icon={ faSteam } id="icon"/> 
                 </div>
             </div>
         </aside>
