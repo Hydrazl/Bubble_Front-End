@@ -1,17 +1,17 @@
 import './Home.css'
 import Header from '../../components/Header'
 import Post from '../../components/Postagem'
-
+import Status from '../../components/Status'
 function Home() {
   return (
     <>
     <header>
-      <Header/>
     </header>
 
     <main>
-      <Post/>
+      <Status/>
     </main>
+
     </>
   )
 }
