@@ -9,35 +9,35 @@ export default function Aside() {
         <aside>
             <div className="container">
                 <div className="bubble">
-                    <FontAwesomeIcon icon={ faGithub } /> 
+                    <FontAwesomeIcon icon={ faGithub } id="icon"/> 
                 </div>
 
                 <div className="bubble">
-                    <IonIcon icon={ rocketOutline } />
+                    <FontAwesomeIcon icon={ faGithub } id="icon"/> 
                 </div>
 
                 <div className="bubble">
-                   <IonIcon icon={ airplaneOutline } />
+                    <FontAwesomeIcon icon={ faGithub } id="icon"/> 
                 </div>
 
                 <div className="bubble">
-                   <ion-icon icon={ carSportOutline} />
+                    <FontAwesomeIcon icon={ faGithub } id="icon"/> 
                 </div>
 
                 <div className="bubble">
-                   <ion-icon icon={ basketballOutline } />
+                    <FontAwesomeIcon icon={ faGithub } id="icon"/> 
                 </div>
 
                 <div className="bubble">
-                   <ion-icon icon={ gameControllerOutline } />
+                    <FontAwesomeIcon icon={ faGithub } id="icon"/> 
                 </div>
 
                 <div className="bubble">
-                   <ion-icon icon={ chatbubblesOutline } />
+                    <FontAwesomeIcon icon={ faGithub } id="icon"/> 
                 </div>
 
                 <div className="bubble">
-                   <ion-icon icon={ footballOutline } />
+                    <FontAwesomeIcon icon={ faGithub } id="icon"/> 
                 </div>
             </div>
         </aside>

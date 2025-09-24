@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 .content{
-    @apply p-4 fixed absolute top-0
+    @apply p-4 fixed absolute top-0 ml-6
 }
 
 .content li{
