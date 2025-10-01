@@ -1,10 +1,11 @@
 import '../Login.css'
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faGoogle, faInstagram, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 export default function Register() {
     return (
-        <main className='login-container'>
+        <main className='body-login'>
             <div className="container">
                 <ion-icon name="exit"></ion-icon>
                 <div className="logo-content">
@@ -29,7 +30,7 @@ export default function Register() {
                         <li><FontAwesomeIcon icon={faFacebook} /></li>
                         <li><FontAwesomeIcon icon={faTwitter} /></li>
                     </ul>
-                    <p>Já possui uma conta?<span>Conecte-se</span></p>
+                    <p>Já possui uma conta?<span><Link to='/login'>Conecte-se</Link></span></p>
                 </form>
             </div>
         </main>

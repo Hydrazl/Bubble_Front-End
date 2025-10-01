@@ -1,0 +1,41 @@
+@import 'tailwindcss';
+
+.body-login{
+    @apply z-[-1] fixed w-[100%] object-cover
+}
+
+.container {
+    @apply h-160 w-210 rounded-2xl flex backdrop-blur-xs backdrop-grayscale-75 border-1 text-[var(--text)] flex-col p-4 bg-[#ffffff0f]
+}
+
+.login-main{
+    @apply flex w-screen h-screen justify-center items-center 
+}
+
+.circle-icon{
+    @apply rounded-full border-3 text-[var(--text)] size-15 flex items-center justify-center text-4xl rotate-180    
+}
+
+.logo-content{
+    @apply flex flex-row text-5xl h-20 w-full items-center absolute mx-68 font-semibold
+}
+
+.bubble_img{
+    @apply object-contain mr-3 size-20
+}
+
+.login-form{
+    @apply flex flex-col mx-40 top-40 absolute w-120
+}
+
+.login-form input{
+    @apply bg-[var(--text)] my-2 text-[var(--bg)] h-10 rounded-lg px-3 font-semibold text-xl
+}
+
+.login-form h1{
+    @apply font-semibold text-3xl ml-2
+}
+
+.login-checkbox{
+    @apply flex items-center gap-3 justify-between
+}

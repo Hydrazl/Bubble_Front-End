@@ -7,5 +7,13 @@
 }
 
 body{
-    @apply bg-[var(--bg)]
+    @apply bg-[var(--bg)];
+}
+
+*{
+    font-family:  "Quicksand", sans-serif;
+
+}
+input{
+    outline: none;
 }
