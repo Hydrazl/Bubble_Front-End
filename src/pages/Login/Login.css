@@ -1,20 +1,29 @@
 @import 'tailwindcss';
 
-.body-login{
-    @apply z-[-1] fixed w-[100%] object-cover
-}
 
-.container {
-    @apply h-160 w-210 rounded-2xl flex backdrop-blur-xs backdrop-grayscale-75 border-1 text-[var(--text)] flex-col p-4 bg-[#ffffff0f]
+.half-image2 {
+    @apply fixed top-0 left-0 w-1/2 h-screen object-cover z-[-1] rotate-180;
+}   
+  
+.half-image {
+    @apply fixed top-0 right-0 w-1/2 h-screen object-cover z-[-1];
+}   
+
+.container { /* A base do login, o container principal */
+    @apply h-160 w-210 rounded-2xl flex backdrop-blur-xs backdrop-grayscale-75 border-2 text-[var(--text)] flex-col p-4 bg-[#0000004e]
 }
 
 .login-main{
-    @apply flex w-screen h-screen justify-center items-center 
+    @apply flex w-screen h-screen justify-center items-center z-[2]
 }
+
+/* Icone de voltar*/
 
 .circle-icon{
     @apply rounded-full border-3 text-[var(--text)] size-15 flex items-center justify-center text-4xl rotate-180    
 }
+
+/*  */
 
 .logo-content{
     @apply flex flex-row text-5xl h-20 w-full items-center absolute mx-68 font-semibold
@@ -25,17 +34,25 @@
 }
 
 .login-form{
-    @apply flex flex-col mx-40 top-40 absolute w-120
+    @apply flex flex-col mx-30 top-40 absolute w-130
 }
 
 .login-form input{
-    @apply bg-[var(--text)] my-2 text-[var(--bg)] h-10 rounded-lg px-3 font-semibold text-xl
+    @apply bg-[var(--text)] my-2 text-[var(--bg)] h-11 rounded-lg px-3 font-semibold text-lg
 }
 
 .login-form h1{
-    @apply font-semibold text-3xl ml-2
+    @apply font-semibold text-4xl ml-2
 }
 
 .login-checkbox{
-    @apply flex items-center gap-3 justify-between
+    @apply flex items-center gap-3 justify-between mt-[-1.25rem]
+}
+
+.redes_sociais{
+    @apply flex flex-row justify-between mb-3 w-100 
+}
+
+.redes_sociais li{
+    @apply border-2 text-[var(--text)] size-15 rounded-2xl justify-center flex items-center text-[2.5rem]
 }

@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faGoogle, faInstagram, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import bg from '../../../assets/login-bg.png'
+import bg2 from '../../../assets/login-bg2.png'
 
 export default function Login() {
     return (
         <main>
-            <img src={bg} className='body-login'/>
+            <img src={bg2} className="half-image2" />
+            <img src={bg2} className="half-image" />
             <div className='login-main'>
                 <div className='login-container'>
                     <div className="container">
@@ -24,23 +26,29 @@ export default function Login() {
                             <input type="password" name="password" id="" placeholder='Senha'/>
 
                             <div className='login-checkbox'>
-                                <div>
-                                    <input type="checkbox" /><p>mantennha me conectado</p>
+                                <div className='flex flex-row items-center gap-2'>
+                                    <input type="checkbox" />
+                                    <p>Mantenha-me conectado</p>
                                 </div>
-                                <div></div>
-                                <span className=''>Esqueceu a senha?</span>
+                                <div>
+                                    <span className=''>Esqueceu a senha?</span>
+                                </div>
+                                
                             </div>
-                            <input type="submit" value="Continuar" />
-                            <p>ou Conecte com uma Rede Social</p>
+                            <input type="submit" value="Continuar"/>
+                            <p className='text-center mb-5'>ou Conecte com uma Rede Social</p>
 
-                            <ul>
+                            <ul className='redes_sociais'>
                                 <li><FontAwesomeIcon icon={faInstagram} /></li>
                                 <li><FontAwesomeIcon icon={faLinkedin} /></li>
                                 <li><FontAwesomeIcon icon={faGoogle} /></li>
                                 <li><FontAwesomeIcon icon={faFacebook} /></li>
                                 <li><FontAwesomeIcon icon={faTwitter} /></li>
                             </ul>
-                            <p>Não possui uma conta ainda?<span><Link to='/register'>Cadastre-se</Link></span></p>
+                            <div className='flex flex-row gap-3'>
+                                <p>Não possui uma conta ainda?</p>
+                                <span ><Link to='/register'>Cadastre-se</Link></span>
+                            </div>
                         </form>
                     </div>
                 </div>
