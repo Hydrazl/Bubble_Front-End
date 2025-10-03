@@ -1,29 +1,56 @@
-import Header from '../../components/Header'
-import Bannerprofile from '../../components/BannerProfile'
+import { Link } from 'react-router-dom';
+import BubbleRecommended from '../../components/BubbleRecoment';
+import Header from '../../components/Header';
+import BannerProfile from './../../components/BannerProfile/index';
+import Post from './../../components/Postagem/index';
 
-function Profile() {
+export default function Profile(contentImg) {
     return (
-    <>
-        <header>
-            <Header/>
-        </header>
+        <>
+            <header>
+                <Header />
+            </header>
 
-        <main>
+            <main>
+                <BannerProfile  name={'Calabreso'}
+                                bio={'Ola pessoal'}
+                                following={2121}
+                                follows={232143}
+                                bubbles={1233}
+                                nickName={'@davibritto'}
+                                />
+                
+                <section className='menuBubbleRecommended'>
 
-            <Bannerprofile name={'Calabreso'}
-                           nickName={'@DaviBritto'}bio={'⚡ Foco, visão e propósito 📖 “Se Deus é por nós, quem será contra?” – Rm 8:31 ✉️ contato@davioficial.com.br'}
-                           following={32}
-                           follows={'1M'}
-                           bubbles={'4'}
-             />
+                    <BubbleRecommended nameBubble={"jogo"}
+                                       imgBubble={"img.png"}
+                                       />
+                    
+                    <BubbleRecommended nameBubble={"jogo"}
+                                       imgBubble={"img.png"}
+                                       />
 
-            <section>
+                    <BubbleRecommended nameBubble={"jogo"}
+                                       imgBubble={"img.png"}
+                                       />
 
-            </section>
-        </main>
+                </section>
 
-    </>
+                <section className='menuPerfil'>
+
+                    <Link ><span className='abasProfile'>Post</span></Link> {/* Coloca um psiduo Item ::before para fazer aquela linha embaixo da palavra  */}
+                    <Link ><span className='abasProfile'>Curtidas</span></Link>
+                    <Link ><span className='abasProfile'>Salvos</span></Link>
+                    <Link ><span className='abasProfile'>Privados</span></Link>
+                    <Link ><span className='abasProfile'>Historico</span></Link>
+
+                </section>
+
+                <section>
+                    
+                </section>
+
+            </main>
+        </>
     )
 }
-
-export default Profile
