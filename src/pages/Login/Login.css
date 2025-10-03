@@ -13,6 +13,10 @@
     @apply h-160 w-210 rounded-2xl flex backdrop-blur-xs backdrop-grayscale-75 border-2 text-[var(--text)] flex-col p-4 bg-[#0000004e]
 }
 
+.container#register {
+    @apply h-180
+}
+
 .login-main{
     @apply flex w-screen h-screen justify-center items-center z-[2]
 }
@@ -20,13 +24,13 @@
 /* Icone de voltar*/
 
 .circle-icon{
-    @apply rounded-full border-3 text-[var(--text)] size-15 flex items-center justify-center text-4xl rotate-180    
+    @apply rounded-full border-3 text-[var(--text)] size-15 flex items-center justify-center text-4xl rotate-0 hover:rotate-180 transition-all duration-600
 }
 
 /*  */
 
 .logo-content{
-    @apply flex flex-row text-5xl h-20 w-full items-center absolute mx-68 font-semibold
+    @apply flex flex-row text-5xl h-20 w-full items-center absolute mx-68 font-semibold mt-1
 }
 
 .bubble_img{
@@ -34,7 +38,7 @@
 }
 
 .login-form{
-    @apply flex flex-col mx-30 top-40 absolute w-130
+    @apply flex flex-col mx-35 top-40 absolute w-130
 }
 
 .login-form input{
@@ -54,5 +58,21 @@
 }
 
 .redes_sociais li{
-    @apply border-2 text-[var(--text)] size-15 rounded-2xl justify-center flex items-center text-[2.5rem]
+    @apply border-2 text-[var(--text)] size-15 rounded-2xl justify-center flex items-center text-[2.5rem] cursor-pointer hover:scale-130 transition-all duration-350 ease-in-out
+}
+
+.link_text {
+    @apply relative inline-block;
+  }
+  
+.link_text::after {
+    content: '';
+    @apply absolute left-0 bottom-0 w-full h-[2px] bg-current;
+    transform: scaleX(0);
+    transform-origin: center; 
+    transition: transform 0.4s ease-in-out;
+}
+
+.link_text:hover::after {
+    transform: scaleX(1);
 }

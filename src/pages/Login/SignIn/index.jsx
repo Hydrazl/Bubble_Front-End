@@ -13,7 +13,7 @@ export default function Login() {
             <div className='login-main'>
                 <div className='login-container'>
                     <div className="container">
-                        <div className='circle-icon'>
+                        <div className='circle-icon cursor-pointer'>
                             <ion-icon name="arrow-forward-outline"></ion-icon>
                         </div>
                         <div className="logo-content">
@@ -27,27 +27,28 @@ export default function Login() {
 
                             <div className='login-checkbox'>
                                 <div className='flex flex-row items-center gap-2'>
-                                    <input type="checkbox" />
+                                    <input type="checkbox" className='cursor-pointer' />
                                     <p>Mantenha-me conectado</p>
                                 </div>
                                 <div>
-                                    <span className=''>Esqueceu a senha?</span>
+                                    <span className='cursor-pointer link_text'>Esqueceu a senha?</span>
                                 </div>
                                 
                             </div>
-                            <input type="submit" value="Continuar"/>
-                            <p className='text-center mb-5'>ou Conecte com uma Rede Social</p>
-
-                            <ul className='redes_sociais'>
-                                <li><FontAwesomeIcon icon={faInstagram} /></li>
-                                <li><FontAwesomeIcon icon={faLinkedin} /></li>
-                                <li><FontAwesomeIcon icon={faGoogle} /></li>
-                                <li><FontAwesomeIcon icon={faFacebook} /></li>
-                                <li><FontAwesomeIcon icon={faTwitter} /></li>
-                            </ul>
-                            <div className='flex flex-row gap-3'>
+                            <input type="submit" value="Continuar" className='cursor-pointer'/>
+                            <p className='text-center mb-5'>Conecte com uma Rede Social</p>
+                            <div className='flex justify-center'>
+                                <ul className='redes_sociais'>
+                                    <li><FontAwesomeIcon icon={faInstagram} /></li>
+                                    <li><FontAwesomeIcon icon={faLinkedin} /></li>
+                                    <li><FontAwesomeIcon icon={faGoogle} /></li>
+                                    <li><FontAwesomeIcon icon={faFacebook} /></li>
+                                    <li><FontAwesomeIcon icon={faTwitter} /></li>
+                                </ul>
+                            </div>
+                            <div className='flex flex-row gap-3 ml-2'>
                                 <p>Não possui uma conta ainda?</p>
-                                <span ><Link to='/register'>Cadastre-se</Link></span>
+                                <span ><Link to='/register' className='link_text'>Cadastre-se</Link></span>
                             </div>
                         </form>
                     </div>
