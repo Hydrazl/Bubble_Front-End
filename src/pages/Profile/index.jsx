@@ -2,9 +2,12 @@ import { Link } from 'react-router-dom';
 import BubbleRecommended from '../../components/BubbleRecoment';
 import Header from '../../components/Header';
 import BannerProfile from './../../components/BannerProfile/index';
-import Post from './../../components/Postagem/index';
+import GridPost from './../../components/GridPost/index';
+import photoProfile from '../../assets/meusegundo place.jpeg';
+import banner from '../../assets/ilhaplace.jpeg';
+import imgBubble from '../../assets/gitbolha.png';
 
-export default function Profile(contentImg) {
+export default function Profile() {
     return (
         <>
             <header>
@@ -18,20 +21,22 @@ export default function Profile(contentImg) {
                                 follows={232143}
                                 bubbles={1233}
                                 nickName={'@davibritto'}
+                                photoProfile={photoProfile}
+                                banner={banner}
                                 />
                 
                 <section className='menuBubbleRecommended'>
 
                     <BubbleRecommended nameBubble={"jogo"}
-                                       imgBubble={"img.png"}
+                                       imgBubble={imgBubble}
                                        />
                     
                     <BubbleRecommended nameBubble={"jogo"}
-                                       imgBubble={"img.png"}
+                                       imgBubble={imgBubble}
                                        />
 
                     <BubbleRecommended nameBubble={"jogo"}
-                                       imgBubble={"img.png"}
+                                       imgBubble={imgBubble}
                                        />
 
                 </section>
@@ -46,9 +51,7 @@ export default function Profile(contentImg) {
 
                 </section>
 
-                <section>
-                    
-                </section>
+                <GridPost/>
 
             </main>
         </>
