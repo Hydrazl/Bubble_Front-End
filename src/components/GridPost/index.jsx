@@ -8,12 +8,12 @@ export default function GridPost(){
     return(
         <>
           <div className='gridImgPost'>
-
-            <div className='styleImgPost'><img src={test2} /></div>
-            <div className='styleImgPost'><img src={test1} /></div>
-            <div className='styleImgPost'><img src={test2} /></div>
-            <div className='styleImgPost'><img src={test1} /></div>
-
+            <div id='post'><img src={test1} /></div>
+            <div id='post'><img src={test1} /></div>
+            <div id='post'><img src={test1} /></div>
+            <div id='post'><img src={test1} /></div>
+            <div id='post'><img src={test1} /></div>
+            {/*Add post   <div id='addpost'><p className='plus'>+</p><p className='add_post'>Add post</p></div>*/}
           </div>
         </>
     )

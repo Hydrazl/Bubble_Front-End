@@ -1,0 +1,63 @@
+@import 'tailwindcss';
+
+.conteinerProfile{
+    @apply flex flex-col h-100 right-50 absolute m-3 text-[var(--text)] 
+}
+
+.bannerAdjustment img{
+    @apply w-300 h-114 object-cover cursor-pointer rounded-md
+}
+
+.profile{
+    @apply relative top-[-110px] flex flex-row left-5 items-center 
+}
+
+.photoProfile img{ 
+    @apply rounded-full cursor-pointer
+}
+
+.nameProfile{
+    @apply flex flex-col h-[50%] mb-5 ml-5 text-center 
+    
+}
+
+.nameProfile h1{
+    @apply text-6xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)] font-medium rounded-t-3xl rounded-b-md hover:backdrop-blur-md cursor-pointer transition-all duration-1000 hover:bg-[#0000001c]
+}
+
+.borderNameProfile {
+    @apply w-80 h-2 rounded-2xl bg-[var(--text)] 
+}
+
+.nameProfile h2{
+    @apply text-3xl drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,1)] cursor-pointer
+}
+
+.btnProfile button {
+    @apply w-auto mx-6 h-15 text-3xl mb-5 rounded-2xl px-10 backdrop-blur-md cursor-pointer transition-all duration-700 bg-[#0000002f] border-2 border-[#ffffff34] hover:scale-105 ease-in-out hover:bg-[#1a1a1a59]
+}
+
+.btnProfile p{
+    @apply drop-shadow-[0_1.8px_1.8px_rgba(0,0,0,1)]
+}
+
+.text-bio{
+    @apply font-semibold text-2xl
+}
+
+.bio{
+    @apply flex flex-col w-200 whitespace-pre-line relative left-66.5 bottom-40 
+
+}
+
+.numProfile{
+    @apply justify-between flex flex-row w-125 text-3xl text-left left-65 bottom-30 relative
+}
+
+.numProfile h1{
+    @apply font-semibold text-4xl
+}
+
+.numProfile p{
+    @apply font-[100px]
+}
