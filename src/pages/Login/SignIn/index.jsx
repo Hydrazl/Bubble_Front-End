@@ -20,7 +20,7 @@ export default function Login() {
                             <img src="white-logo.png" alt="" className='bubble_img'/><p>Bubble</p>
                         </div>
 
-                        <form className='login-form'>
+                        <form className='login-form' action={`http://localhost:5173/`}>
                             <h1>LOGIN</h1>
                             <input type="email" name="email" id="" placeholder='Insera o seu E-mail'/>
                             <input type="password" name="password" id="" placeholder='Senha'/>

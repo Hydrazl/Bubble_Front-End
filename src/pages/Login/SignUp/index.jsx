@@ -20,7 +20,7 @@ export default function Register() {
                             <img src="white-logo.png" alt="" className='bubble_img'/><p>Bubble</p>
                         </div>
 
-                        <form className='login-form'>
+                        <form className='login-form' action={`http://localhost:5173/login`}>
                             <h1>CADASTRO</h1>
                             <input type="text" name="text" id="" placeholder='Nome de Usuário'/>
                             <input type="email" name="email" id="" placeholder='E-mail'/>
