@@ -19,3 +19,7 @@
 .plus{
     @apply text-[var(--text)]  relative top-5 text-[10rem]
 }
+
+#post, .add_post{
+    @apply cursor-pointer
+}
