@@ -1,4 +1,6 @@
 import Header from "../../components/Header/index"
+import { IonIcon } from '@ionic/react';
+import { arrowForwardOutline } from 'ionicons/icons';
 
 function NewPost() {
     return (
@@ -30,7 +32,7 @@ function NewPost() {
                             <div className=""><p>#</p></div>
                             <div className="">
                                 <div className="">
-                                    
+                                    <IonIcon icon={arrowForwardOutline} />
                                 </div>
                             </div>
                         </div>
