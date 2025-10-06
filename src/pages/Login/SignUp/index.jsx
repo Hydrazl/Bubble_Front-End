@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faGoogle, faInstagram, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import bg from '../../../assets/login-bg.png'
 import bg2 from '../../../assets/login-bg2.png'
+import ButtonGoBack from '../../../components/ButtonGoBack';
 
 export default function Register() {
     return (
@@ -13,11 +14,9 @@ export default function Register() {
             <div className='login-main'>
                 <div className='login-container'>
                     <div className="container" id='register'>
-                        <div className='circle-icon cursor-pointer'>
-                            <ion-icon name="arrow-forward-outline"></ion-icon>
-                        </div>
+                        <ButtonGoBack />
                         <div className="logo-content">
-                            <img src="white-logo.png" alt="" className='bubble_img'/><p>Bubble</p>
+                            <img src="../white-logo.png" alt="" className='bubble_img'/><p>Bubble</p>
                         </div>
 
                         <form className='login-form' action={`http://localhost:5173/login`}>

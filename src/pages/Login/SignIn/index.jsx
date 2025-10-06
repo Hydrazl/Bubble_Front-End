@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faGoogle, faInstagram, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import bg from '../../../assets/login-bg.png'
 import bg2 from '../../../assets/login-bg2.png'
+import ButtonGoBack from '../../../components/ButtonGoBack';
 
 export default function Login() {
     return (
@@ -13,11 +14,9 @@ export default function Login() {
             <div className='login-main'>
                 <div className='login-container'>
                     <div className="container">
-                        <div className='circle-icon cursor-pointer'>
-                            <ion-icon name="arrow-forward-outline"></ion-icon>
-                        </div>
+                        <ButtonGoBack />
                         <div className="logo-content">
-                            <img src="white-logo.png" alt="" className='bubble_img'/><p>Bubble</p>
+                            <img src="../white-logo.png" alt="" className='bubble_img'/><p>Bubble</p>
                         </div>
 
                         <form className='login-form' action={`http://localhost:5173/`}>
@@ -31,7 +30,7 @@ export default function Login() {
                                     <p>Mantenha-me conectado</p>
                                 </div>
                                 <div>
-                                    <span className='cursor-pointer link_text'>Esqueceu a senha?</span>
+                                    <span className='cursor-pointer link_text'><Link to='/login/forgot'>Esqueceu a senha?</Link></span>
                                 </div>
                                 
                             </div>
@@ -48,7 +47,7 @@ export default function Login() {
                             </div>
                             <div className='flex flex-row gap-3 ml-2'>
                                 <p>Não possui uma conta ainda?</p>
-                                <span ><Link to='/register' className='link_text'>Cadastre-se</Link></span>
+                                <span ><Link to='/login/register' className='link_text'>Cadastre-se</Link></span>
                             </div>
                         </form>
                     </div>

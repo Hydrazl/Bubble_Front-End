@@ -1,0 +1,6 @@
+@import 'tailwindcss';
+
+/* Icone de voltar*/
+.circle-icon{
+    @apply rounded-full border-3 text-[var(--text)] size-15 flex items-center justify-center text-4xl rotate-0 hover:rotate-180 transition-all duration-600
+}
