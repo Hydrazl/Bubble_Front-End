@@ -1,0 +1,45 @@
+@import 'tailwindcss';
+
+.post_roll{
+    @apply flex absolute flex-col items-center justify-center w-full h-full gap-15 my-202
+}
+.conteiner-post {
+    @apply flex flex-col my-10 mb-20 p-3 px-5 rounded-2xl bg-[var(--primary)] text-[var(--text)] w-230 justify-self-center;
+}
+.conteiner-perfil, .like, .coments, .display-like{
+    @apply flex flex-row select-none 
+}
+.like, .coments, .display-like {
+    @apply items-center  gap-2 text-2xl
+}
+
+.coments{
+    @apply items-center gap-3
+}
+.text-post{
+    @apply px-5 pb-3 
+}
+
+.nome-perfil{
+    @apply pt-2 pl-3 items-center text-3xl font-semibold
+}
+
+.arroba-perfil{
+     @apply text-xl font-normal
+}
+
+.conteudo-post{
+    @apply px-9 py-2 text-xl 
+}
+
+.display-like{ 
+    @apply gap-5 py-1 px-5 
+}
+
+.heart, .coment, .share{
+    @apply text-4xl cursor-pointer
+}
+
+.input-coments input{
+    @apply bg-[var(--hover)] w-105 mx-8.5 h-12 items-center px-6 pb-1 rounded-3xl
+}
