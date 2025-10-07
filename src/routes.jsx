@@ -11,6 +11,7 @@ import Register from "./pages/Login/SignUp";
 import Forgot from "./pages/Login/Forgot";
 import Sent from "./pages/Login/Sent";
 import Unfound from "./pages/Login/Unfound";
+import Status from './components/Status';
 
 function AppRoutes() {
     return (
@@ -28,6 +29,7 @@ function AppRoutes() {
                 <Route path="/login/forgot/sent-email" element={<Sent />}></Route>
                 <Route path="/login/forgot/unfound" element={<Unfound />}></Route>
                 <Route path="/settings" element={<Settings />}></Route>
+                <Route path="/status" element={<Status/>}></Route>
             </Routes>
         </BrowserRouter>
     )

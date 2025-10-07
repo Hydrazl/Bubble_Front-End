@@ -1,43 +1,44 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IonIcon } from "@ionic/react";
 import { airplaneOutline, rocketOutline, carSportOutline, basketballOutline, gameControllerOutline, chatbubblesOutline, footballOutline} from "ionicons/icons";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faGitAlt, faGithub, faJava, faPython, faSteam, faTiktok } from "@fortawesome/free-brands-svg-icons";
 import "./aside.css"
+import { faBasketball, faCar, faPlane, faRocket } from "@fortawesome/free-solid-svg-icons";
 
 export default function Aside() {
     return (
         <aside>
-            <div>
-                <div>
-                    <FontAwesomeIcon icon={ faGithub } /> 
+            <div className="container">
+                <div className="bubble">
+                    <FontAwesomeIcon icon={ faGithub } id="icon"/> 
                 </div>
 
-                <div>
-                    <IonIcon icon={ rocketOutline } />
+                <div className="bubble">
+                    <FontAwesomeIcon icon={ faRocket } id="icon"/> 
                 </div>
 
-                <div>
-                   <IonIcon icon={ airplaneOutline } />
+                <div className="bubble">
+                    <FontAwesomeIcon icon={ faPlane } id="icon"/> 
                 </div>
 
-                <div>
-                   <ion-icon icon={ carSportOutline} />
+                <div className="bubble">
+                    <FontAwesomeIcon icon={ faGitAlt } id="icon"/> 
                 </div>
 
-                <div>
-                   <ion-icon icon={ basketballOutline } />
+                <div className="bubble">
+                    <FontAwesomeIcon icon={ faBasketball } id="icon"/> 
                 </div>
 
-                <div>
-                   <ion-icon icon={ gameControllerOutline } />
+                <div className="bubble">
+                    <FontAwesomeIcon icon={ faTiktok } id="icon"/> 
                 </div>
 
-                <div>
-                   <ion-icon icon={ chatbubblesOutline } />
+                <div className="bubble">
+                    <FontAwesomeIcon icon={ faPython } id="icon"/> 
                 </div>
 
-                <div>
-                   <ion-icon icon={ footballOutline } />
+                <div className="bubble">
+                    <FontAwesomeIcon icon={ faSteam } id="icon"/> 
                 </div>
             </div>
         </aside>

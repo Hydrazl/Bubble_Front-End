@@ -14,6 +14,12 @@ body{
     font-family:  "Quicksand", sans-serif;
 
 }
+
 input{
     outline: none;
+    @apply bg-[var(--bg)]
+}
+
+input:focus {
+    @apply outline-none focus:ring-0;
 }
