@@ -13,7 +13,7 @@ export default function Profile(contentImg) {
 
             <main>
                 <BannerProfile  name={'Calabreso'}
-                                bio={'Gost de pamonha'}
+                                bio={'Eu sou o davi britto'}
                                 following={2121}
                                 follows={232143}
                                 bubbles={1233}
