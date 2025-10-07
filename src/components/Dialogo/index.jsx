@@ -13,20 +13,30 @@ export default function Dialogo({ url_img_profile, name }) {
   ];
 
   return (
-    <div className='dialogue'>
-      {blocos.map((bloco, i) => {
-        // se mensagem existir, quebramos em linhas
-        const linhas = bloco.mensagem ? bloco.mensagem.split('\n') : [''];
-        return linhas.map((linha, j) => (
-          <Mensagem 
-            key={`${i}-${j}`}
-            Person={bloco.Person}
-            mensagem={linha.trim()}
-            time={j === linhas.length - 1 ? bloco.time : ""} 
-            Type={bloco.Type}
-          />
-        ))
-      })}
-    </div>
+    <section className="dialog-container">
+      {/* Header fixo */}
+      <div className="avatar">
+        <picture>
+          <img src={url_img_profile} alt="Profile Picture" />
+        </picture>
+        <p>{name}</p>
+      </div>
+
+      {/* Conteúdo que scrolla */}
+      <div className="dialogue">
+        {blocos.map((bloco, i) => {
+          const linhas = bloco.mensagem ? bloco.mensagem.split('\n') : [''];
+          return linhas.map((linha, j) => (
+            <Mensagem 
+              key={`${i}-${j}`}
+              Person={bloco.Person}
+              mensagem={linha.trim()}
+              time={j === linhas.length - 1 ? bloco.time : ""} 
+              Type={bloco.Type}
+            />
+          ))
+        })}
+      </div>
+    </section>
   )
 }
