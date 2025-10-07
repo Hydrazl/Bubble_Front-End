@@ -1,0 +1,26 @@
+@import 'tailwindcss';
+
+.contato {
+    @apply flex h-30 mr-25 items-center relative cursor-pointer w-100
+}
+
+.contato h1{
+    @apply flex text-2xl font-semibold
+}
+
+.contato p{
+    @apply flex ml-2
+}
+
+.contato img{
+    @apply rounded-full h-25 object-contain ml-5
+}
+
+.contato-info{
+    @apply flex flex-col justify-center ml-3 
+}
+
+.line{
+    @apply w-80 h-[.15rem] bg-[var(--text)] justify-self-center rounded-2xl
+
+}

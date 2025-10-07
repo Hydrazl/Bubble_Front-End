@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+  
 img {
   user-select: none;
   -webkit-user-drag: none;
@@ -7,4 +8,5 @@ img {
 
 *{
     box-sizing:content-box;
+    font-family: 'Quicksand';
 }

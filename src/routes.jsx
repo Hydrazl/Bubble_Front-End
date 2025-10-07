@@ -20,7 +20,7 @@ function AppRoutes() {
                 <Route path="/" element={<Home />}></Route>
                 <Route path="/trending" element={<Trending />}></Route>
                 <Route path="/explorer" element={<Explorer />}></Route>
-                <Route path="/chat" element={<Chat />}></Route>
+                <Route path="/bulhufas" element={<Chat />}></Route>
                 <Route path="/notifications" element={<Notification />}></Route>
                 <Route path="/profile" element={<Profile />}></Route>
                 <Route path="/login" element={<Login />}></Route>

@@ -1,0 +1,43 @@
+@import 'tailwindcss';
+
+.container-chat{
+    @apply h-230 w-380 left-0 absolute overflow-scroll mt-4 ml-90 rounded-2xl items-center flex p-6 text-[var(--text)] bg-[var(--primary)];
+    scrollbar-width: none;
+}
+
+.container-chat h2{
+    @apply text-4xl font-medium justify-self-center
+}
+
+.line{
+    @apply w-60 h-[.2rem] bg-[var(--text)] justify-self-center rounded-2xl
+} 
+
+.container-contatos {
+    @apply w-100 h-180 overflow-scroll bg-[var(--primary)];
+    scrollbar-width: none;
+}
+
+.container-contatos li{
+    @apply my-6
+}
+.container-dialogo{
+    @apply w-265 h-215 overflow-scroll bg-[var(--bg)] rounded-3xl ml-5;
+    scrollbar-width: none;
+}
+
+#selected{
+    @apply bg-[var(--hover)] rounded-2xl
+}
+
+.textBar{
+    @apply bg-[var(--segundary)] flex relative w-263 h-16 top-[52.67rem] rounded-b-3xl left-[50.25rem] text-[var(--priamry)] text-2xl items-center justify-center
+}
+
+.textBar input{
+    @apply  rounded-3xl w-240 bg-[var(--text)] px-5
+}
+
+.icon{
+    @apply text-[var(--text)] rotate-40
+}
