@@ -4,7 +4,7 @@ import Header from '../../components/Header';
 import BannerProfile from './../../components/BannerProfile/index';
 import GridPost from './../../components/GridPost/index';
 import photoProfile from '../../assets/meusegundo place.jpeg';
-import banner from '../../assets/ilhaplace.jpeg';
+import banner from '../../assets/ocean.jpg';
 import imgBubble from '../../assets/gitbolha.png';
 import './Profile.css'
 
@@ -16,14 +16,14 @@ export default function Profile() {
             </header>
 
             <main>
-                <BannerProfile  name={'Calabreso'}
+                <BannerProfile  name={'Henri Baruki'}
                                 bio={`⚡ Foco, visão e propósito
                                     📖 “Se Deus é por nós, quem será contra?” – Rm 8:31
                                     ✉️ contato@davioficial.com.br`} 
                                 following={2121}
                                 follows={'23K'}
                                 bubbles={12}
-                                nickName={'@davibritto'}
+                                nickName={'@baruki015'}
                                 photoProfile={photoProfile}
                                 banner={banner}
                                 />
