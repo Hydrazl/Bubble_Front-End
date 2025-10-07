@@ -10,7 +10,7 @@
 }   
 
 .container { /* A base do login, o container principal */
-    @apply h-160 w-210 rounded-2xl flex backdrop-blur-xs backdrop-grayscale-75 border-2 text-[var(--text)] flex-col p-4 bg-[#0000004e]
+    @apply h-160 w-210 rounded-2xl flex backdrop-blur-xs backdrop-grayscale-75 border-2 text-[var(--text)] flex-col p-4 bg-[#0000004e] 
 }
 
 .container#register {
@@ -19,6 +19,10 @@
 
 .login-main{
     @apply flex w-screen h-screen justify-center items-center z-[2]
+}
+
+#forgot-main{
+    @apply h-115 w-200
 }
 
 /* Icone de voltar*/
@@ -30,23 +34,38 @@
 /*  */
 
 .logo-content{
-    @apply flex flex-row text-5xl h-20 w-full items-center absolute mx-68 font-semibold mt-1
+    @apply flex flex-row text-5xl h-20 w-210 items-center absolute font-semibold mt-1 justify-center  
+}
+
+#logo-forgot{
+    @apply flex flex-row text-5xl h-20 w-200 items-center absolute font-semibold mt-1 justify-center 
 }
 
 .bubble_img{
-    @apply object-contain mr-3 size-20
+    @apply object-contain mr-3 size-20 
 }
 
 .login-form{
-    @apply flex flex-col mx-35 top-40 absolute w-130
+    @apply flex flex-col top-40 absolute w-150 justify-center
 }
 
 .login-form input{
-    @apply bg-[var(--text)] my-2 text-[var(--bg)] h-11 rounded-lg px-3 font-semibold text-lg
+    @apply bg-[var(--text)] my-2 text-[var(--bg)] h-11 rounded-lg px-3 font-semibold text-lg w-150
+}
+
+#checkbox {
+    @apply cursor-pointer w-3.5
+}
+
+.form_login{
+    @apply w-full justify-center flex ml-[-.75rem]
 }
 
 .login-form h1{
     @apply font-semibold text-4xl ml-2
+}
+.login-form h3{
+    @apply font-normal text-lg ml-2 
 }
 
 .login-checkbox{
@@ -76,3 +95,4 @@
 .link_text:hover::after {
     transform: scaleX(1);
 }
+
