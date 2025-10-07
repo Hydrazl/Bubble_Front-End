@@ -8,7 +8,7 @@ import { faBasketball, faCar, faPlane, faRocket } from "@fortawesome/free-solid-
 export default function Aside() {
     return (
         <aside>
-            <div className="container">
+            <div className="container1">
                 <div className="bubble">
                     <FontAwesomeIcon icon={ faGithub } id="icon"/> 
                 </div>

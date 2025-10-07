@@ -1,0 +1,18 @@
+@import 'tailwindcss';
+
+.BubbleIconProfile img{
+    @apply rounded-full size-30 hover:size-2
+}
+
+.BubbleIconProfile {
+    @apply hover:scale-110 transition-all duration-150
+}
+
+.BubbleIconProfile:hover p {
+    @apply opacity-100
+}
+
+
+.BubbleIconProfile p{
+    @apply text-[var(--text)] text-center text-lg opacity-75 
+}

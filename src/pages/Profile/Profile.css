@@ -1,0 +1,18 @@
+@import 'tailwindcss';
+
+.menuBubbleRecommended{
+    @apply flex flex-row justify-around w-300 relative top-210 left-123 px-2
+}
+
+.menuPerfil{
+    @apply flex flex-row justify-around w-250 left-146 px-2 top-230 relative text-[var(--text)] text-4xl font-semibold
+}
+
+.menuPerfilSelected {
+  position: relative; /* Pai precisa ser relativo */
+}
+
+.menuPerfilSelected::after {
+  content: '';
+  @apply w-full h-1 bg-[var(--text)] rounded bottom-[-.3rem] left-0 absolute
+}
