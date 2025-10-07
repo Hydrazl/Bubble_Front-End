@@ -12,33 +12,23 @@ following, bubbles}){
             </div>
 
             <div className='profile'>
-
                 <div className='photoProfile'>
                     <img src={photoProfile}/>
                 </div>
 
                 <div className='nameProfile'>
-
                     <div>
-                        <p>{name}</p>
+                        <h1>{name}</h1>
                         {/* pensei em colocar o espaço para o icon, mas se pah não vai dar certo */}
                     </div>
-
                     <div className='borderNameProfile'></div>
-
-                    <div><p>{nickName}</p></div>
-                    
-
+                    <div><h2 className='italic'>{nickName}</h2></div>
                 </div>
-
+    
                 <div className='btnProfile'>
-
-                    <button className='btn'> Seguir </button>
-                    <button className='btn'> Compartilhar perfil</button>
-
+                    <button > <p>Seguir</p> </button>
+                    <button > <p>Compartilhar perfil</p></button>
                 </div>
-
-
             </div>
 
             <div className='bio'>
@@ -51,17 +41,17 @@ following, bubbles}){
             <div className='numProfile'>
 
                 <div className='textNumProfile'>
-                    <p>{follows}</p>
+                    <h1>{follows}</h1>
                     <p>Seguidores</p>
                 </div>
 
                 <div className='textNumProfile'>
-                    <p>{following}</p>
+                    <h1>{following}</h1>
                     <p>Seguindo</p>
                 </div>
 
                 <div className='textNumProfile'>
-                    <p>{bubbles}</p>
+                    <h1>{bubbles}</h1>
                     <p>Bolhas</p>
                 </div>
 

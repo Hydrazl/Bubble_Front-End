@@ -1,0 +1,25 @@
+@import 'tailwindcss';
+
+.gridImgPost{
+    @apply grid relative top-250 left-148 grid-cols-3 w-250 place-items-center gap-y-18
+}
+
+.gridImgPost #post img{
+    @apply w-65 h-90 object-cover rounded-lg border-3 text-[#ffffff5d] 
+}
+
+.gridImgPost #addpost{
+    @apply w-65 h-90 bg-[var(--primary)] rounded-lg border-3 text-[#ffffff5d] flex items-center flex-col
+}
+
+.add_post{
+    @apply text-[var(--text)] relative text-2xl bottom-8
+}
+
+.plus{
+    @apply text-[var(--text)]  relative top-5 text-[10rem]
+}
+
+#post, .add_post{
+    @apply cursor-pointer
+}
