@@ -2,5 +2,9 @@
 img {
   user-select: none;
   -webkit-user-drag: none;
-  pointer-events: none; /* opcional */
+  pointer-events: none;
+}/* opcional */
+
+*{
+    box-sizing:content-box;
 }
