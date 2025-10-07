@@ -1,11 +1,11 @@
 @import 'tailwindcss';
 
-.container {
+.container1 {
     @apply text-[var(--text)] flex flex-col h-210 w-30 bg-[var(--primary)] right-0 top-0 fixed rounded-2xl my-15 mr-10 justify-center items-center;
 }
 
 .bubble{
-    @apply size-22 my-2 flex bg-[var(--primary)] rounded-full justify-center items-center shadow-md p-6 shadow-black/40 cursor-pointer
+    @apply size-10 my-2 flex bg-[var(--primary)] rounded-full justify-center items-center shadow-md p-6 shadow-black/40 cursor-pointer
 }
 
 #icon{
