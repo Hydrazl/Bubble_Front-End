@@ -1,0 +1,6 @@
+@import 'tailwindcss';
+
+.dialogue{
+    @apply flex w-full flex-col mt-5 pb-17
+}
+

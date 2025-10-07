@@ -16,12 +16,12 @@ function Chat() {
       <section> {/* Section dos contatos */}
         <div>
           <h2>BULHUFAS</h2>
-          <div></div> {/* div q será a barra de baixo do txt */}
+          <div className='line'></div> {/* div q será a barra de baixo do txt */}
         </div>
 
-        <div className='containier-contatos'>
+        <div className='container-contatos'>
           <ul> {/* lista dos contatos */}
-            <li>
+            <li id='selected'>
               <Contatos name='Fulano de Tal' url_img_profile='https://avatars.githubusercontent.com/u/9919?s=200&v=4' last_msg='Oi, tudo bem?'/>
             </li>
             <li>
@@ -48,18 +48,19 @@ function Chat() {
 
         <div></div> {/* div q separará os contatos do chat*/}
 
-      <section>
+      <section className='container-dialogo'>
         {/* How fucking I´ll make this fucking chat happened? I really don´t have any idea. I hate FrontEnd! */}
         <Dialogo url_img_profile='https://avatars.githubusercontent.com/u/9919?s=200&v=4' name='Fulano de Tal'/>
 
+        
+      </section>
+    </main>
         <div className="textBar">
           <input type="text" />
           <button type='submit'>
-            <FontAwesomeIcon icon={faPaperPlane} />
+            <FontAwesomeIcon icon={faPaperPlane} className='icon' />
           </button>
         </div>
-      </section>
-    </main>
     </>
   )
 }
