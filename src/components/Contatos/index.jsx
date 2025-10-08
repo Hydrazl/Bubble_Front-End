@@ -12,7 +12,7 @@ export default function Contatos({name, url_img_profile, last_msg}) {
                     <p>{last_msg}</p>
                 </div>
             </div>
-            <div className='line'></div> {/* div q será a barra de baixo do txt */}
+             {/* div q será a barra de baixo do txt */}
         </>
     )
 }

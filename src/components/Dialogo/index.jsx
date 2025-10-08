@@ -1,5 +1,7 @@
 import './Dialogo.css';
 import Mensagem from '../Mensagem'
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function Dialogo({ url_img_profile, name }) {
   const blocos = [
@@ -37,6 +39,12 @@ export default function Dialogo({ url_img_profile, name }) {
           ))
         })}
       </div>
+        <div className="textBar">
+          <input type="text" />
+          <button type='submit'>
+            <FontAwesomeIcon icon={faPaperPlane} className='icon' />
+          </button>
+        </div>
     </section>
   )
 }

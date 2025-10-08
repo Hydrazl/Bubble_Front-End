@@ -1,11 +1,11 @@
 @import 'tailwindcss';
 
 .content{
-    @apply p-4 fixed top-0 ml-6
+    @apply p-4 fixed top-0 ml-6 w-60 max-h-[90%]
 }
 
 .content li{
-    @apply my-[-30] cursor-pointer px-3 gap-2 flex w-53 h-11 items-center transform transition duration-300 hover:bg-[var(--hover)] hover:scale-105 select-none rounded-xl text-[--text];
+    @apply my-[-30] cursor-pointer px-3 gap-2 flex w-[82%] h-11 items-center transform transition duration-300 hover:bg-[var(--hover)] hover:scale-105 select-none rounded-xl text-[--text];
 }
 
 .content li:hover{
@@ -17,11 +17,11 @@
 }
 
 .nav {
-    @apply flex flex-col rounded-xl w-57 bg-[var(--primary)] text-2xl font-semibold text-[var(--text)] items-center overflow-hidden ; 
+    @apply flex flex-col rounded-xl w-60 bg-[var(--primary)] text-2xl font-semibold text-[var(--text)] items-center overflow-hidden ; 
 }
 
 #pages_nav {
-    @apply my-7 pt-6 h-172 justify-start gap-10 ; 
+    @apply my-7 pt-6  justify-start gap-10 w-full; 
 }
 
 #person_nav {

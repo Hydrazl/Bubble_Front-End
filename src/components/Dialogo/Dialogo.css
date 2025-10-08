@@ -16,3 +16,15 @@
 .avatar img{
     @apply rounded-full size-20 ml-2 transition-none object-cover mr-20
 }
+
+.textBar{
+    @apply bg-[var(--segundary)] flex w-full h-20 rounded-b-3xl  text-[var(--priamry)] text-2xl items-center justify-center sticky left-0 bottom-0
+}
+
+.textBar input{
+    @apply  rounded-3xl w-[85%] bg-[var(--text)] px-5 h-12 text-[var(--primary)] font-medium
+}
+
+.icon{
+    @apply text-[var(--text)] rotate-40 text-3xl cursor-pointer
+}

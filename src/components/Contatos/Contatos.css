@@ -1,8 +1,14 @@
 @import 'tailwindcss';
 
 .contato {
-    @apply flex h-30 mr-25 items-center relative cursor-pointer w-100
+    @apply flex h-25 mr-25 items-center relative cursor-pointer w-100 rounded-2xl transition-colors duration-300
 }
+
+#unselected {
+    @apply hover:bg-[var(--terciary)] rounded-2xl transition-colors duration-300
+}
+
+
 
 .contato h1{
     @apply flex text-2xl font-semibold
@@ -13,14 +19,10 @@
 }
 
 .contato img{
-    @apply rounded-full h-25 object-contain ml-5
+    @apply rounded-full h-17 object-contain ml-5
 }
 
 .contato-info{
     @apply flex flex-col justify-center ml-3 
 }
 
-.line{
-    @apply w-80 h-[.15rem] bg-[var(--text)] justify-self-center rounded-2xl
-
-}

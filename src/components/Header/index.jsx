@@ -19,7 +19,7 @@ export default function Header() {
                         <li><Link to='/trending' className='borbulhando'><img src={whiteBubbling} alt="Borbulhando" /> Borbulhando</Link></li>
                         <li><Link to='/explorer'><FontAwesomeIcon icon={faCompass}/> Explorar</Link></li>
                         <li><Link to='/chat'><FontAwesomeIcon icon={faComments}/> Bulhufas</Link></li>
-                        <li className='mt-65'><Link to='/notifications'><FontAwesomeIcon icon={faBell}/> Flops</Link></li>
+                        <li className='mt-64 mb-5'><Link to='/notifications'><FontAwesomeIcon icon={faBell}/> Flops</Link></li>
                     </ul>
 
                     <ul className='nav' id='person_nav'>
