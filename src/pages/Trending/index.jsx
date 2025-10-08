@@ -12,6 +12,9 @@ function Trending() {
         </header>
 
         <main>
+        <div class="flex items-center justify-center h-screen bg-black">
+            <div class="bubble"></div>
+        </div>
 
             <h1>Borbulhando</h1>
             <h3>Principais Post que estouraram a Bolha</h3>
