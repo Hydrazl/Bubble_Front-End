@@ -43,3 +43,16 @@
 .input-coments input{
     @apply bg-[var(--hover)] w-105 mx-8.5 h-12 items-center px-6 pb-1 rounded-3xl
 }
+
+.conteiner-perfil img{
+    @apply size-25 rounded-full object-cover
+}
+
+.midia-post{
+    @apply justify-self-center bg-[var(--segundary)] w-200 rounded-3xl
+}
+
+.midia-post img{
+    @apply h-125 object-cover justify-self-center 
+}
+
