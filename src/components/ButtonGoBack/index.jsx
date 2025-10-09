@@ -1,6 +1,7 @@
 import React from "react";
 import './ButtonGoBack.css';
 import { useGoBack } from "../../hook/useGoBack";
+import { IoIosArrowRoundForward } from "react-icons/io";
 
 export default function ButtonGoBack({ fallbackPath = '/' }) {
         const goBack = useGoBack (fallbackPath);
@@ -8,7 +9,8 @@ export default function ButtonGoBack({ fallbackPath = '/' }) {
         return (    
             <button onClick={goBack}>
                 <div className='circle-icon cursor-pointer'>
-                    <ion-icon name="arrow-forward-outline"></ion-icon>
+                    <IoIosArrowRoundForward />
+                    {/* <ion-icon name="arrow-forward-outline"></ion-icon> */}
                 </div>
             </button>
         );

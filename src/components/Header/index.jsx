@@ -18,7 +18,7 @@ export default function Header() {
                         <li><Link to='/'><FontAwesomeIcon icon={faHouse}/> Início</Link></li>
                         <li><Link to='/trending' className='borbulhando'><img src={whiteBubbling} alt="Borbulhando" /> Borbulhando</Link></li>
                         <li><Link to='/explorer'><FontAwesomeIcon icon={faCompass}/> Explorar</Link></li>
-                        <li><Link to='/chat'><FontAwesomeIcon icon={faComments}/> Bulhufas</Link></li>
+                        <li><Link to='/bulhufas'><FontAwesomeIcon icon={faComments}/> Bulhufas</Link></li>
                         <li className='mt-64 mb-5'><Link to='/notifications'><FontAwesomeIcon icon={faBell}/> Flops</Link></li>
                     </ul>
 
