@@ -15,7 +15,7 @@ import Status from './components/Status';
 
 function AppRoutes() {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename="/Bubble_Front-End">
             <Routes>
                 <Route basename="/Bubble_Front-End" path="/" element={<Home />}></Route>
                 <Route path="/trending" element={<Trending />}></Route>
