@@ -17,7 +17,7 @@ function AppRoutes() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Home />}></Route>
+                <Route basename="/Bubble_Front-End" path="/" element={<Home />}></Route>
                 <Route path="/trending" element={<Trending />}></Route>
                 <Route path="/explorer" element={<Explorer />}></Route>
                 <Route path="/bulhufas" element={<Chat />}></Route>
