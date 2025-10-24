@@ -1,6 +1,7 @@
 import './Post.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faHeart, faComments, faShareNodes } from "@fortawesome/free-solid-svg-icons";
+import LikeButton from '../LikeButton';
 
 export default function Post({name, id, description, url_image_perfil, url_image_post, like_num, com_num}){
     return(
@@ -33,7 +34,7 @@ export default function Post({name, id, description, url_image_perfil, url_image
 
                     <div className='like'>
                         <h3 className='num-like'>{like_num}</h3>
-                        <FontAwesomeIcon icon={faHeart} className='heart'/>
+                        <LikeButton />
                     </div>
 
                     <div className='coments'>
