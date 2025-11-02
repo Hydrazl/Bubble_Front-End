@@ -13,7 +13,7 @@ function Trending() {
 
         <main>
         <div class="flex items-center justify-center h-screen bg-black">
-            <div class="bubble"></div>
+            <div class="bubble-trening"></div>
         </div>
 
             <h1>Borbulhando</h1>

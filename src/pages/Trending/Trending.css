@@ -15,7 +15,7 @@
   }
 }
 
-.bubble {
+.bubble-trending {
   @apply w-20 h-20 rounded-full bg-gradient-to-r from-blue-300 via-pink-200 to-purple-300 opacity-80;
   animation: bubbleFloat 4s ease-in-out infinite;
 }
