@@ -70,8 +70,17 @@ export default function Post({
       </section>
 
         {openPopup && (
-            <Popup fechar={() => setOpenPopup(false)} />
-        )}
+          <Popup 
+            fechar={() => setOpenPopup(false)} 
+            post={{
+            name,
+            id,
+            url_image_perfil,
+            url_image_post,
+    }}
+  />
+)}
+
 
     </>
   );

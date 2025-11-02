@@ -16,6 +16,8 @@ export default function Commets({imgProfile, NameProfile, CommetsTextContent, li
                         <span>{NameProfile}</span>
                     </div>
 
+                    <div className='conteinertext'>
+
                     <div className='TextCommets'>
                         <span>{CommetsTextContent}</span>
                     </div>
@@ -32,6 +34,7 @@ export default function Commets({imgProfile, NameProfile, CommetsTextContent, li
                             <FontAwesomeIcon icon={faComments} className='coment'/>
                         </div>
 
+                    </div>
                     </div>
             </div>        
         </>

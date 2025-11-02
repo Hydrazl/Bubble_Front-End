@@ -8,8 +8,6 @@ import carro from '../../assets/carro.jpg'
 import ciencia from '../../assets/ciencia.jpg'
 
 import Popup from '../Popup/index'
-
-
 import { useState } from 'react'
 
 
