@@ -1,0 +1,17 @@
+@import 'tailwindcss';
+
+.home-body {
+    @apply flex;
+}
+
+.home-header {
+    @apply w-64 flex-shrink-0 overflow-y-auto;
+}
+
+.home-main {
+    @apply flex-1 overflow-auto overflow-y-auto;
+}
+
+.home-aside {
+    @apply w-32 flex-shrink-0 sticky top-0 h-screen flex items-center justify-center;
+}
