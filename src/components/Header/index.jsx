@@ -10,21 +10,23 @@ export default function Header() {
         <header>
             <div className='content'>
                 <div className='logo_content'>
-                    <img src='white-logo.png' alt="logo" />
-                    <p className="teste">BUBBLE</p>
+                    <Link to='/' className='flex flex-row gap-2 items-center'>
+                        <img src='white-logo.png' alt="logo" />
+                        <p className="teste">BUBBLE</p>
+                    </Link>
                 </div>
                 <nav >
                     <ul className='nav' id='pages_nav'>
-                        <li><Link to='/'><FontAwesomeIcon icon={faHouse}/> Início</Link></li>
-                        <li><Link to='/trending' className='borbulhando'><img src={whiteBubbling} alt="Borbulhando" /> Borbulhando</Link></li>
-                        <li><Link to='/explorer'><FontAwesomeIcon icon={faCompass}/> Explorar</Link></li>
-                        <li><Link to='/chat'><FontAwesomeIcon icon={faComments}/> Bulhufas</Link></li>
-                        <li className='mt-64 mb-5'><Link to='/notifications'><FontAwesomeIcon icon={faBell}/> Flops</Link></li>
+                        <Link to='/' className='header-link'><li><FontAwesomeIcon icon={faHouse}/> Início</li></Link>
+                        <Link to='/trending' className='borbulhando header-link'><li><img src={whiteBubbling} alt="Borbulhando" /> Borbulhando</li></Link>
+                        <Link to='/explorer' className='header-link'><li><FontAwesomeIcon icon={faCompass}/> Explorar</li></Link>
+                        <Link to='/chat' className='header-link'><li><FontAwesomeIcon icon={faComments}/> Bulhufas</li></Link>
+                        <Link to='/notifications' className='mt-64 mb-5 header-link'><li><FontAwesomeIcon icon={faBell}/> Flops</li></Link>
                     </ul>
 
                     <ul className='nav' id='person_nav'>
-                        <li><Link to='/profile' ><FontAwesomeIcon icon={faUser} />Seu Perfil</Link></li>
-                        <li><Link to='/settings' ><FontAwesomeIcon icon={faGear} />Configurações</Link></li>
+                        <Link to='/profile' className='header-link'><li><FontAwesomeIcon icon={faUser} />Seu Perfil</li></Link>
+                        <Link to='/settings' className='header-link'><li><FontAwesomeIcon icon={faGear} />Configurações</li></Link>
                     </ul>
                 </nav>
             </div>
