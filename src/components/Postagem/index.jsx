@@ -3,7 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComments, faShareNodes } from "@fortawesome/free-solid-svg-icons";
 import LikeButton from '../LikeButton';
 import { useState, useEffect } from "react";
-import Popup from "../Popup"; // mesmo componente usado no GridPost
+import Popup from "../Popup";
+import PopupShared from '../PopupShared'; // mesmo componente usado no GridPost
 
 export default function Post({
   name, id, description, url_image_perfil,
@@ -11,7 +12,15 @@ export default function Post({
 }) {
 
   const [openPopup, setOpenPopup] = useState(false);
+  const [openPopupshared, setOpenshared] = useState(false);
 
+  useEffect(()=>{
+    if (openPopupshared){
+        document.body.classList.add('no-scroll');
+    } else {
+      document.body.classList.remove('no-scroll');
+    }
+  }, [openPopupshared])
 
   useEffect(() => {
     if (openPopup) {
@@ -20,6 +29,7 @@ export default function Post({
       document.body.classList.remove('no-scroll');
     }
   }, [openPopup]);
+
 
   return (
     <>
@@ -62,7 +72,10 @@ export default function Post({
               <input placeholder='Comente algo!!!' className='pero-insput-coments' />
             </div>
 
-            <div className='share'>
+            <div className='share'
+              onClick={()=> setOpenshared(true)}
+              style={{cursor:"pointer"}}
+              >
               <FontAwesomeIcon icon={faShareNodes}/>
             </div>
           </div>
@@ -81,6 +94,9 @@ export default function Post({
   />
 )}
 
+{openPopupshared && (
+    <PopupShared fechar={() => setOpenshared(false)}/>
+    )}
 
     </>
   );
