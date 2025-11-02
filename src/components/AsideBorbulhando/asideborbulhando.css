@@ -1,0 +1,54 @@
+@import 'tailwindcss';
+
+.aside {
+  @apply fixed top-0 right-0 w-[300px] h-[92vh]
+         mr-7 mt-3 mb-2.5 p-5
+         flex flex-col gap-[18px]
+         rounded-[20px]
+         bg-[#110f0f]
+         border-r border-white/10;
+}
+
+
+.searchBox input {
+  @apply w-[94%] px-3 py-2
+         bg-white/10 text-white text-sm
+         rounded-lg outline-none
+         placeholder:text-white/50;
+}
+
+
+.card {
+  @apply bg-white/10 p-3 rounded-xl
+         flex flex-col gap-2.5;
+}
+
+.card h3 {
+  @apply text-sm font-semibold text-white mb-1;
+}
+
+
+.list {
+  @apply flex flex-col gap-2;
+}
+
+.scrollable {
+  @apply max-h-[240px] overflow-y-auto;
+}
+
+.row {
+  @apply flex items-center gap-2
+         text-white text-[13px];
+}
+
+.row .index {
+  @apply w-5 opacity-80;
+}
+
+.row .label {
+  @apply opacity-90;
+}
+
+.row.user img.avatar {
+  @apply w-7 h-7 rounded-full;
+}

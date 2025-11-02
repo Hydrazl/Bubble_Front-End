@@ -1,0 +1,28 @@
+.BubbleGroup {
+    position: relative;
+    width: 60vw;
+    height: 100vh;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3,3fr);
+}
+
+
+.BubbleImg img{
+   width: 200px;
+   height: 200px;
+   border-radius: 150px;
+   object-fit: cover;
+   animation: float infinite 10s;
+   
+}
+
+
+/* flutuação controlada */
+@keyframes float {
+    0% { transform: translate(0,0); }
+    25% { transform: translate(8px,-10px); }
+    50% { transform: translate(-6px,8px); }
+    75% { transform: translate(10px,-5px); }
+    100% { transform: translate(0,0); }
+}
