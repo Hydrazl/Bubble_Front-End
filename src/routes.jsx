@@ -12,6 +12,7 @@ import Forgot from "./pages/Login/Forgot";
 import Sent from "./pages/Login/Sent";
 import Unfound from "./pages/Login/Unfound";
 import Status from './components/Status';
+import NewLogin from "./pages/Login/NewSignIn";
 
 function AppRoutes() {
     return (
@@ -24,6 +25,7 @@ function AppRoutes() {
                 <Route path="/notifications" element={<Notification />}></Route>
                 <Route path="/profile" element={<Profile />}></Route>
                 <Route path="/login" element={<Login />}></Route>
+                <Route path="/newlogin" element={<NewLogin />}></Route>
                 <Route path="/login/register" element={<Register />}></Route>
                 <Route path="/login/forgot" element={<Forgot />}></Route>
                 <Route path="/login/forgot/sent-email" element={<Sent />}></Route>

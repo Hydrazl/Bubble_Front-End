@@ -1,6 +1,55 @@
 @import 'tailwindcss';
 
+/* Login Containers */
+.login-page {
+    @apply w-screen h-screen grid grid-cols-2 text-white; 
+}
 
+.container-login {
+    @apply bg-[var(--bg)] flex flex-col justify-center items-center;
+}
+
+.container-login-form {
+    @apply bg-[#d9d9d9] flex justify-center items-center grid-cols-1;
+}
+
+.login-block {
+    @apply bg-[var(--bg)] rounded-md w-[96%] h-[95%] w-[96%] h-[95%];
+}
+
+/* Container desc */
+.login-logo {
+    @apply flex items-center gap-6; 
+}
+
+.login-logo img {
+    @apply h-auto w-30;
+}
+
+h1.login-tittle {
+    @apply  text-7xl font-medium;
+}
+
+h2.login-tittle {
+    @apply font-semibold;
+}
+
+/* Login Container Form */
+.login-return {
+    @apply absolute mt-5 ml-5 text-[var(--text)] text-4xl cursor-pointer hover:text-[var(--hover)] transition-colors duration-300;
+}
+
+h3.login-tittle {
+    @apply font-semibold text-5xl;
+}
+
+
+
+
+
+
+
+/* 
 .half-image2 {
     @apply fixed top-0 left-0 w-1/2 h-screen object-cover z-[-1] rotate-180;
 }   
@@ -9,7 +58,7 @@
     @apply fixed top-0 right-0 w-1/2 h-screen object-cover z-[-1];
 }   
 
-.container { /* A base do login, o container principal */
+.container { /* A base do login, o container principal /* }
     @apply h-160 w-210 rounded-2xl flex backdrop-blur-xs backdrop-grayscale-75 border-2 text-[var(--text)] flex-col p-4 bg-[#0000004e] 
 }
 
@@ -45,27 +94,8 @@
     @apply object-contain mr-3 size-20 
 }
 
-.login-form{
-    @apply flex flex-col top-40 absolute w-150 justify-center
-}
-
-.login-form input{
-    @apply bg-[var(--text)] my-2 text-[var(--bg)] h-11 rounded-lg px-3 font-semibold text-lg w-150
-}
-
 #checkbox {
     @apply cursor-pointer w-3.5
-}
-
-.form_login{
-    @apply w-full justify-center flex ml-[-.75rem]
-}
-
-.login-form h1{
-    @apply font-semibold text-4xl ml-2
-}
-.login-form h3{
-    @apply font-normal text-lg ml-2 
 }
 
 .login-checkbox{
@@ -95,4 +125,3 @@
 .link_text:hover::after {
     transform: scaleX(1);
 }
-
