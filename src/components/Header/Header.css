@@ -4,6 +4,11 @@
     @apply p-4 fixed top-0 ml-6 w-60 max-h-[90%]
 }
 
+/* 
+.logo_content {
+  @apply justify-center;
+} */
+
 /* Agora o Link recebe os estilos que eram do li */
 .content a.header-link{
     @apply my-[-30] cursor-pointer px-3 gap-2 flex w-[82%] h-11 items-center transform transition duration-300 hover:bg-[var(--hover)] hover:scale-105 select-none rounded-xl text-[--text];

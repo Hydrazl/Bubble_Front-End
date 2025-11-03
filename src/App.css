@@ -19,7 +19,7 @@ body{
 
 input{
     outline: none;
-    @apply bg-[var(--bg)]
+    @apply bg-[var(--bg)] rounded-lg
 }
 
 input:focus {
