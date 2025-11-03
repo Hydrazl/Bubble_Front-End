@@ -16,7 +16,7 @@ export default function NewLogin() {
 
                 <h4 className="login-tittle">Cadastre-se já e <br/> venha fazer parte de <br/> nossa comunidade</h4>
 
-                <p>Ao você continuar, você estará concordando com nosso <span>Termos de Uso</span> e <span>Política de Privacidade</span> da Bubble</p>
+                <p >Ao você continuar, você estará concordando com nossos <br/> <span>Termos de Uso</span> e <span>Política de Privacidade</span> da Bubble</p>
 
                 <button typeof="submit" className='signup-input'>Cadastre-se</button>
             </div>

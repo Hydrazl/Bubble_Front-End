@@ -23,7 +23,7 @@
 }
 
 .login-logo img {
-    @apply h-auto w-30;
+    @apply h-auto w-25;
 }
 
 h1.login-tittle {
@@ -31,7 +31,27 @@ h1.login-tittle {
 }
 
 h2.login-tittle {
-    @apply font-semibold;
+    @apply font-semibold text-5xl mt-6;
+}
+
+h4.login-tittle {
+    @apply text-2xl text-center text-3xl font-light mt-15;
+}
+
+.container-login p, span {
+    @apply font-extralight text-center;
+}
+
+.container-login p {
+    @apply mt-70;
+}
+
+.container-login span {
+    @apply text-[#4192A4] underline cursor-pointer;
+}
+
+.signup-input {
+    @apply mt-10 pt-3.5 pb-3.5 pr-9 pl-9 bg-[#4192A4] rounded-xl text-2xl cursor-pointer;
 }
 
 /* Login Container Form */
