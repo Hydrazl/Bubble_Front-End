@@ -1,0 +1,21 @@
+@import 'tailwindcss';
+
+.notification-head {
+    @apply flex items-center gap-4 justify-center mt-8 bg-[var(--primary)] rounded-2xl w-200 p-3 mx-auto select-none
+}
+
+.notification-headtext {
+    @apply text-5xl text-[var(--text)]
+}
+
+.notifications {
+    @apply grid gap-2 p-4 w-310 mx-auto mt-5 rounded-2xl bg-[var(--primary)] m-4
+} 
+
+.notifications-seemore {
+    @apply bg-[var(--primary)] flex items-center p-2 hover:bg-[var(--hover)] rounded-2xl transform transition hover:scale-105 mx-auto text-[var(--text)] mt-3
+}
+
+.notifications-seemore:hover {
+    box-shadow: 0 10px 6px -1px rgba(0, 0, 0, 0.3);
+}
