@@ -1,0 +1,21 @@
+@import 'tailwindcss';
+
+.notification {
+    @apply bg-[var(--primary)] flex items-center p-2 hover:bg-[var(--hover)] rounded-2xl transform transition hover:scale-105
+}
+
+.notification:hover {
+    box-shadow: 0 10px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+.notification-img {
+    @apply w-15 h-15 rounded-full 
+}
+
+.notification-text {
+    @apply text-2xl text-[var(--text)]
+}
+
+.notification-time {
+    @apply text-xl text-[var(--text)] font-bold
+}
