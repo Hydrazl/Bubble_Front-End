@@ -1,60 +1,104 @@
 import './Post.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faComments, faShareNodes } from "@fortawesome/free-solid-svg-icons";
+
 import LikeButton from '../LikeButton';
+import { useState, useEffect } from "react";
+import Popup from "../Popup";
+import PopupShared from '../PopupShared'; // mesmo componente usado no GridPost
 
-export default function Post({name, id, description, url_image_perfil, url_image_post, like_num, com_num}){
-    return(
-        <section className='conteiner-post'>
+export default function Post({
+  name, id, description, url_image_perfil,
+  url_image_post, like_num, com_num
+}) {
 
-            <div className='conteiner-perfil'>
+  const [openPopup, setOpenPopup] = useState(false);
+  const [openPopupshared, setOpenshared] = useState(false);
 
-                <div className='ft-perfil'>
-                    <img src={url_image_perfil} alt='perfil'/>
-                </div>
+  useEffect(()=>{
+    if (openPopupshared){
+        document.body.classList.add('no-scroll');
+    } else {
+      document.body.classList.remove('no-scroll');
+    }
+  }, [openPopupshared])
 
-                <div className='nome-perfil'>
-                    <h2>{name}</h2>
-                    <p className='arroba-perfil'>{id}</p>
-                </div>
+  useEffect(() => {
+    if (openPopup) {
+      document.body.classList.add('no-scroll');
+    } else {
+      document.body.classList.remove('no-scroll');
+    }
+  }, [openPopup]);
 
+
+  return (
+    <>
+      <section className='conteiner-post'>
+        <div className='conteiner-perfil'>
+          <div className='ft-perfil'>
+            <img src={url_image_perfil} alt='perfil'/>
+          </div>
+          <div className='nome-perfil'>
+            <h2>{name}</h2>
+            <p className='arroba-perfil'>{id}</p>
+          </div>
+        </div>
+
+        <div className='conteudo-post'>
+          <div className='text-post'>
+            <p className='titulo-post'>{description}</p>
+          </div>
+
+          <div className='midia-post'>
+            <img src={url_image_post} alt='post'/>
+          </div>
+
+          <div className='display-like'>
+            <div className='like'>
+              <h3 className='num-like'>{like_num}</h3>
+              <LikeButton />
             </div>
 
-            <div className='conteudo-post'>
-
-                <div className='text-post'>
-                    <p className='titulo-post'>{description} </p>
-                </div>
-
-                <div className='midia-post'>
-                    <img src={url_image_post} alt='post'/>
-                </div>
-
-                <div className='display-like'>
-
-                    <div className='like'>
-                        <h3 className='num-like'>{like_num}</h3>
-                        <LikeButton />
-                    </div>
-
-                    <div className='coments'>
-                        <h3 className='num-coments'>{com_num}</h3>
-                        <FontAwesomeIcon icon={faComments} className='coment'/>
-                    </div>
-
-                    <div className='input-coments'>
-                        <input placeholder='Comente algo!!!' className='pero-insput-coments'></input>
-                    </div>
-
-                    <div className='share'>
-                        <FontAwesomeIcon icon={faShareNodes}/>
-                    </div>
-
-                </div>
-
+            <div 
+              className='coments' 
+              onClick={() => setOpenPopup(true)}
+              style={{ cursor: "pointer" }}
+            >
+              <h3 className='num-coments'>{com_num}</h3>
+              <FontAwesomeIcon icon={faComments} className='coment'/>
             </div>
 
-        </section>
-        
-    )
-};
+            <div className='input-coments'>
+              <input placeholder='Comente algo!!!' className='pero-insput-coments' />
+            </div>
+
+            <div className='share'
+              onClick={()=> setOpenshared(true)}
+              style={{cursor:"pointer"}}
+              >
+              <FontAwesomeIcon icon={faShareNodes}/>
+            </div>
+          </div>
+        </div>
+      </section>
+
+        {openPopup && (
+          <Popup 
+            fechar={() => setOpenPopup(false)} 
+            post={{
+            name,
+            id,
+            url_image_perfil,
+            url_image_post,
+    }}
+  />
+)}
+
+{openPopupshared && (
+    <PopupShared fechar={() => setOpenshared(false)}/>
+    )}
+
+    </>
+  );
+}
