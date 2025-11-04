@@ -38,13 +38,13 @@ export default function NewLogin() {
                                 <div className="login-form">
                                     <label htmlFor="password">Senha</label>
                                     <input type="password" id='password' placeholder='Digite a sua senha' />
-                                    <small>Esqueceu a sua senha?</small>
+                                    <small><Link>Esqueceu a sua senha?</Link></small>
                                 </div>
 
                                 <button typeof='submit' className='submit-button'>Acessar a conta</button>
                             </form>
 
-                            <div className='separator'>ou continue com</div>
+                            <div className='separator'><p>ou continue com</p></div>
 
                             <div className="account-form">
                                 <div className="account-input">

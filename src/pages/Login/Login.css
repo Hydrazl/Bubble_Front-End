@@ -59,8 +59,40 @@ h4.login-tittle {
     @apply absolute mt-5 ml-5 text-[var(--text)] text-4xl cursor-pointer hover:text-[var(--hover)] transition-colors duration-300;
 }
 
+.parent-login-container-form {
+    @apply p-15;
+}
+
 h3.login-tittle {
-    @apply font-semibold text-5xl;
+    @apply font-semibold mt-15 text-5xl after:content-[''] after:block after:h-1.5 after:bg-[#4192A4] after:rounded-2xl after:w-[7%];
+}
+
+.child-login-container-form {
+    @apply pb-5 pl-[5rem] pr-[5rem];
+}
+
+.login-form {
+    @apply grid grid-cols-1
+}
+
+.login-form label {
+    @apply font-semibold text-3xl mt-5;
+}
+
+.login-form input {
+    @apply bg-[#d9d9d9] pl-3 pr-3 pb-1.5 pt-1.5 text-xl text-gray-600 font-medium;
+}
+
+.login-form small {
+    @apply flex justify-end-safe font-semibold mt-1 text-[1rem];
+}
+
+.separator {
+    @apply flex items-center text-center my-6 text-[#888] text-[0.85rem] w-[30%] before:content-[''] before:flex-1 before:border-b before:border-[#ddd] after:content-[''] after:flex-1 after:border-b after:border-[#ddd] not-empty:before:mr-3 not-empty:after:ml-3;
+}
+
+.separator p {
+    @apply text-sm;
 }
 
 
