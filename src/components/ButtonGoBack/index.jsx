@@ -1,4 +1,3 @@
-import React from "react";
 import './ButtonGoBack.css';
 import { useGoBack } from "../../hook/useGoBack";
 

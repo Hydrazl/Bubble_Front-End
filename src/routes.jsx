@@ -12,18 +12,20 @@ import Forgot from "./pages/Login/Forgot";
 import Sent from "./pages/Login/Sent";
 import Unfound from "./pages/Login/Unfound";
 import Status from './components/Status';
+import NewLogin from "./pages/Login/NewSignIn";
 
 function AppRoutes() {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename="/Bubble_Front-End">
             <Routes>
-                <Route path="/" element={<Home />}></Route>
+                <Route basename="/Bubble_Front-End" path="/" element={<Home />}></Route>
                 <Route path="/trending" element={<Trending />}></Route>
                 <Route path="/explorer" element={<Explorer />}></Route>
                 <Route path="/bulhufas" element={<Chat />}></Route>
                 <Route path="/notifications" element={<Notification />}></Route>
                 <Route path="/profile" element={<Profile />}></Route>
                 <Route path="/login" element={<Login />}></Route>
+                <Route path="/newlogin" element={<NewLogin />}></Route>
                 <Route path="/login/register" element={<Register />}></Route>
                 <Route path="/login/forgot" element={<Forgot />}></Route>
                 <Route path="/login/forgot/sent-email" element={<Sent />}></Route>

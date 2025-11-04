@@ -1,6 +1,7 @@
 import './Post.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComments, faShareNodes } from "@fortawesome/free-solid-svg-icons";
+import {faComments, faShareNodes } from "@fortawesome/free-solid-svg-icons";
+
 import LikeButton from '../LikeButton';
 import { useState, useEffect } from "react";
 import Popup from "../Popup";
