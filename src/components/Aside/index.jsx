@@ -1,46 +1,67 @@
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { IonIcon } from "@ionic/react";
-import { airplaneOutline, rocketOutline, carSportOutline, basketballOutline, gameControllerOutline, chatbubblesOutline, footballOutline} from "ionicons/icons";
-import { faGitAlt, faGithub, faJava, faPython, faSteam, faTiktok } from "@fortawesome/free-brands-svg-icons";
-import "./aside.css"
-import { faBasketball, faCar, faPlane, faRocket } from "@fortawesome/free-solid-svg-icons";
+import {
+  faGitAlt,
+  faGithub,
+  faPython,
+  faSteam,
+  faTiktok,
+} from "@fortawesome/free-brands-svg-icons";
+import {
+  faBasketball,
+  faPlane,
+  faRocket,
+} from "@fortawesome/free-solid-svg-icons";
+import "./Aside.css";
 
 export default function Aside() {
-    return (
-        <aside>
-            <div className="container1">
-                <div className="bubble">
-                    <FontAwesomeIcon icon={ faGithub } id="icon"/> 
-                </div>
+  const icons = [
+    faGithub,
+    faRocket,
+    faPlane,
+    faGitAlt,
+    faBasketball,
+    faTiktok,
+    faPython,
+    faSteam,
+  ];
 
-                <div className="bubble">
-                    <FontAwesomeIcon icon={ faRocket } id="icon"/> 
-                </div>
+  const [positions, setPositions] = useState(() =>
+    icons.map(() => ({ x: 0, y: 0 }))
+  );
 
-                <div className="bubble">
-                    <FontAwesomeIcon icon={ faPlane } id="icon"/> 
-                </div>
+  useEffect(() => {
+    const move = () => {
+      setPositions((prev) =>
+        prev.map(() => ({
+          x: Math.random() * 12 - 6,
+          y: Math.random() * 12 - 6,
+        }))
+      );
+    };
 
-                <div className="bubble">
-                    <FontAwesomeIcon icon={ faGitAlt } id="icon"/> 
-                </div>
+    move();
+    const interval = setInterval(move, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
-                <div className="bubble">
-                    <FontAwesomeIcon icon={ faBasketball } id="icon"/> 
-                </div>
-
-                <div className="bubble">
-                    <FontAwesomeIcon icon={ faTiktok } id="icon"/> 
-                </div>
-
-                <div className="bubble">
-                    <FontAwesomeIcon icon={ faPython } id="icon"/> 
-                </div>
-
-                <div className="bubble">
-                    <FontAwesomeIcon icon={ faSteam } id="icon"/> 
-                </div>
-            </div>
-        </aside>
-    );
+  return (
+    <aside className="aside-root">
+      <div className="bubble-container">
+        {icons.map((icon, i) => (
+          <div
+            key={i}
+            className="bubble"
+            style={{
+              transform: `translate(${positions[i].x}px, ${positions[i].y}px)`,
+              transition: "transform 3s cubic-bezier(0.4, 0, 0.2, 1)",
+              animationDelay: `${i * 0.1}s`,
+            }}
+          >
+            <FontAwesomeIcon icon={icon} className="bubble-icon" />
+          </div>
+        ))}
+      </div>
+    </aside>
+  );
 }
