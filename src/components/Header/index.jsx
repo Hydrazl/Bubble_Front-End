@@ -20,8 +20,8 @@ export default function Header() {
                         <Link to='/' className='header-link'><li><FontAwesomeIcon icon={faHouse}/> Início</li></Link>
                         <Link to='/trending' className='borbulhando header-link'><li><img src={whiteBubbling} alt="Borbulhando" /> Borbulhando</li></Link>
                         <Link to='/explorer' className='header-link'><li><FontAwesomeIcon icon={faCompass}/> Explorar</li></Link>
-                        <Link to='/chat' className='header-link'><li><FontAwesomeIcon icon={faComments}/> Bulhufas</li></Link>
-                        <Link to='/notifications' className='mt-64 mb-5 header-link'><li><FontAwesomeIcon icon={faBell}/> Flops</li></Link>
+                        <Link to='/bulhufas' className='header-link'><li><FontAwesomeIcon icon={faComments}/> Bulhufas</li></Link>
+                        <Link to='/notifications' className='mt-20 lg:mt-40 xl:mt-56 mb-5 header-link'><li><FontAwesomeIcon icon={faBell}/> Flops</li></Link>
                     </ul>
 
                     <ul className='nav' id='person_nav'>

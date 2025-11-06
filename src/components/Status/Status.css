@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 .container-status{
-    @apply flex flex-row bg-[var(--primary)] h-12 w-230 justify-self-center mt-5 rounded-lg items-center justify-center text-[var(--text)]
+    @apply flex flex-row bg-[var(--bg-secondary)] shadow-[var(--bg-shadow)] border-[1px] border-[var(--bg-border)] h-12 w-230 justify-self-center mt-5 rounded-lg items-center justify-center text-[var(--text)]
 }
 
 .inside-line{
