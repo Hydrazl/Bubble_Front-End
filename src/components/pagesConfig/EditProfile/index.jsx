@@ -21,7 +21,7 @@ export default function EditProfile(){
 
                     <div className='editInfoUserName'>
 
-                        <h3>Seu @</h3>
+                        <h3></h3>
                         <input type='text' className='inputStyle'></input>
 
                     </div>

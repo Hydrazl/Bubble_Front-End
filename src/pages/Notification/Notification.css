@@ -9,7 +9,7 @@
 }
 
 .notifications {
-    @apply grid gap-2 p-4 w-310 mx-auto mt-5 rounded-2xl bg-[var(--primary)] m-4
+    @apply grid gap-2 p-4 w-280 mx-auto mt-5 rounded-2xl bg-[var(--primary)] m-4
 } 
 
 .notifications-seemore {
