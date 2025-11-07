@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 .container-chat{
-    @apply h-[90%] w-[75%] left-0 absolute overflow-scroll mt-4 ml-90 rounded-2xl items-center flex p-6 text-[var(--text)] bg-[var(--bg-secondary)] shadow-[var(--bg-shadow)] border-[1px] border-[var(--bg-border)];
+    @apply h-[90%] w-[75%] left-0 absolute overflow-hidden mt-4 ml-90 rounded-2xl items-center flex p-6 text-[var(--text)] bg-[var(--bg-secondary)] shadow-[var(--bg-shadow)] border-[1px] border-[var(--bg-border)];
     scrollbar-width: none;
 }
 
@@ -17,7 +17,7 @@
 } 
 
 .container-contatos {
-    @apply w-100 h-180 overflow-scroll bg-[var(--primary)];
+    @apply w-100 h-180 overflow-scroll bg-[var(--bg-secondary)] shadow-[var(--bg-shadow)] border-[1px] border-[var(--bg-border)];
     scrollbar-width: none;
 }
 
