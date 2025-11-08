@@ -13,10 +13,11 @@ import Sent from "./pages/Login/Sent";
 import Unfound from "./pages/Login/Unfound";
 import Status from './components/Status';
 import NewLogin from "./pages/Login/NewSignIn";
+import NewPost from './pages/NewPost';
 
 function AppRoutes() {
     return (
-        <BrowserRouter basename="/Bubble_Front-End">
+        <BrowserRouter basename="/">
             <Routes>
                 <Route basename="/Bubble_Front-End" path="/" element={<Home />}></Route>
                 <Route path="/trending" element={<Trending />}></Route>
@@ -32,6 +33,7 @@ function AppRoutes() {
                 <Route path="/login/forgot/unfound" element={<Unfound />}></Route>
                 <Route path="/settings" element={<Settings />}></Route>
                 <Route path="/status" element={<Status/>}></Route>
+                <Route path="/newpost" element={<NewPost/>}></Route>
             </Routes>
         </BrowserRouter>
     )

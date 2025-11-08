@@ -1,62 +1,115 @@
+import "./NewPost.css"
 import Header from "../../components/Header";
-import Postagem from "../../components/Postagem"
-import { IonIcon } from "@ionic/react";
-import { arrowForwardOutline } from "ionicons/icons";
+import { GoPlus } from "react-icons/go";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faComments, faShareNodes } from "@fortawesome/free-solid-svg-icons";
+
 
 function NewPost() {
     return (
         <>
             <Header />
+
             <main>
-                <div>
-                    <h1>New Post</h1>
-                </div>
+                <h1 className="titlenewpost">New Post</h1>
 
-                <div>
-                    <p>Título</p>
-                </div>
+                <section className="inputsnewpost">
 
-                <article>
-                    <div>
-                        <p>Publique algo. Como foi o seu dia?... </p>
+                   <div className="conteiner-title"> 
+                    <input type="text" placeholder="Título" className="inputtitle"/>
+                    <input type="text" placeholder="Bublique algo... Como foi o seu dia?..." className="inputcommets"/>
+                   </div>
+
+                   <div className="conteiner-infoadd">
+                      
+                    <div className="divprofiles">
+                        <h2>Marcar pessoas (Opicional)</h2>
+                        <input type="text" placeholder="Digite o @ da pessoa" className="inputinfo"/>
                     </div>
 
-                    <section>
-                        <div>
-                            <div>
-                                <p>#</p>
-                            </div>
-                            <div>
-                                <IonIcon icon={arrowForwardOutline} />
+                    <div className="divLocal">
+                        <h2>Localização (Opicional)</h2>
+                        <input type="text" placeholder="Adicionar Local" className="inputinfo"/>
+                    </div>
+
+                   </div>
+
+                   <div className="imgPost">
+                        <h2>Imagens</h2>
+
+                        <div className="addImg">
+                            <div className="buttonAddImg">
+                                <GoPlus className="iconAdd"/>
                             </div>
                         </div>
-                    </section>
-                </article>
+                   </div>
 
-               <h1>Marcar pessoas</h1>
-                <div>
-                    <p>Digite o nome da pessoa</p>
-                </div>
-                
-                <h1>Localização</h1>
-                <div>
-                    <p>Adicionar Localização</p>
-                </div>
-
-                <h1>Imagens</h1>
-                <div>
-                    <img src="/public/imagem_para_baixar.png" />
-                    <div>+</div>
-                </div>
-
-                <h1>Previa</h1>
-                <Post />
-
-                <div>
-                    <div> Salvar como Rascunho</div>
-                    <div> Publicar </div>
-                </div>
+                </section>
             </main>
+
+            <aside className="conteinerPreview">
+
+                <h2>Prévia</h2>
+
+                <div className='conteinerProfilePreview'>
+
+                <div className='ftPerfilPreview'>
+                    <img alt='perfil'/>
+                </div>
+
+                <div className='nomePerfilPreview'>
+                    <h2></h2>
+                    <p className='arroba-perfil'></p>
+                </div>
+
+
+            <div className='conteinerPostPreview'>
+
+                <div className='text-post'>
+                    <p className='titulo-post'> </p>
+                </div>
+
+                <div className='midiaPostPreview'>
+                    <img alt='post'/>
+                </div>
+
+                <div className='displayLikePreview'>
+
+                    <div className='like'>
+                        <h3 className='num-like'></h3>
+                    </div>
+
+                    <div className='comentsPreview'>
+                        <h3 className='num-coments'></h3>
+                        <FontAwesomeIcon icon={faComments} className='coment'/>
+                    </div>
+
+                    <div className='inputComentsPreview'>
+                        <input placeholder='Comente algo!!!' className='pero-insput-coments-preview'></input>
+                    </div>
+
+                    <div className='share'>
+                        <FontAwesomeIcon icon={faShareNodes}/>
+                    </div>
+
+                </div>
+
+            </div>
+           </div> 
+            
+            <div className="conteinerPublicar">
+
+                <div className="ButtonsPublicar">
+                    <span>Publicar</span>
+                </div>
+
+                <div className="ButtonCancel">
+                    <span>Cancelar</span>
+                </div>
+
+            </div>
+
+            </aside>
         </>
     );
 }
