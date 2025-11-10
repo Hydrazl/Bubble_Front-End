@@ -16,7 +16,7 @@ import NewLogin from "./pages/Login/NewSignIn";
 
 function AppRoutes() {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename="/">
             <Routes>
                 <Route path="/" element={<Home />}></Route>
                 <Route path="/trending" element={<Trending />}></Route>

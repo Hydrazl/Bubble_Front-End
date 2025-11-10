@@ -49,13 +49,7 @@ function NewPost() {
                     <div>+</div>
                 </div>
 
-                <h1>Previa</h1>
-                <Post />
-
-                <div>
-                    <div> Salvar como Rascunho</div>
-                    <div> Publicar </div>
-                </div>
+                
             </main>
         </>
     );

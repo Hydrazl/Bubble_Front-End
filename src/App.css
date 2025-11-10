@@ -5,6 +5,11 @@
     --terciary: #525252;
     --segundary: #333333;
     --bg: #1d1d1d;
+    --bg-secondary: rgba(10, 25, 50, 0.5);
+    --bg-border: rgba(120, 200, 255, 0.25);
+    --bg-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
     --text: #E5E5E5;
 }
 
