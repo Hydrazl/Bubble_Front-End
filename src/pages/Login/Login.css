@@ -68,15 +68,15 @@ h3.login-tittle {
 }
 
 .child-login-container-form {
-    @apply pb-5 pl-[5rem] pr-[5rem];
+    @apply pb-5 pl-[5rem] pr-[5rem] grid gap-8;
 }
 
 .login-form {
-    @apply grid grid-cols-1
+    @apply grid grid-cols-1 items-center-safe;
 }
 
 .login-form label {
-    @apply font-semibold text-3xl mt-5;
+    @apply font-normal text-2xl mt-5;
 }
 
 .login-form input {
@@ -84,15 +84,27 @@ h3.login-tittle {
 }
 
 .login-form small {
-    @apply flex justify-end-safe font-semibold mt-1 text-[1rem];
+    @apply flex justify-end-safe font-normal mt-1 text-[0.8rem];
+}
+
+.login-button {
+    @apply bg-[#4192A4] w-[100%] pt-2.5 pb-2.5 mt-13 rounded-lg text-xl font-medium cursor-pointer;
 }
 
 .separator {
-    @apply flex items-center text-center my-6 text-[#888] text-[0.85rem] w-[30%] before:content-[''] before:flex-1 before:border-b before:border-[#ddd] after:content-[''] after:flex-1 after:border-b after:border-[#ddd] not-empty:before:mr-3 not-empty:after:ml-3;
+    @apply flex items-center text-center my-6 text-[#888] text-[0.85rem] w-[75%] before:content-[''] before:flex-1 before:border-b-2 before:border-[#ddd] after:content-[''] after:flex-1 after:border-b-2 after:border-[#ddd] not-empty:before:mr-7 not-empty:after:ml-7 justify-self-center;
 }
 
 .separator p {
-    @apply text-sm;
+    @apply text-[1rem] text-white;
+}
+
+.account-form {
+    @apply grid justify-center items-center;
+}
+
+.account-input {
+    @apply bg-blue-500 w-[100%];
 }
 
 

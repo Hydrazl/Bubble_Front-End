@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { FaRegEye, FaRegEyeSlash, FaGoogle,FaFacebookF, FaApple } from "react-icons/fa";
+import { MdOutlineMailOutline } from "react-icons/md";
 import ButtonGoBack from '../../../components/ButtonGoBack';
 import '../Login.css'
 
@@ -41,14 +42,14 @@ export default function NewLogin() {
                                     <small><Link>Esqueceu a sua senha?</Link></small>
                                 </div>
 
-                                <button typeof='submit' className='submit-button'>Acessar a conta</button>
+                                <button typeof='submit' className='login-button'>Acessar a conta</button>
                             </form>
 
                             <div className='separator'><p>ou continue com</p></div>
 
                             <div className="account-form">
                                 <div className="account-input">
-                                    <div className="icon"></div>
+                                    <div className="icon-login"><FaGoogle/><p>Continuar com uma conta Google</p></div>
                                 </div>
 
                                 <div className="account-input">
