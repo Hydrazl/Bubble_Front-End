@@ -53,20 +53,21 @@ function NewPost() {
                 <h2>Prévia</h2>
 
                 <div className='conteinerProfilePreview'>
+                    
+                  <div className='conteinerProfile'>
+                    <div className='ftPerfilPreview'>
+                        <img/>
+                    </div>
 
-                <div className='ftPerfilPreview'>
-                    <img alt='perfil'/>
-                </div>
-
-                <div className='nomePerfilPreview'>
-                    <p className='arroba-perfil'></p>
-                </div>
-
+                    <div className='nomePerfilPreview'>
+                        <p className='arroba-perfil'>Ronaldo</p>
+                    </div>
+                  </div>
 
             <div className='conteinerPostPreview'>
 
                 <div className='text-post'>
-                    <p className='titulo-post'> </p>
+                    <p className='titulo-post'> ola poggers</p>
                 </div>
 
                 <div className='midiaPostPreview'>
@@ -91,7 +92,7 @@ function NewPost() {
                     </div>
 
                     <div className='share'>
-                        <FontAwesomeIcon icon={faShareNodes}/>
+                        <FontAwesomeIcon icon={faShareNodes} className="shareicon"/>
                     </div>
 
                 </div>

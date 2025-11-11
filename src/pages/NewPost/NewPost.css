@@ -60,11 +60,11 @@ main{
 }
 
 .conteinerProfilePreview{
-    @apply h-100 w-150 bg-gray-800 rounded-2xl justify-center items-center flex flex-col
+    @apply h-120 w-150 bg-gray-800 rounded-2xl justify-center items-center flex flex-col
 }
 
-.conteinerPostPreview{
-    @apply h-75 w-130 bg-gray-900 rounded-2xl
+.midiaPostPreview{
+    @apply h-70 w-130 bg-gray-900 rounded-2xl
 }
 
 .displayLikePreview{
@@ -85,4 +85,12 @@ main{
 
 .ButtonCancel{
     @apply hover:bg-red-500 transition ease-in duration-300
+}
+
+.comentsPreview{
+    @apply flex text-2xl
+}
+
+.coment, .shareicon{
+    @apply text-3xl mr-2
 }
