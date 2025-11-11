@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { FaRegEye, FaRegEyeSlash, FaGoogle,FaFacebookF, FaApple } from "react-icons/fa";
+import { FaRegEye, FaRegEyeSlash, FaFacebookF, FaApple } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 import { MdOutlineMailOutline } from "react-icons/md";
 import ButtonGoBack from '../../../components/ButtonGoBack';
 import '../Login.css'
@@ -13,7 +14,7 @@ export default function NewLogin() {
                     <h1 className='login-tittle'>BUBBLE</h1>
                 </div>
 
-                <h2 className="login-tittle">Seja Bem-vindo</h2>
+                <h2 className="login-tittle text-center">Seja Bem-vindo<br/> novamente</h2>
 
                 <h4 className="login-tittle">Cadastre-se já e <br/> venha fazer parte de <br/> nossa comunidade</h4>
 
@@ -49,7 +50,7 @@ export default function NewLogin() {
 
                             <div className="account-form">
                                 <div className="account-input">
-                                    <div className="icon-login"><FaGoogle/><p>Continuar com uma conta Google</p></div>
+                                    <FcGoogle className='icon-login'/><p>Continuar com uma conta Google</p>
                                 </div>
 
                                 <div className="account-input">

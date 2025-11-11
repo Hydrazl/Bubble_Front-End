@@ -100,14 +100,20 @@ h3.login-tittle {
 }
 
 .account-form {
-    @apply grid justify-center items-center;
+    @apply grid justify-center gap-2.5 bg-amber-200 max-w-[100%];
 }
 
 .account-input {
-    @apply bg-blue-500 w-[100%];
+    @apply bg-blue-500 w-[100%] inline-block justify-center rounded-full p-[0.2rem] justify-center;
 }
 
+.account-input p {
+    @apply text-center w-full px-10;
+}
 
+.icon-login {
+    @apply bg-white p-1 rounded-full text-2xl;
+}
 
 
 
