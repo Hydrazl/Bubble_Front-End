@@ -60,7 +60,7 @@ function Home() {
             com_num="57.7K"
           />
         </main>
-
+        
         <aside className="home-aside">
           <Aside />
         </aside>
