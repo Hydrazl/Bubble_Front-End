@@ -4,7 +4,8 @@ import { GoPlus } from "react-icons/go";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faComments, faShareNodes } from "@fortawesome/free-solid-svg-icons";
 import Like from "../../components/LikeButton";
-
+import ProfilePic from '../..//assets/tl.png'
+import Silksong from '../../assets/post1.jpeg'
 
 function NewPost() {
     return (
@@ -17,19 +18,19 @@ function NewPost() {
                 <section className="inputsnewpost">
 
                    <div className="conteiner-title"> 
-                    <input type="text" placeholder="Título" className="inputtitle"/>
-                    <input type="text" placeholder="Bublique algo... Como foi o seu dia?..." className="inputcommets"/>
+
+                    <textarea placeholder="Bublique algo... Como foi o seu dia?..." className="inputcommets"/>
                    </div>
 
                    <div className="conteiner-infoadd">
                       
                     <div className="divprofiles">
-                        <h2>Marcar pessoas (Opicional)</h2>
+                        <h2>Marcar pessoas (Opcional)</h2>
                         <input type="text" placeholder="Digite o @ da pessoa" className="inputinfo"/>
                     </div>
 
                     <div className="divLocal">
-                        <h2>Localização (Opicional)</h2>
+                        <h2>Localização (Opcional)</h2>
                         <input type="text" placeholder="Adicionar Local" className="inputinfo"/>
                     </div>
 
@@ -52,26 +53,24 @@ function NewPost() {
 
                 <h2>Prévia</h2>
 
-                <div className='conteinerProfilePreview'>
-                    
-                  <div className='conteinerProfile'>
-                    <div className='ftPerfilPreview'>
-                        <img/>
-                    </div>
+            <div className='conteinerProfilePreview'>
 
-                    <div className='nomePerfilPreview'>
-                        <p className='arroba-perfil'>Ronaldo</p>
-                    </div>
+                <div className="profileelements">
+                    <img src={ProfilePic}/>
+                  <div className="textprofile">
+                    <span>Lukas_kkj</span>
+                    <span className="text-sm">@Lucas213</span>
                   </div>
+                </div>
 
             <div className='conteinerPostPreview'>
 
                 <div className='text-post'>
-                    <p className='titulo-post'> ola poggers</p>
+                    <p className='titulo-post'>Ola poggers</p>
                 </div>
 
                 <div className='midiaPostPreview'>
-                    <img alt='post'/>
+                    <img src={Silksong}/>
                 </div>
             </div>
 
@@ -88,7 +87,7 @@ function NewPost() {
                     </div>
 
                     <div className='inputComentsPreview'>
-                        <input placeholder='Comente algo!!!' className='pero-insput-coments-preview'></input>
+                        <input placeholder='Comente algo!!!'></input>
                     </div>
 
                     <div className='share'>
