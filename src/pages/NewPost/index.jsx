@@ -3,6 +3,7 @@ import Header from "../../components/Header";
 import { GoPlus } from "react-icons/go";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faComments, faShareNodes } from "@fortawesome/free-solid-svg-icons";
+import Like from "../../components/LikeButton";
 
 
 function NewPost() {
@@ -52,36 +53,38 @@ function NewPost() {
                 <h2>Prévia</h2>
 
                 <div className='conteinerProfilePreview'>
+                    
+                  <div className='conteinerProfile'>
+                    <div className='ftPerfilPreview'>
+                        <img/>
+                    </div>
 
-                <div className='ftPerfilPreview'>
-                    <img alt='perfil'/>
-                </div>
-
-                <div className='nomePerfilPreview'>
-                    <h2></h2>
-                    <p className='arroba-perfil'></p>
-                </div>
-
+                    <div className='nomePerfilPreview'>
+                        <p className='arroba-perfil'>Ronaldo</p>
+                    </div>
+                  </div>
 
             <div className='conteinerPostPreview'>
 
                 <div className='text-post'>
-                    <p className='titulo-post'> </p>
+                    <p className='titulo-post'> ola poggers</p>
                 </div>
 
                 <div className='midiaPostPreview'>
                     <img alt='post'/>
                 </div>
+            </div>
 
                 <div className='displayLikePreview'>
 
                     <div className='like'>
-                        <h3 className='num-like'></h3>
+                        <Like/>
+                        <h3 className='num-like'>00</h3>
                     </div>
 
                     <div className='comentsPreview'>
-                        <h3 className='num-coments'></h3>
                         <FontAwesomeIcon icon={faComments} className='coment'/>
+                        <h3 className='num-coments'>00</h3>
                     </div>
 
                     <div className='inputComentsPreview'>
@@ -89,12 +92,12 @@ function NewPost() {
                     </div>
 
                     <div className='share'>
-                        <FontAwesomeIcon icon={faShareNodes}/>
+                        <FontAwesomeIcon icon={faShareNodes} className="shareicon"/>
                     </div>
 
                 </div>
 
-            </div>
+            
            </div> 
             
             <div className="conteinerPublicar">
