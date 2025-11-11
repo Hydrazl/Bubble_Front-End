@@ -1,5 +1,0 @@
-@import 'tailwindcss';
-
-.titlenewpost h1{
-    @apply text-white 
-}
