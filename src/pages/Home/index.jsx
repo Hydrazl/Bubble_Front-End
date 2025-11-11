@@ -1,4 +1,5 @@
 import "./Home.css";
+import Card from "../../components/Card";
 import Header from "../../components/Header";
 import Post from "../../components/Postagem";
 import Status from "../../components/Status";

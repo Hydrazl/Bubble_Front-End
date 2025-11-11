@@ -16,9 +16,9 @@ import NewLogin from "./pages/Login/NewSignIn";
 
 function AppRoutes() {
     return (
-        <BrowserRouter basename="/Bubble_Front-End">
+        <BrowserRouter>
             <Routes>
-                <Route basename="/Bubble_Front-End" path="/" element={<Home />}></Route>
+                <Route basename="/" path="/" element={<Home />}></Route>
                 <Route path="/trending" element={<Trending />}></Route>
                 <Route path="/explorer" element={<Explorer />}></Route>
                 <Route path="/bulhufas" element={<Chat />}></Route>
@@ -32,9 +32,11 @@ function AppRoutes() {
                 <Route path="/login/forgot/unfound" element={<Unfound />}></Route>
                 <Route path="/settings" element={<Settings />}></Route>
                 <Route path="/status" element={<Status/>}></Route>
+                <Route path="/Explorer" element={<Explorer/>}></Route>
             </Routes>
         </BrowserRouter>
     )
+    // basename="/Bubble_Front-End"
 }
 
 export default AppRoutes
