@@ -17,7 +17,7 @@ export default function Header() {
                 </div>
                 <nav>
                     <ul className='nav' id='pages_nav'>
-                        <Link to='/' className='header-link'><li><FontAwesomeIcon icon={faHouse}/> Início</li></Link>
+                        <Link to='/home' className='header-link'><li><FontAwesomeIcon icon={faHouse}/> Início</li></Link>
                         <Link to='/trending' className='borbulhando header-link'><li><img src={whiteBubbling} alt="Borbulhando" /> Borbulhando</li></Link>
                         <Link to='/explorer' className='header-link'><li><FontAwesomeIcon icon={faCompass}/> Explorar</li></Link>
                         <Link to='/bulhufas' className='header-link'><li><FontAwesomeIcon icon={faComments}/> Bulhufas</li></Link>
