@@ -23,7 +23,11 @@ export default function Card({ title, image }) {
         <div className="card-image-wrapper">
             <img src={image} alt="card-image" className="card-image" />
         </div>
+
+        <div className="card-image-wrapper">
+            <img src={image} alt="card-image" className="card-image" />
         </div>
+      </div>
     </div>
   );
 }
