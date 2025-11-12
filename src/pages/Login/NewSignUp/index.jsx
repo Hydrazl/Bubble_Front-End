@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { FaRegEye, FaRegEyeSlash, FaGoogle, FaFacebookF, FaApple } from "react-icons/fa";
 import { MdOutlineMailOutline } from "react-icons/md";
+import { FcGoogle } from "react-icons/fc";
 import ButtonGoBack from '../../../components/ButtonGoBack';
 import '../Login.css'
 
@@ -61,7 +62,7 @@ export default function NewLogin() {
 
                             <div className="account-form">
                                 <div className="account-input">
-                                    <div className="icon-login"><FaGoogle /><p>Continuar com uma conta Google</p></div>
+                                    <div className="icon-login"><FcGoogle /><p>Google</p></div>
                                 </div>
 
                                 <div className="account-input">
