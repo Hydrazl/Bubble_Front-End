@@ -6,6 +6,7 @@ import Chat from './pages/Chat';
 import Notification from "./pages/Notification";
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
+import Colors from './pages/Colors';
 import Login from "./pages/Login/SignIn";
 import Register from "./pages/Login/SignUp";
 import Forgot from "./pages/Login/Forgot";
@@ -20,6 +21,7 @@ function AppRoutes() {
             <Routes>
                 <Route basename="/Bubble_Front-End" path="/" element={<Login />}></Route>
                 <Route path="/trending" element={<Trending />}></Route>
+                <Route path="/colors" element={<Colors />}></Route>
                 <Route path="/explorer" element={<Explorer />}></Route>
                 <Route path="/bulhufas" element={<Chat />}></Route>
                 <Route path="/notifications" element={<Notification />}></Route>
