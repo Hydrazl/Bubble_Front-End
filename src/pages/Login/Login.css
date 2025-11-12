@@ -51,7 +51,7 @@ h4.login-tittle {
 }
 
 .signup-input {
-    @apply mt-10 pt-3.5 pb-3.5 pr-9 pl-9 bg-[#4192A4] rounded-xl text-2xl cursor-pointer;
+    @apply mt-3 pt-3.5 pb-3.5 pr-9 pl-9 bg-[#4192A4] rounded-xl text-2xl cursor-pointer;
 }
 
 /* Login Container Form */
