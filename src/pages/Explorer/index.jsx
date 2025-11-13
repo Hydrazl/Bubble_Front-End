@@ -6,6 +6,8 @@ import Card from '../../components/Card';
 import Carro from '../../assets/carro-explorer.jpg';
 import Luta from '../../assets/luta explorer.jpg';
 import Mine from '../../assets/mine explore.jpg';
+import Viagem from '../../assets/viagens explore.jpg';
+import Ciencia from '../../assets/ciencia.jpg';
 
  function Explorer() { 
   return (
@@ -18,23 +20,39 @@ import Mine from '../../assets/mine explore.jpg';
         <Status />     
 
         <Card
-           title="Populares"
-           image={Carro}
+           title="Popular"
+           image1={Carro}
+           image2={Mine}
+           image3={Luta}
+           image4={Viagem}
+           image5={Ciencia}
         />
 
         <Card
-           title="Lutas"
-           image={Luta}
+           title="Filmes"
+           image1={Carro}
+           image2={Carro}
+           image3={Carro}
+           image4={Carro}
+           image5={Carro}
         />
 
         <Card
            title="Jogos"
-           image={Mine}
+           image1={Carro}
+           image2={Carro}
+           image3={Carro}
+           image4={Carro}
+           image5={Carro}
         />
 
         <Card
-           title="Mais Populares"
-           image={Carro}
+           title="Esportes"
+           image1={Carro}
+           image2={Carro}
+           image3={Carro}
+           image4={Carro}
+           image5={Carro}
         />
       </main>
 
