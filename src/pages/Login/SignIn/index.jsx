@@ -4,10 +4,12 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import ButtonGoBack from "../../../components/ButtonGoBack";
 import { loginUser } from "../../../services/api";
+import { useAuth } from "../../../context/AuthContext";
 import "../Login.css";
 
 export default function NewLogin() {
   const navigate = useNavigate();
+  const { setLogged, setUser } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -18,7 +20,11 @@ export default function NewLogin() {
     setError("");
     try {
       const userData = await loginUser(email, password);
+      localStorage.setItem("token", userData.token);
+      localStorage.setItem("user", JSON.stringify(userData.user));
       console.log("Usuário logado:", userData);
+      setLogged(true);
+      setUser(userData.user);
       navigate("/home"); // redireciona após login
     } catch (err) {
       setError(err.message);
