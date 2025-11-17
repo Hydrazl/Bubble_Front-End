@@ -1,10 +1,11 @@
 import './configNav.css'
 import { Link } from 'react-router-dom'
+import ButtonGoBack from '../../components/ButtonGoBack';
 
 export default function ConfigNav(){
     return(
 
-        <>
+        <div className='flex'>
             <div className='conteinerConfigNav'>
 
                 <h2>Configuração do perfil</h2>
@@ -50,10 +51,15 @@ export default function ConfigNav(){
                         <span className='linkConfigNav'>Central de Ajuda</span>
                 </div>
 
-                <div>
+                <div className='centerBubble'>
                     <p>©Bubble - 2025</p>
                 </div>
             </div>
-        </>
+
+            <div>
+                <ButtonGoBack/>
+            </div>
+
+        </div>
     )
 }

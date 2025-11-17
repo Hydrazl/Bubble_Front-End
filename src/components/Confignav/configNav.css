@@ -1,0 +1,22 @@
+
+@import 'tailwindcss';
+
+.conteinerConfigNav{
+    @apply bg-amber-200 h-screen w-[20vw] flex flex-col text-lg gap-3
+}
+
+.conteinerConfigNav h2{ 
+    @apply font-medium text-xl ml-2
+}
+
+.optionconfig{
+    @apply flex flex-col gap-3
+}
+
+.optionconfig span, .optionconfig a{
+    @apply flex self-start pl-2 ml-1 text-sm font-normal hover:bg-blue-800 hover:transition hover:ease-in hover:w-[18vw] hover:h-[5vh] hover:flex hover:items-center hover:rounded-2xl cursor-pointer hover:text-lg hover:animate-bounce
+}
+
+.centerBubble{
+    @apply relative top-28 flex justify-center rounded-2xl
+}

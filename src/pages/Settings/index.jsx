@@ -2,7 +2,6 @@
 
 import { Link } from 'react-router-dom'
 import ConfigNav from '../../components/Confignav'
-import ButtonGoBack from '../../components/ButtonGoBack';
 import EditProfile from '../../components/pagesConfig/EditProfile';
 
 function Settings() {
@@ -13,7 +12,6 @@ function Settings() {
         </header>
 
         <main>
-           <ButtonGoBack/>
            <EditProfile/>
         </main>
         </>
