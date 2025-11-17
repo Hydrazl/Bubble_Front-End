@@ -40,9 +40,12 @@ main{
 }
 
 .addImg{
-    @apply bg-gray-700 w-full p-5 h-20 rounded-xl 
+    @apply bg-gray-700 w-full p-5 h-20 rounded-xl flex gap-2 items-center
 }
 
+.addImg img{
+    @apply w-22 h-22 rounded-2xl
+}
 .buttonAddImg{
     @apply w-20 h-20 bg-gray-800 flex items-center justify-center rounded-xl wrap-normal  text-5xl font-bold  
 }
