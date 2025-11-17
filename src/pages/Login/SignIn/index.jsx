@@ -1,60 +1,126 @@
-import '../Login.css'
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook, faGoogle, faInstagram, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
-import bg from '../../../assets/login-bg.png'
-import bg2 from '../../../assets/login-bg2.png'
-import ButtonGoBack from '../../../components/ButtonGoBack';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
+import ButtonGoBack from "../../../components/ButtonGoBack";
+import { loginUser } from "../../../services/api";
+import { useAuth } from "../../../context/AuthContext";
+import "../Login.css";
 
-export default function Login() {
-    return (
-        <main>
-            <img src={bg2} className="half-image2" />
-            <img src={bg2} className="half-image" />
-            <div className='login-main'>
-                <div className='login-container'>
-                    <div className="container">
-                        <ButtonGoBack />
-                        <div className="logo-content">
-                            <img src="../white-logo.png" alt="" className='bubble_img'/><p>Bubble</p>
-                        </div>
-                        <div className='form_login'>
-                            <form className='login-form' action={`http://localhost:5173/`}>
-                                <h1>LOGIN</h1>
-                                <input type="email" name="email" id="" placeholder='Insera o seu E-mail'/>
-                                <input type="password" name="password" id="" placeholder='Senha'/>
+export default function NewLogin() {
+  const navigate = useNavigate();
+  const { setLogged, setUser } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
-                                <div className='login-checkbox'>
-                                    <div className='flex flex-row items-center gap-2'>
-                                        <input type="checkbox" id='checkbox' />
-                                        <p>Mantenha-me conectado</p>
-                                    </div>
-                                    <div>
-                                        <span className='cursor-pointer link_text'><Link to='/login/forgot'>Esqueceu a senha?</Link></span>
-                                    </div>
-                                    
-                                </div>
-                                <input type="submit" value="Continuar" className='cursor-pointer'/>
-                                <p className='text-center mb-5'>Conecte com uma Rede Social</p>
-                                <div className='flex justify-center'>
-                                    <ul className='redes_sociais'>
-                                        <li><FontAwesomeIcon icon={faInstagram} /></li>
-                                        <li><FontAwesomeIcon icon={faLinkedin} /></li>
-                                        <li><FontAwesomeIcon icon={faGoogle} /></li>
-                                        <li><FontAwesomeIcon icon={faFacebook} /></li>
-                                        <li><FontAwesomeIcon icon={faTwitter} /></li>
-                                    </ul>
-                                </div>
-                                
-                                <div className='flex flex-row gap-3 ml-2'>
-                                    <p>Não possui uma conta ainda?</p>
-                                    <span ><Link to='/login/register' className='link_text'>Cadastre-se</Link></span>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      const userData = await loginUser(email, password);
+      localStorage.setItem("token", userData.token);
+      localStorage.setItem("user", JSON.stringify(userData.user));
+      console.log("Usuário logado:", userData);
+      setLogged(true);
+      setUser(userData.user);
+      navigate("/home"); // redireciona após login
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  return (
+    <main className="login-page">
+      <div className="container-login">
+        <div className="login-logo">
+          <img src="../newBubbleIcon.png" alt="logo" />
+          <h1 className="login-tittle">BUBBLE</h1>
+        </div>
+
+        <h2 className="login-tittle text-center">
+          Seja Bem-vindo<br />novamente
+        </h2>
+
+        <h4 className="login-tittle">
+          Cadastre-se já e <br /> venha fazer parte de <br /> nossa comunidade
+        </h4>
+
+        <p>
+          Ao você continuar, você estará concordando com nossos <br />
+          <span>Termos de Uso</span> e <span>Política de Privacidade</span> da Bubble
+        </p>
+
+        <button type="button" className="signup-input">
+          Cadastre-se
+        </button>
+      </div>
+
+      <div className="container-login-form">
+        <div className="login-block">
+          <div className="login-return">
+            <ButtonGoBack />
+          </div>
+          <div className="parent-login-container-form">
+            <h3 className="login-tittle">Login</h3>
+            <div className="child-login-container-form">
+              <form onSubmit={handleLogin}>
+                <div className="login-form">
+                  <label htmlFor="email">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    placeholder="Digite o seu Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
                 </div>
+
+                <div className="login-form">
+                  <label htmlFor="password">Senha</label>
+                  <div className="password-wrapper">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      id="password"
+                      placeholder="Digite a sua senha"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="toggle-password"
+                    >
+                      {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+                    </button>
+                  </div>
+                  <small>
+                    <Link>Esqueceu a sua senha?</Link>
+                  </small>
+                </div>
+
+                {error && <p className="error-text">{error}</p>}
+
+                <button type="submit" className="login-button">
+                  Acessar a conta
+                </button>
+              </form>
+
+              <div className="separator">
+                <p>ou continue com</p>
+              </div>
+
+              <div className="account-form">
+                <div className="account-input">
+                  <FcGoogle className="icon-login" />
+                  <p>Continuar com uma conta Google</p>
+                </div>
+              </div>
             </div>
-        </main>
-    )
+          </div>
+        </div>
+      </div>
+    </main>
+  );
 }
