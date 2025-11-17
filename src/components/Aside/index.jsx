@@ -1,29 +1,26 @@
 import { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faGitAlt,
-  faGithub,
-  faPython,
-  faSteam,
-  faTiktok,
-} from "@fortawesome/free-brands-svg-icons";
-import {
-  faBasketball,
-  faPlane,
-  faRocket,
-} from "@fortawesome/free-solid-svg-icons";
+  FaCode,
+  FaPaw,
+  FaPlane,
+  FaRegLaughSquint,
+  FaBasketballBall,
+  FaTree,
+} from "react-icons/fa";
+import { IoGameController } from "react-icons/io5";
+import { FaMusic } from "react-icons/fa6";
 import "./Aside.css";
 
 export default function Aside() {
   const icons = [
-    faGithub,
-    faRocket,
-    faPlane,
-    faGitAlt,
-    faBasketball,
-    faTiktok,
-    faPython,
-    faSteam,
+    FaRegLaughSquint,
+    IoGameController,
+    FaPaw,
+    FaPlane,
+    FaBasketballBall,
+    FaMusic,
+    FaTree,
+    FaCode,
   ];
 
   const [positions, setPositions] = useState(() =>
@@ -48,7 +45,7 @@ export default function Aside() {
   return (
     <aside className="aside-root">
       <div className="bubble-container">
-        {icons.map((icon, i) => (
+        {icons.map((Icon, i) => (
           <div
             key={i}
             className="bubble"
@@ -58,7 +55,7 @@ export default function Aside() {
               animationDelay: `${i * 0.1}s`,
             }}
           >
-            <FontAwesomeIcon icon={icon} className="bubble-icon" />
+            <Icon className="bubble-icon" />
           </div>
         ))}
       </div>
