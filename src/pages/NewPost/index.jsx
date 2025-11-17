@@ -34,10 +34,63 @@ function NewPost() {
             />
           </div>
 
+<<<<<<< HEAD
           <div className="conteiner-infoadd">
             <div className="divprofiles">
               <h2>Marcar pessoas (Opcional)</h2>
               <input type="text" placeholder="Digite o @ da pessoa" className="inputinfo" />
+=======
+                   <div className="conteiner-infoadd">
+                      
+                    <div className="divprofiles">
+                        <h2>Marcar pessoas (Opcional)</h2>
+                        <input type="text" placeholder="Digite o @ da pessoa" className="inputinfo"/>
+                    </div>
+
+                    <div className="divLocal">
+                        <h2>Bolhas</h2>
+                        <input type="text" placeholder="Adicionar Local" className="inputinfo"/>
+                    </div>
+
+                   </div>
+
+                   <div className="imgPost">
+                        <h2>Imagens</h2>
+
+                        <div className="addImg">
+                            <div className="buttonAddImg">
+                                <GoPlus className="iconAdd"/>
+                            </div>
+                        </div>
+                   </div>
+
+                </section>
+            </main>
+
+            <aside className="conteinerPreview">
+
+                <h2>Prévia</h2>
+
+            <div className='conteinerProfilePreview'>
+
+                <div className="profileelements">
+                    <img src={ProfilePic}/>
+                  <div className="textprofile">
+                    <span>Lukas_kkj</span>
+                    <span className="text-sm">@Lucas213</span>
+                  </div>
+                </div>
+
+            <div className='conteinerPostPreview'>
+
+                <div className='text-post'>
+                    <p className='titulo-post'>Ola poggers</p>
+                </div>
+
+                <div className='midiaPostPreview'>
+                    <img src={Silksong}/>
+                </div>
+>>>>>>> c096cf04fb4e349bf71294de7af60e91eb1872c2
             </div>
 
             <div className="divLocal">
