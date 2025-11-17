@@ -30,7 +30,7 @@ function NewPost() {
                     </div>
 
                     <div className="divLocal">
-                        <h2>Localização (Opcional)</h2>
+                        <h2>Bolhas</h2>
                         <input type="text" placeholder="Adicionar Local" className="inputinfo"/>
                     </div>
 
