@@ -10,11 +10,11 @@
 }
 
 .container-login-form {
-    @apply bg-[#d9d9d9] flex justify-center items-center grid-cols-1;
+    @apply bg-[#d9d9d9] flex justify-center items-center grid-cols-1 h-full;
 }
 
 .login-block {
-    @apply bg-[var(--bg)] rounded-md w-[96%] h-[95%] w-[96%] h-[95%];
+    @apply bg-[var(--bg)] rounded-md w-[90%] h-[95%];
 }
 
 /* Container desc */
@@ -72,7 +72,7 @@ h3.login-tittle {
 }
 
 .login-form {
-    @apply grid grid-cols-1 items-center-safe;
+    @apply grid grid-cols-1 items-center-safe max-w-[100%];
 }
 
 .login-form label {
@@ -80,15 +80,23 @@ h3.login-tittle {
 }
 
 .login-form input {
-    @apply bg-[#d9d9d9] pl-3 pr-3 pb-1.5 pt-1.5 text-xl text-gray-600 font-medium;
+    @apply bg-[#d9d9d9] pl-3 pr-12 pb-1.5 pt-1.5 text-xl text-gray-600 font-medium w-[100%] z-10 box-border;
+}
+
+.password-wrapper {
+    @apply w-full relative box-border;
+}
+
+.toggle-password {
+    @apply cursor-pointer absolute top-0 right-0 h-full z-1 pr-3 text-[var(--text2)] text-2xl;
 }
 
 .login-form small {
-    @apply flex justify-end-safe font-normal mt-1 text-[0.8rem];
+    @apply flex justify-end-safe font-normal mt-1 text-[1rem];
 }
 
 .login-button {
-    @apply bg-[#4192A4] w-[100%] pt-2.5 pb-2.5 mt-13 rounded-lg text-xl font-medium cursor-pointer;
+    @apply bg-[#4192A4] w-[100%] pt-3 pb-3 mt-13 rounded-lg text-xl font-medium cursor-pointer;
 }
 
 .separator {

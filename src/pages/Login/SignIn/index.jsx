@@ -52,7 +52,7 @@ export default function NewLogin() {
           <span>Termos de Uso</span> e <span>Política de Privacidade</span> da Bubble
         </p>
 
-        <button type="button" className="signup-input">
+        <button type="button" className="signup-input" onClick={() => {navigate('/newregister')}}>
           Cadastre-se
         </button>
       </div>
@@ -68,30 +68,15 @@ export default function NewLogin() {
               <form onSubmit={handleLogin}>
                 <div className="login-form">
                   <label htmlFor="email">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    placeholder="Digite o seu Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
+                  <input type="email" id="email" placeholder="Digite o seu Email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
                 </div>
 
                 <div className="login-form">
                   <label htmlFor="password">Senha</label>
                   <div className="password-wrapper">
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      id="password"
-                      placeholder="Digite a sua senha"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="toggle-password"
-                    >
+                    <input type={showPassword ? "text" : "password"} id="password" placeholder="Digite a sua senha" value={password}
+                    onChange={(e) => setPassword(e.target.value)} required />
+                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="toggle-password">
                       {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
                     </button>
                   </div>
