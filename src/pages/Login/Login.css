@@ -51,7 +51,7 @@ h4.login-tittle {
 }
 
 .signup-input {
-    @apply mt-10 pt-3.5 pb-3.5 pr-9 pl-9 bg-[#4192A4] rounded-xl text-2xl cursor-pointer;
+    @apply mt-3 pt-3.5 pb-3.5 pr-9 pl-9 bg-[#4192A4] rounded-xl text-2xl cursor-pointer;
 }
 
 /* Login Container Form */
@@ -59,11 +59,61 @@ h4.login-tittle {
     @apply absolute mt-5 ml-5 text-[var(--text)] text-4xl cursor-pointer hover:text-[var(--hover)] transition-colors duration-300;
 }
 
-h3.login-tittle {
-    @apply font-semibold text-5xl;
+.parent-login-container-form {
+    @apply p-15;
 }
 
+h3.login-tittle {
+    @apply font-semibold mt-15 text-5xl after:content-[''] after:block after:h-1.5 after:bg-[#4192A4] after:rounded-2xl after:w-[7%];
+}
 
+.child-login-container-form {
+    @apply pb-5 pl-[5rem] pr-[5rem] grid gap-8;
+}
+
+.login-form {
+    @apply grid grid-cols-1 items-center-safe;
+}
+
+.login-form label {
+    @apply font-normal text-2xl mt-5;
+}
+
+.login-form input {
+    @apply bg-[#d9d9d9] pl-3 pr-3 pb-1.5 pt-1.5 text-xl text-gray-600 font-medium;
+}
+
+.login-form small {
+    @apply flex justify-end-safe font-normal mt-1 text-[0.8rem];
+}
+
+.login-button {
+    @apply bg-[#4192A4] w-[100%] pt-2.5 pb-2.5 mt-13 rounded-lg text-xl font-medium cursor-pointer;
+}
+
+.separator {
+    @apply flex items-center text-center my-6 text-[#888] text-[0.85rem] w-[75%] before:content-[''] before:flex-1 before:border-b-2 before:border-[#ddd] after:content-[''] after:flex-1 after:border-b-2 after:border-[#ddd] not-empty:before:mr-7 not-empty:after:ml-7 justify-self-center;
+}
+
+.separator p {
+    @apply text-[1rem] text-white;
+}
+
+.account-form {
+    @apply grid justify-center gap-2.5 bg-amber-200 max-w-[100%];
+}
+
+.account-input {
+    @apply bg-blue-500 w-[100%] inline-block justify-center rounded-full p-[0.2rem] justify-center;
+}
+
+.account-input p {
+    @apply text-center w-full px-10;
+}
+
+.icon-login {
+    @apply bg-white p-1 rounded-full text-2xl;
+}
 
 
 

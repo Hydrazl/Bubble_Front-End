@@ -1,11 +1,14 @@
 import './Header.css'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faHouse, faCompass, faComments, faGear, faUser } from "@fortawesome/free-solid-svg-icons";
 import whiteBubbling from '../../assets/white_icon_bubbling.png'
 import blackBubbling from '../../assets/black_icon_bubbling.png'
 
 export default function Header() {
+    const { user } = useAuth(); 
+
     return (
         <header>
             <div className='content'>
@@ -15,17 +18,17 @@ export default function Header() {
                         <p className="teste">BUBBLE</p>
                     </Link>
                 </div>
-                <nav >
+                <nav>
                     <ul className='nav' id='pages_nav'>
-                        <Link to='/' className='header-link'><li><FontAwesomeIcon icon={faHouse}/> Início</li></Link>
+                        <Link to='/home' className='header-link'><li><FontAwesomeIcon icon={faHouse}/> Início</li></Link>
                         <Link to='/trending' className='borbulhando header-link'><li><img src={whiteBubbling} alt="Borbulhando" /> Borbulhando</li></Link>
                         <Link to='/explorer' className='header-link'><li><FontAwesomeIcon icon={faCompass}/> Explorar</li></Link>
-                        <Link to='/chat' className='header-link'><li><FontAwesomeIcon icon={faComments}/> Bulhufas</li></Link>
-                        <Link to='/notifications' className='mt-64 mb-5 header-link'><li><FontAwesomeIcon icon={faBell}/> Flops</li></Link>
+                        <Link to='/bulhufas' className='header-link'><li><FontAwesomeIcon icon={faComments}/> Bulhufas</li></Link>
+                        <Link to='/notifications' className='mt-20 lg:mt-40 xl:mt-72 mb-5 header-link'><li><FontAwesomeIcon icon={faBell}/> Flops</li></Link>
                     </ul>
 
                     <ul className='nav' id='person_nav'>
-                        <Link to='/profile' className='header-link'><li><FontAwesomeIcon icon={faUser} />Seu Perfil</li></Link>
+                        <Link to={`/profile/${user.id}`} className='header-link'><li><FontAwesomeIcon icon={faUser} />Seu Perfil</li></Link>
                         <Link to='/settings' className='header-link'><li><FontAwesomeIcon icon={faGear} />Configurações</li></Link>
                     </ul>
                 </nav>

@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 .content{
-    @apply p-4 fixed top-0 ml-6 w-60 max-h-[90%]
+    @apply p-4 top-0 fixed ml-6 w-60 max-h-[90%];
 }
 
 /* 
@@ -24,11 +24,11 @@
 }
 
 .logo_content {
-    @apply flex rounded-xl pl-4 w-57 h-16 bg-[var(--primary)] text-3xl font-semibold text-[var(--text)] items-center gap-2 cursor-pointer select-none; 
+    @apply flex rounded-xl pl-4 w-57 h-16 bg-[var(--bg-secondary)] shadow-[var(--bg-shadow)] border-[1px] border-[var(--bg-border)] text-3xl font-semibold text-[var(--text)] items-center gap-2 cursor-pointer select-none; 
 }
 
 .nav {
-    @apply flex flex-col rounded-xl w-60 bg-[var(--primary)] text-2xl font-semibold text-[var(--text)] items-center overflow-hidden ; 
+    @apply flex flex-col rounded-xl w-60 bg-[var(--bg-secondary)] shadow-[var(--bg-shadow)] border-[1px] border-[var(--bg-border)] text-2xl font-semibold text-[var(--text)] items-center overflow-hidden;
 }
 
 #pages_nav {

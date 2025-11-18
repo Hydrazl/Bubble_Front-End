@@ -5,7 +5,7 @@
 }
 
 .home-header {
-    @apply w-64 flex-shrink-0 overflow-y-auto;
+    @apply w-78 flex-shrink-0 overflow-y-auto grid grid-cols-1 items-center justify-center;
 }
 
 .home-main {

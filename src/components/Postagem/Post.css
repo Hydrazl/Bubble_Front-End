@@ -4,7 +4,7 @@
     @apply flex absolute flex-col items-center justify-center w-full h-full gap-15 my-202
 }
 .conteiner-post {
-    @apply flex flex-col my-10 mb-20 p-3 px-5 rounded-2xl bg-[var(--primary)] text-[var(--text)] w-230 justify-self-center;
+    @apply flex flex-col my-10 mb-20 p-3 px-5 rounded-2xl bg-[var(--bg-secondary)] shadow-[var(--bg-shadow)] border-[1px] border-[var(--bg-border)] text-[var(--text)] w-230 justify-self-center;
 }
 .conteiner-perfil, .like, .coments, .display-like{
     @apply flex flex-row select-none 
@@ -42,7 +42,7 @@
 }
 
 .input-coments input{
-    @apply bg-[var(--hover)] w-105 mx-5 h-12 items-center px-6 pb-1 rounded-3xl
+    @apply bg-[#5f5f5f] w-105 mx-5 h-12 items-center px-6 pb-1 rounded-3xl
 }
 
 .conteiner-perfil img{

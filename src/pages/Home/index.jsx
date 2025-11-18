@@ -1,8 +1,9 @@
 import "./Home.css";
 import Header from "../../components/Header";
-import Post from "../../components/Postagem";
+import Feed from "../../components/Feed";
 import Status from "../../components/Status";
 import Aside from "../../components/Aside";
+
 import { usePosts } from "../../context/PostContext";
 
 import ftPost from "../../assets/post.png";
@@ -76,6 +77,9 @@ function Home() {
             like_num="439K"
             com_num="57.7K"
           />
+
+          <Feed />
+
         </main>
 
         <aside className="home-aside">
