@@ -1,11 +1,14 @@
 import './Header.css'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faHouse, faCompass, faComments, faGear, faUser } from "@fortawesome/free-solid-svg-icons";
 import whiteBubbling from '../../assets/white_icon_bubbling.png'
 import blackBubbling from '../../assets/black_icon_bubbling.png'
 
 export default function Header() {
+    const { user } = useAuth(); 
+
     return (
         <header>
             <div className='content'>
@@ -25,7 +28,7 @@ export default function Header() {
                     </ul>
 
                     <ul className='nav' id='person_nav'>
-                        <Link to='/profile' className='header-link'><li><FontAwesomeIcon icon={faUser} />Seu Perfil</li></Link>
+                        <Link to={`/profile/${user.id}`} className='header-link'><li><FontAwesomeIcon icon={faUser} />Seu Perfil</li></Link>
                         <Link to='/settings' className='header-link'><li><FontAwesomeIcon icon={faGear} />Configurações</li></Link>
                     </ul>
                 </nav>

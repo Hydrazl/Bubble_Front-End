@@ -1,21 +1,10 @@
-// src/services/api.js
+import axios from "axios";
+
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
 export async function loginUser(email, password) {
-  const res = await fetch(`${API_URL}/`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
-  });
+  const { data } = await axios.post(`${API_URL}/`, { email, password });
 
-  if (!res.ok) {
-    const errorData = await res.json();
-    throw new Error(errorData.message || "Erro ao fazer login");
-  }
-
-  const data = await res.json();
-
-  // salva o token JWT localmente para futuras requisições
   if (data.token) {
     localStorage.setItem("token", data.token);
   }
