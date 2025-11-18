@@ -100,23 +100,24 @@ h3.login-tittle {
 }
 
 .account-form {
-    @apply grid justify-center gap-2.5 bg-amber-200 max-w-[100%];
+    @apply flex justify-center gap-2.5 w-full;
 }
 
 .account-input {
-    @apply bg-blue-500 w-[100%] inline-block justify-center rounded-full p-[0.2rem] justify-center;
+    @apply bg-blue-500 flex-1 rounded-full p-[0.2rem];
 }
 
 .account-input p {
-    @apply text-center w-full px-10;
+    @apply text-center w-full px-2;
 }
 
 .icon-login {
-    @apply bg-white p-1 rounded-full text-2xl;
+    @apply p-1 rounded-full text-2xl;
 }
 
-
-
+.icon-register {
+    @apply p-1 rounded-full text-[var(--text2)] flex items-center justify-center gap-2 text-4xl;
+}
 
 
 /* 

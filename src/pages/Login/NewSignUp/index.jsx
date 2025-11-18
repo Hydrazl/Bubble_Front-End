@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import { FaRegEye, FaRegEyeSlash, FaGoogle, FaFacebookF, FaApple } from "react-icons/fa";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
+import { FaFacebook } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import ButtonGoBack from '../../../components/ButtonGoBack';
 import '../Login.css'
 
@@ -62,15 +64,15 @@ export default function NewLogin() {
 
                             <div className="account-form">
                                 <div className="account-input">
-                                    <div className="icon-login"><FcGoogle /><p>Google</p></div>
+                                    <div className="icon-register"><FcGoogle className='bg-white rounded-full p-1 px-2'/><p>Google</p></div>
                                 </div>
 
                                 <div className="account-input">
-                                    <div className="icon"></div>
+                                    <div className="icon-register"><FaFacebook className='bg-white rounded-full p-1 px-2'/><p>FaceBook</p></div>
                                 </div>
 
                                 <div className="account-input">
-                                    <div className="icon"></div>
+                                    <div className="icon-register"><FaXTwitter className='bg-white rounded-full p-1 px-2'/><p>  X  </p></div>
                                 </div>
                             </div>
                         </div>
