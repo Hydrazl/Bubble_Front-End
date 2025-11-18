@@ -3,7 +3,8 @@ import Header from "../../components/Header";
 import Post from "../../components/Postagem";
 import Status from "../../components/Status";
 import Aside from "../../components/Aside";
-// import AsideBubbles from '../../components/AsideBubble'
+import { usePosts } from "../../context/PostContext";
+
 import ftPost from "../../assets/post.png";
 import ftPerfil from "../../assets/perfil.png";
 import ftPost1 from "../../assets/post1.jpeg";
@@ -14,6 +15,8 @@ import ftPost3 from "../../assets/post3.png";
 import ftPerfil3 from "../../assets/perfil3.jpg";
 
 function Home() {
+  const { posts } = usePosts();
+
   return (
     <>
       <div className="home-body">
@@ -23,6 +26,20 @@ function Home() {
 
         <main className="home-main">
           <Status />
+
+          {posts.map((p, index) => (
+            <Post
+              key={index}
+              name={p.author}
+              id={p.userTag}
+              description={p.text}
+              url_image_perfil="/default_profile.png"
+              url_image_post={p.image}
+              like_num={p.likes}
+              com_num={p.comments}
+            />
+          ))}
+
           <Post
             name="Yasmin Ferreira"
             id="@Ferreira_Yas"

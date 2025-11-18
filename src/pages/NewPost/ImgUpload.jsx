@@ -2,9 +2,8 @@ import { GoPlus } from "react-icons/go";
 import { useRef, useState } from "react";
 
 export default function ImgUpload({ onSelect }) {
-    
   const fileInputRef = useRef(null);
-  const [preview, setPreview] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
 
   function handleClick() {
     fileInputRef.current.click();
@@ -14,10 +13,10 @@ export default function ImgUpload({ onSelect }) {
     const file = e.target.files[0];
     if (!file) return;
 
-    const imageURL = URL.createObjectURL(file);
-    setPreview(imageURL);
+    const url = URL.createObjectURL(file);
 
-    if (onSelect) onSelect(file);
+    setPreviewUrl(url);   
+    onSelect(file);     
   }
 
   return (
@@ -25,14 +24,13 @@ export default function ImgUpload({ onSelect }) {
       <h2>Imagens</h2>
 
       <div className="addImg">
-
         <div className="buttonAddImg" onClick={handleClick}>
           <GoPlus className="iconAdd" />
         </div>
 
-        {preview && (
+        {previewUrl && (
           <img
-            src={preview}
+            src={previewUrl}
             alt="preview"
             className="preview-upload"
           />

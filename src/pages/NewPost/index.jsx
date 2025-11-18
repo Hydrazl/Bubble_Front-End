@@ -6,15 +6,32 @@ import Like from "../../components/LikeButton";
 import ProfilePic from "../../assets/tl.png";
 import ImgUpload from "./ImgUpload";
 import { useState } from "react";
+import { usePosts } from "../../context/PostContext";
 
 function NewPost() {
   const [postText, setPostText] = useState("");
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
+  const { addPost } = usePosts();
 
   function handleSelectedImage(file) {
     if (!file) return;
     const url = URL.createObjectURL(file);
     setImagePreviewUrl(url);
+  }
+
+  function handlePublish() {
+    const newPost = {
+      author: "Lukas_kkj",
+      userTag: "@Lucas213",
+      text: postText,
+      image: imagePreviewUrl,
+      likes: 0,
+      comments: 0,
+      createdAt: new Date(),
+    };
+
+    addPost(newPost);
+    window.location.href = "/";
   }
 
   return (
@@ -25,6 +42,7 @@ function NewPost() {
         <h1 className="titlenewpost">New Post</h1>
 
         <section className="inputsnewpost">
+          
           <div className="conteiner-title">
             <textarea
               placeholder="Bublique algo... Como foi o seu dia?..."
@@ -34,74 +52,30 @@ function NewPost() {
             />
           </div>
 
-<<<<<<< HEAD
           <div className="conteiner-infoadd">
             <div className="divprofiles">
               <h2>Marcar pessoas (Opcional)</h2>
-              <input type="text" placeholder="Digite o @ da pessoa" className="inputinfo" />
-=======
-                   <div className="conteiner-infoadd">
-                      
-                    <div className="divprofiles">
-                        <h2>Marcar pessoas (Opcional)</h2>
-                        <input type="text" placeholder="Digite o @ da pessoa" className="inputinfo"/>
-                    </div>
-
-                    <div className="divLocal">
-                        <h2>Bolhas</h2>
-                        <input type="text" placeholder="Adicionar Local" className="inputinfo"/>
-                    </div>
-
-                   </div>
-
-                   <div className="imgPost">
-                        <h2>Imagens</h2>
-
-                        <div className="addImg">
-                            <div className="buttonAddImg">
-                                <GoPlus className="iconAdd"/>
-                            </div>
-                        </div>
-                   </div>
-
-                </section>
-            </main>
-
-            <aside className="conteinerPreview">
-
-                <h2>Prévia</h2>
-
-            <div className='conteinerProfilePreview'>
-
-                <div className="profileelements">
-                    <img src={ProfilePic}/>
-                  <div className="textprofile">
-                    <span>Lukas_kkj</span>
-                    <span className="text-sm">@Lucas213</span>
-                  </div>
-                </div>
-
-            <div className='conteinerPostPreview'>
-
-                <div className='text-post'>
-                    <p className='titulo-post'>Ola poggers</p>
-                </div>
-
-                <div className='midiaPostPreview'>
-                    <img src={Silksong}/>
-                </div>
->>>>>>> c096cf04fb4e349bf71294de7af60e91eb1872c2
+              <input
+                type="text"
+                placeholder="Digite o @ da pessoa"
+                className="inputinfo"
+              />
             </div>
 
             <div className="divLocal">
               <h2>Localização (Opcional)</h2>
-              <input type="text" placeholder="Adicionar Local" className="inputinfo" />
+              <input
+                type="text"
+                placeholder="Adicionar Local"
+                className="inputinfo"
+              />
             </div>
           </div>
 
           <div className="imgPost">
             <ImgUpload onSelect={handleSelectedImage} />
           </div>
+
         </section>
       </main>
 
@@ -118,8 +92,11 @@ function NewPost() {
           </div>
 
           <div className="conteinerPostPreview">
+
             <div className="text-post">
-              <p className="titulo-post">{postText || "O que você escrever aqui aparecerá na prévia..."}</p>
+              <p className="titulo-post">
+                {postText || "O que você escrever aqui aparecerá na prévia..."}
+              </p>
             </div>
 
             <div className="midiaPostPreview">
@@ -129,6 +106,7 @@ function NewPost() {
                 <div className="placeholder-image"></div>
               )}
             </div>
+
           </div>
 
           <div className="displayLikePreview">
@@ -153,7 +131,7 @@ function NewPost() {
         </div>
 
         <div className="conteinerPublicar">
-          <div className="ButtonsPublicar">
+          <div className="ButtonsPublicar" onClick={handlePublish}>
             <span>Publicar</span>
           </div>
 
@@ -161,6 +139,7 @@ function NewPost() {
             <span>Cancelar</span>
           </div>
         </div>
+
       </aside>
     </>
   );
