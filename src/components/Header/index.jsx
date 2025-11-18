@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faHouse, faCompass, faComments, faGear, faUser } from "@fortawesome/free-solid-svg-icons";
 import whiteBubbling from '../../assets/white_icon_bubbling.png'
 import blackBubbling from '../../assets/black_icon_bubbling.png'
+import logo from '../../../public/white-logo.png'
 
 export default function Header() {
     const { user } = useAuth(); 
@@ -14,7 +15,7 @@ export default function Header() {
             <div className='content'>
                 <div className='logo_content'>
                     <Link to='/' className='flex flex-row gap-2 items'>
-                        <img src='white-logo.png' alt="logo" />
+                        <img src={logo} alt="logo" />
                         <p className="teste">BUBBLE</p>
                     </Link>
                 </div>

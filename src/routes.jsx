@@ -14,7 +14,6 @@ import Forgot from "./pages/Login/Forgot";
 import Sent from "./pages/Login/Sent";
 import Unfound from "./pages/Login/Unfound";
 import Status from './components/Status';
-import NewLogin from "./pages/Login/NewSignIn";
 import NewPost from './pages/NewPost';
 import NewRegister from "./pages/Login/NewSignUp";
 
