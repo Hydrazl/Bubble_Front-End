@@ -59,7 +59,7 @@ export default function Profile() {
                 <Header />
             </header>
 
-            <main>
+            <main className='-mt-130'>
                 <BannerProfile  
                     name={data.nickname}
                     bio={data.description || '⚡ Foco, visão e propósito'} 
@@ -71,7 +71,7 @@ export default function Profile() {
                     banner={banner}
                 />
                 
-                <section className='menuBubbleRecommended'>
+                <section className='menuBubbleRecommended mt-120'>
                     <BubbleRecommended nameBubble={"jogo"} imgBubble={imgBubble} />
                     <BubbleRecommended nameBubble={"jogo"} imgBubble={imgBubble} />
                     <BubbleRecommended nameBubble={"jogo"} imgBubble={imgBubble} />

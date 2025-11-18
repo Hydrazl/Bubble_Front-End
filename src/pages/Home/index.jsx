@@ -3,7 +3,7 @@ import Header from "../../components/Header";
 import Feed from "../../components/Feed";
 import Status from "../../components/Status";
 import Aside from "../../components/Aside";
-
+import Post from '../../components/Postagem';
 import { usePosts } from "../../context/PostContext";
 
 import ftPost from "../../assets/post.png";
