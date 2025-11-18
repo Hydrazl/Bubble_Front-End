@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import ConfigNav from '../../components/Confignav'
 import EditProfile from '../../components/pagesConfig/EditProfile';
 
+
 function Settings() {
     return (
         <>
@@ -14,6 +15,7 @@ function Settings() {
         <main>
            <EditProfile/>
         </main>
+
         </>
     )
 }
