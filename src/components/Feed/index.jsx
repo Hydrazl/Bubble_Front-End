@@ -7,10 +7,25 @@ import ftPost2 from "../../assets/post2.jpg";
 import ftPerfil2 from "../../assets/perfil2.jpg";
 import ftPost3 from "../../assets/post3.png";
 import ftPerfil3 from "../../assets/perfil3.jpg";
+import { usePosts } from "../../context/PostContext";
 
 export default function Feed() {
+    const { posts } = usePosts();
+    
     return (
         <main>
+            {posts.map((p, index) => (
+            <Post
+                key={index}
+                name={p.author}
+                id={p.userTag}
+                description={p.text}
+                url_image_perfil="/default_profile.png"
+                url_image_post={p.image}
+                like_num={p.likes}
+                com_num={p.comments}
+            />
+            ))}
             <Post
                 name="Yasmin Ferreira"
                 id="@Ferreira_Yas"

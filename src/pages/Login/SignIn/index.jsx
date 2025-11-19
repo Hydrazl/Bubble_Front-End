@@ -52,6 +52,8 @@ export default function NewLogin() {
           <span>Termos de Uso</span> e <span>Política de Privacidade</span> da Bubble
         </p>
 
+        <h3 className='mt-8'>Não possui uma conta?</h3>
+
         <button type="button" className="signup-input" onClick={() => {navigate('/newregister')}}>
           Cadastre-se
         </button>

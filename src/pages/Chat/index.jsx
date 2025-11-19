@@ -1,7 +1,7 @@
 import './Chat.css';
 import Header from '../../components/Header';
 import Contatos from '../../components/Contatos';
-import Dialogo from './../../components/Dialogo/index';
+import Dialogo from '../../components/Dialogo';
 
 function Chat() {
   return (
@@ -78,9 +78,7 @@ function Chat() {
         <div className='vertical-line'></div> {/* div q separará os contatos do chat*/}
 
       <section className='container-dialogo'>
-        {/* How fucking I´ll make this fucking chat happened? I really don´t have any idea. I hate FrontEnd! */}
         <Dialogo url_img_profile='https://avatars.githubusercontent.com/u/9919?s=200&v=4' name='Fulano de Tal'/>
-
       </section>
     </main>
 
