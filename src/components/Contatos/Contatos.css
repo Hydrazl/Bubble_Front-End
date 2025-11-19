@@ -5,7 +5,7 @@
 }
 
 #unselected {
-    @apply hover:bg-[var(--terciary)] rounded-2xl transition-colors duration-300
+    @apply hover:bg-[var(--hover)] rounded-2xl transition-colors duration-300
 }
 
 .contato h1{

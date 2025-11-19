@@ -1,118 +1,117 @@
-
 @import 'tailwindcss';
 
-main{
-    @apply flex flex-col items-center justify-center w-[75%] 
+.mainNewPost {
+    @apply flex flex-col items-center justify-center w-[75%];
 }
 
 .titlenewpost {
-    @apply text-white m-4 font-bold text-4xl w-[50%] after:block after:bg-amber-50 after:w-[23%] after:h-1.5 after:rounded-2xl
+    @apply text-white m-4 font-bold text-4xl w-[50%] after:block after:bg-amber-50 after:w-[23%] after:h-1.5 after:rounded-2xl;
 }
 
 .inputsnewpost{
-    @apply flex flex-col justify-center w-2xl m-4
+    @apply flex flex-col justify-center w-2xl m-4;
 }
 
 .conteiner-title{
-    @apply flex flex-col gap-5
+    @apply flex flex-col gap-5;
 }
 
 .inputcommets{
-    @apply bg-gray-800 w-full p-5 h-50 text-white font-medium rounded-2xl
+    @apply bg-gray-800 w-full p-5 h-50 text-white font-medium rounded-2xl;
 }
 
 
 .conteiner-infoadd{
-    @apply flex flex-col mt-10 gap-4
+    @apply flex flex-col mt-10 gap-4;
 }
 
 .divprofiles, .divLocal{
-    @apply gap-2 text-white text-xl flex-col flex
+    @apply gap-2 text-white text-xl flex-col flex;
 }
 
 .divprofiles input, .divLocal input{
-    @apply bg-gray-800 w-full p-3  font-medium
+    @apply bg-gray-800 w-full p-3  font-medium;
 }
 
 
 .imgPost{
-    @apply mt-10 text-white text-xl flex flex-col gap-4  
+    @apply mt-10 text-white text-xl flex flex-col gap-4;
 }
 
 .addImg{
-    @apply bg-gray-700 w-full p-5 h-20 rounded-xl flex gap-2 items-center
+    @apply bg-gray-700 w-full p-5 h-20 rounded-xl flex gap-2 items-center;
 }
 
 .addImg img{
-    @apply w-22 h-22 rounded-2xl
+    @apply w-22 h-22 rounded-2xl;
 }
 .buttonAddImg{
-    @apply w-20 h-20 bg-gray-800 flex items-center justify-center rounded-xl wrap-normal  text-5xl font-bold  
+    @apply w-20 h-20 bg-gray-800 flex items-center justify-center rounded-xl wrap-normal text-5xl font-bold;
 }
 
 /* Aside */
 
 .conteinerPreview{
-    @apply flex flex-col items-center text-amber-50 w-[25%] absolute right-30 top-6
+    @apply flex flex-col items-center text-amber-50 w-[25%] absolute right-30 top-6;
 }
 
 .conteinerPreview h2{
-    @apply text-2xl font-bold mb-4 after:block after:bg-amber-50 after:w-full after:h-1.5 after:rounded-2xl
+    @apply text-2xl font-bold mb-4 after:block after:bg-amber-50 after:w-full after:h-1.5 after:rounded-2xl;
 }
 
 .conteinerProfilePreview{
-    @apply h-120 w-150 bg-gray-800 rounded-2xl justify-center items-center flex flex-col gap-2
+    @apply h-120 w-150 bg-gray-800 rounded-2xl justify-center items-center flex flex-col gap-2;
 }
 
 .profileelements{
-    @apply flex w-[85%] relative top-3 gap-2 m-1
+    @apply flex w-[85%] relative top-3 gap-2 m-1;
 }
 
 .profileelements img{
-    @apply h-12 w-12 rounded-full
+    @apply h-12 w-12 rounded-full;
 }
 
 .textprofile{
-    @apply flex flex-col
+    @apply flex flex-col;
 }
 
 .span2{
-    @apply text-lg
+    @apply text-lg;
 }
 
 .midiaPostPreview {
-    @apply h-80 w-130 bg-gray-900 rounded-2xl
+    @apply h-80 w-130 bg-gray-900 rounded-2xl;
 }
 
 .midiaPostPreview img{
-    @apply h-full w-full rounded-2xl object-cover
+    @apply h-full w-full rounded-2xl object-cover;
 }
 
 .displayLikePreview{
-   @apply flex items-center gap-10 
+   @apply flex items-center gap-10;
 }
 
 .conteinerPublicar{
-    @apply mt-6 w-150 h-50 rounded-2xl flex flex-col items-center bg-gray-700  
+    @apply mt-6 w-150 h-50 rounded-2xl flex flex-col items-center bg-gray-700;  
 }
 
 .ButtonsPublicar, .ButtonCancel {
-    @apply w-100 h-20 bg-gray-800 text-2xl rounded-2xl  flex items-center justify-center mt-4  
+    @apply w-100 h-20 bg-gray-800 text-2xl rounded-2xl  flex items-center justify-center mt-4; 
 }
 
 .ButtonsPublicar span, .ButtonCancel span{
-    @apply font-bold
+    @apply font-bold;
 }
 
 .ButtonCancel{
-    @apply hover:bg-red-500 transition ease-in duration-300
+    @apply hover:bg-red-500 transition ease-in duration-300;
 }
 
 .comentsPreview{
-    @apply flex text-2xl
+    @apply flex text-2xl;
 }
 
 .coment, .shareicon{
-    @apply text-3xl mr-2
+    @apply text-3xl mr-2;
 }
 

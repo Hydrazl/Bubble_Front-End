@@ -11,7 +11,7 @@ function Chat() {
     </header>
     
     <main className="container-chat"> {/* Container do chat */}
-      <section> {/* Section dos contatos */}
+      <section className='funciona'> {/* Section dos contatos */}
         <div className='title'>
           <h2>BULHUFAS</h2>
           <div className='line-bubble'></div> {/* div q será a barra de baixo do txt */}

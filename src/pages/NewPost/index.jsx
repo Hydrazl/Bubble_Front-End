@@ -39,7 +39,7 @@ function NewPost() {
     <>
       <Header />
 
-      <main>
+      <main className="mainNewLogin">
         <h1 className="titlenewpost">New Post</h1>
 
         <section className="inputsnewpost">

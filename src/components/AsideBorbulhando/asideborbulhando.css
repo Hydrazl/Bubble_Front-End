@@ -1,22 +1,12 @@
 @import 'tailwindcss';
 
 .aside {
-  @apply fixed top-0 right-0 w-[300px] h-[92vh]
-         mr-7 mt-3 mb-2.5 p-5
-         flex flex-col gap-[18px]
-         rounded-[20px]
-         bg-[#110f0f]
-         border-r border-white/10;
+  @apply fixed top-0 right-0 w-[300px] h-[92vh] mr-7 mt-3 mb-2.5 p-5 flex flex-col gap-[18px] rounded-[20px] bg-[#110f0f] border-r border-white/10;
 }
-
 
 .searchBox input {
-  @apply w-[94%] px-3 py-2
-         bg-white/10 text-white text-sm
-         rounded-lg outline-none
-         placeholder:text-white/50;
+  @apply w-[94%] px-3 py-2 bg-white/10 text-white text-sm rounded-lg outline-none placeholder:text-white/50;
 }
-
 
 .card {
   @apply bg-white/10 p-3 rounded-xl
@@ -37,8 +27,7 @@
 }
 
 .row {
-  @apply flex items-center gap-2
-         text-white text-[13px];
+  @apply flex items-center gap-2 text-white text-[13px];
 }
 
 .row .index {
