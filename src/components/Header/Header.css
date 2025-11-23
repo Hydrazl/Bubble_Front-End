@@ -3,11 +3,9 @@
 .content{
     @apply p-4 top-0 fixed ml-6 w-60 max-h-[90%];
 }
-
-/* 
-.logo_content {
-  @apply justify-center;
-} */
+.header-logo {
+  @apply h-10
+}
 
 /* Agora o Link recebe os estilos que eram do li */
 .content a.header-link{
