@@ -42,8 +42,8 @@ h4.login-tittle {
     @apply font-extralight text-center;
 }
 
-.container-login p {
-    @apply mt-70;
+#login-p {
+    @apply pt-70;
 }
 
 .container-login span {
@@ -76,11 +76,32 @@ h3.login-tittle {
 }
 
 .login-form label {
-    @apply font-normal text-2xl mt-5;
+    @apply font-normal text-2xl;
 }
 
-.login-form input {
+.login-form input, textarea {
     @apply bg-[#d9d9d9] pl-3 pr-12 pb-1.5 pt-1.5 text-xl text-gray-600 font-medium w-[100%] z-10 box-border;
+}
+
+.login-form textarea {
+    @apply rounded-lg h-[8rem] resize-none;
+}
+
+input[type="file"]::file-selector-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+/* Ocultar o ícone padrão */
+input[type="file"] {
+    font-size: 0;
+}
+
+input[type="file"]::before {
+    content: '📷 Escolher foto';
+    font-size: 16px;
+    display: inline-block;
 }
 
 .password-wrapper {
@@ -127,80 +148,71 @@ h3.login-tittle {
     @apply p-1 rounded-full text-[var(--text2)] flex items-center justify-center gap-2 text-4xl;
 }
 
-
-/* 
-.half-image2 {
-    @apply fixed top-0 left-0 w-1/2 h-screen object-cover z-[-1] rotate-180;
-}   
-  
-.half-image {
-    @apply fixed top-0 right-0 w-1/2 h-screen object-cover z-[-1];
-}   
-
-.container { /* A base do login, o container principal /* }
-    @apply h-160 w-210 rounded-2xl flex backdrop-blur-xs backdrop-grayscale-75 border-2 text-[var(--text)] flex-col p-4 bg-[#0000004e] 
+.banner-input {
+    @apply flex flex-col items-center justify-center w-[99%] h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-colors
 }
 
-.container#register {
-    @apply h-180
+.photo-input {
+    @apply flex items-center justify-center gap-2 w-full py-2 bg-blue-600 text-white rounded-lg cursor-pointer hover:bg-blue-700 transition-colors;
 }
 
-.login-main{
-    @apply flex w-screen h-screen justify-center items-center z-[2]
+/* PREVIEW */
+
+.profile-preview-container {
+    @apply w-full max-w-md mt-8 bg-[#2a2a3e] rounded-2xl overflow-hidden shadow-2xl;
 }
 
-#forgot-main{
-    @apply h-115 w-200
+/* Banner Preview */
+.preview-banner {
+    @apply w-full h-32 bg-gradient-to-br from-gray-700 to-gray-800 relative overflow-hidden;
 }
 
-/* Icone de voltar*/
-
-.circle-icon{
-    @apply rounded-full border-3 text-[var(--text)] size-15 flex items-center justify-center text-4xl rotate-0 hover:rotate-180 transition-all duration-600
+.preview-banner img {
+    @apply w-full h-full object-cover;
 }
 
-/*  */
-
-.logo-content{
-    @apply flex flex-row text-5xl h-20 w-210 items-center absolute font-semibold mt-1 justify-center  
+.preview-banner-placeholder {
+    @apply w-full h-full flex flex-col items-center justify-center text-gray-400 gap-1 text-sm;
 }
 
-#logo-forgot{
-    @apply flex flex-row text-5xl h-20 w-200 items-center absolute font-semibold mt-1 justify-center 
+/* Profile Info Section */
+.preview-profile-info {
+    @apply px-5 -mt-10 relative z-10 pb-3;
 }
 
-.bubble_img{
-    @apply object-contain mr-3 size-20 
+.preview-avatar {
+    @apply w-20 h-20 rounded-full bg-[#1a1a2e] border-4 border-[#2a2a3e] overflow-hidden shadow-xl;
 }
 
-#checkbox {
-    @apply cursor-pointer w-3.5
+.preview-avatar img {
+    @apply w-full h-full object-cover;
 }
 
-.login-checkbox{
-    @apply flex items-center gap-3 justify-between mt-[-1.25rem]
+.preview-avatar-placeholder {
+    @apply w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-600 to-gray-700 text-gray-300;
 }
 
-.redes_sociais{
-    @apply flex flex-row justify-between mb-3 w-100 
+.preview-user-details {
+    @apply mt-2;
 }
 
-.redes_sociais li{
-    @apply border-2 text-[var(--text)] size-15 rounded-2xl justify-center flex items-center text-[2.5rem] cursor-pointer hover:scale-130 transition-all duration-350 ease-in-out
+.preview-nickname {
+    @apply text-xl font-bold text-white;
 }
 
-.link_text {
-    @apply relative inline-block;
-  }
-  
-.link_text::after {
-    content: '';
-    @apply absolute left-0 bottom-0 w-full h-[2px] bg-current;
-    transform: scaleX(0);
-    transform-origin: center; 
-    transition: transform 0.4s ease-in-out;
+.preview-username {
+    @apply text-sm text-gray-400;
 }
 
-.link_text:hover::after {
-    transform: scaleX(1);
+/* Bio Preview */
+.preview-bio {
+    @apply px-5 pb-5 border-t border-gray-700 pt-3 mt-2;
+}
+
+.preview-bio-label {
+    @apply text-xs font-semibold text-gray-400 mb-1.5;
+}
+
+.preview-bio-text {
+    @apply text-sm text-white leading-relaxed;
 }

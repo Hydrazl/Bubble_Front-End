@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useAuth } from "./context/AuthContext";
 import Home from './pages/Home';
 import Trending from './pages/Trending';
 import Explorer from './pages/Explorer';
@@ -15,12 +14,9 @@ import Sent from "./pages/Login/Sent";
 import Unfound from "./pages/Login/Unfound";
 import Status from './components/Status';
 import NewPost from './pages/NewPost';
-import NewRegister from "./pages/Login/NewSignUp";
 
 
 function AppRoutes() {
-    const { user } = useAuth();
-
     return (
         <BrowserRouter basename="/">
             <Routes>
@@ -39,11 +35,9 @@ function AppRoutes() {
                 <Route path="/settings" element={<Settings />}></Route>
                 <Route path="/status" element={<Status/>}></Route>
                 <Route path="/newpost" element={<NewPost/>}></Route>
-                <Route path="/newregister" element={<NewRegister/>}></Route>
-
             </Routes>
         </BrowserRouter>
     )
 }
 
-export default AppRoutes
+export default AppRoutes;

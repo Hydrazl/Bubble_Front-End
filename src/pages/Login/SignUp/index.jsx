@@ -1,58 +1,399 @@
-import '../Login.css'
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook, faGoogle, faInstagram, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
-import bg from '../../../assets/login-bg.png'
-import bg2 from '../../../assets/login-bg2.png'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { LuX, LuCamera, LuUpload } from "react-icons/lu";
+import { FcGoogle } from "react-icons/fc";
+import { FaFacebook } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import ButtonGoBack from '../../../components/ButtonGoBack';
+import { registerUser, completeProfile } from '../../../services/api';
+import '../Login.css'
 
-export default function Register() {
+// Página 1: Informações inicias
+
+function StepOne({ onNext }) {
+    const navigate = useNavigate();
+    const [error, setError] = useState("");
+    const [errors, setErrors] = useState({});
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [ formData, setFormData ] = useState({
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData (prev => ({
+            ...prev,
+            [name]: value
+        }));
+
+        if (errors[name]) {
+            setErrors (prev => ({
+                ...prev, 
+                [name]: ''
+            }))
+        }
+    };
+
+    const validateForm = () => {
+        const newErrors = {};
+        if (formData.password !== formData.confirmPassword) {
+            newErrors.confirmPassword = 'As senhas não se coincidem';
+        }
+        setErrors(newErrors)
+        return Object.keys(newErrors).length === 0;
+    }
+
+    const handleRegister = async (e) => {
+        e.preventDefault()
+        setError('');
+        if (!validateForm()) {
+            return;
+        }
+
+        // Não salva no banco, apenas passa os dados para a próxima etapa
+        onNext(formData)
+    }
+
     return (
-        <main>
-            <img src={bg2} className="half-image2" />
-            <img src={bg2} className="half-image" />
-            <div className='login-main'>
-                <div className='login-container'>
-                    <div className="container" id='register'>
-                        <ButtonGoBack />
-                        <div className="logo-content">
-                            <img src="../white-logo.png" alt="" className='bubble_img'/><p>Bubble</p>
-                        </div>
-                        <div className="form_login">   
-                            <form className='login-form' action={`http://localhost:5173/login`}>
-                                <h1>CADASTRO</h1>
-                                <input type="text" name="text" id="" placeholder='Nome de Usuário'/>
-                                <input type="email" name="email" id="" placeholder='E-mail'/>
-                                <input type="password" name="password" id="" placeholder='Senha'/>
-                                <input type="password" name="confirmPassword" id="" placeholder='Confirmar senha'/>
+        <main className='login-page'>
+            <div className="container-login">
+                <div className="login-logo">
+                    <img src="../newBubbleIcon.png" alt="logo" />
+                    <h1 className='login-tittle'>BUBBLE</h1>
+                </div>
 
-                                <div className='login-checkbox'>
-                                    <div className='flex flex-row items-center gap-2'>
-                                        <input type="checkbox" className='cursor-pointer' id='checkbox' />
-                                        <p>Concordo com os <span className='link_text cursor-pointer'>Termos de Uso & Política de Privacidade</span></p>
+                <h2 className="login-tittle">Seja Bem-vindo</h2>
+
+                <h4 className="login-tittle">Cadastre-se já e <br /> venha fazer parte de <br /> nossa comunidade</h4>
+
+                <p id='login-p' >Ao você continuar, você estará concordando com nossos <br /> <span>Termos de Uso</span> e <span>Política de Privacidade</span> da Bubble</p>
+
+                <h3 className='mt-8'>Já tem uma conta?</h3>
+
+                <button type="submit" className='signup-input' onClick={() => {navigate('/')}}>Faça Login</button>
+            </div>
+
+            <div className="container-login-form">
+                <div className="login-block">
+                    <div className="login-return">
+                        <ButtonGoBack />
+                    </div>
+                    <div className="parent-login-container-form">
+                        <h3 className="login-tittle">Cadastro</h3>
+                        <div className='child-login-container-form'>
+                            <form onSubmit={handleRegister}>
+                                <div className="login-form">
+                                    <label htmlFor="username">Nome de usuário</label>
+                                    <input type="text" id="username" name='username' placeholder='Digite o seu nome de usuário' value={formData.username} onChange={handleChange} required/>
+                                </div>
+                                <div className="login-form">
+                                    <label htmlFor="email">Email</label>
+                                    <input type="email" id="email" name='email' value={formData.email} onChange={handleChange} placeholder='Digite o seu Email' required/>
+                                </div>
+                                <div className="login-form">
+                                    <label htmlFor="password">Senha</label>
+                                    <div className="password-wrapper">
+                                        <input type={showPassword ? "text" : "password"} id="password" name='password' placeholder="Digite a sua senha" value={formData.password}
+                                        onChange={handleChange} className={errors.password ? 'inout-error' : ''} required />
+                                        <button type="button" onClick={() => setShowPassword(!showPassword)} className="toggle-password">
+                                        {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+                                        </button>
                                     </div>
-                                    
                                 </div>
-                                <input type="submit" value="Continuar" className='cursor-pointer'/>
-                                <p className='text-center mb-5'>Conecte com uma Rede Social</p>
-                                <div className='flex justify-center'>
-                                    <ul className='redes_sociais'>
-                                        <li><FontAwesomeIcon icon={faInstagram} /></li>
-                                        <li><FontAwesomeIcon icon={faLinkedin} /></li>
-                                        <li><FontAwesomeIcon icon={faGoogle} /></li>
-                                        <li><FontAwesomeIcon icon={faFacebook} /></li>
-                                        <li><FontAwesomeIcon icon={faTwitter} /></li>
-                                    </ul>
+                                <div className="login-form">
+                                    <label htmlFor="password">Confirme sua senha</label>
+                                    <div className="password-wrapper">
+                                        <input type={showConfirmPassword ? "text" : "password"} id="confirmPassword" name='confirmPassword' placeholder="Digite novamente a sua senha" value={formData.confirmPassword}
+                                        onChange={handleChange} className={errors.confirmPassword ? 'input-error' : ''} required />
+                                        <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="toggle-password">
+                                        {showConfirmPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+                                        </button>
+                                    </div>
+                                    {errors.confirmPassword && (
+                                        <small className="error-text">{errors.confirmPassword}</small>
+                                    )}
                                 </div>
-                                <div className='flex flex-row gap-3 ml-2'>
-                                    <p>Já possui uma conta?</p>
-                                    <span className='link_text'><Link to='/Login'>Conecte-se</Link></span>
-                                </div>
+                                {error && <p className="error-text">{error}</p>}
+                                <button type='submit' className='login-button'>Criar sua conta</button>
                             </form>
+
+                            <div className='separator'><p>ou continue com</p></div>
+                            <div className="account-form">
+                                <div className="account-input">
+                                    <div className="icon-register"><FcGoogle className='bg-white rounded-full p-1 px-2'/><p>Google</p></div>
+                                </div>
+                                <div className="account-input">
+                                    <div className="icon-register"><FaFacebook className='bg-white rounded-full p-1 px-2'/><p>FaceBook</p></div>
+                                </div>
+                                <div className="account-input">
+                                    <div className="icon-register"><FaXTwitter className='bg-white rounded-full p-1 px-2'/><p>  X  </p></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </main>
     )
-}  
+} 
+
+// Página 2: Customização com Preview
+
+function StepTwo({userData, onComplete}) {
+    const [ profilePic, setProfilePic ] = useState(null)
+    const [ profilePreview, setProfilePreview ] = useState(null)
+    const [ banner, setBanner ] = useState(null)
+    const [ bannerPreview, setBannerPreview ] = useState(null)
+    const [ nickname, setNickname ] = useState('')
+    const [ description, setDescription ] = useState('')
+    const [ uploading, setUploading ] = useState(false)
+
+    const handleFileChange = (e, type) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader()
+            reader.onloadend = () => {
+                if (type === 'profile') {
+                    setProfilePic(file);
+                    setProfilePreview(reader.result);
+                } else if (type === 'banner') {
+                    setBanner(file)
+                    setBannerPreview(reader.result)
+                }
+            };
+            reader.readAsDataURL(file);
+        } 
+    };
+
+    const removeImg = (type) => {
+        if (type === 'profile') {
+            setProfilePic (null)
+            setProfilePreview (null)
+        } else {
+            setBanner(null)
+            setBannerPreview(null)
+        }
+    }
+
+    const handleFinish = async () => {
+        if (!nickname.trim()) {
+            alert('Para continuar defina um nome de Exibição');
+            return;
+        }
+
+        setUploading(true)
+
+        try {
+            // Primeiro cria o usuário
+            const { username, email, password } = userData;
+            const registerResponse = await registerUser(username, email, password);
+            console.log('Usuário criado:', registerResponse)
+            
+            const userId = registerResponse.user?.id || registerResponse.userId || registerResponse.id;
+
+            if (!userId) {
+                throw new Error('ID do usuário não foi retornado');
+            }
+
+            // Depois completa o perfil
+            const formData = new FormData();
+            formData.append('userId', userId)
+            formData.append('nickname', nickname)
+            formData.append('description', description);
+
+            if (profilePic) formData.append('profilePic', profilePic)
+            if (banner) formData.append('banner', banner)
+
+            const profileData = await completeProfile(formData)
+
+            onComplete(profileData);
+        } catch (error) {
+            const message = error.response?.data?.message || error.message || 'Erro ao finalizar cadastro';
+            alert('Erro: ' + message);
+        } finally {
+            setUploading(false)
+        }
+    }
+
+    const handleSkip = () =>{
+        handleFinish();
+    }
+
+    return (
+        <main className='login-page'>
+            <div className="container-login-form">
+                <div className="login-block">
+                    <div className="login-return">
+                        <ButtonGoBack />
+                    </div>
+                    <div className="parent-login-container-form">
+                        <h3 className="login-tittle">Personalização</h3>
+                        <div className='child-login-container-form'>
+                            <form onSubmit={(e) => { e.preventDefault(); handleFinish(); }}>
+                                <div className="login-form">
+                                    <label htmlFor="nickname" className='mt-5'>Nome de Exibição</label>
+                                    <input 
+                                        type="text" 
+                                        id="nickname" 
+                                        name="nickname" 
+                                        value={nickname} 
+                                        onChange={(e) => setNickname(e.target.value)} 
+                                        placeholder='Digite o seu nome de exibição' 
+                                        required 
+                                    />
+                                </div>
+                                
+                                <div className="login-form">
+                                    <label htmlFor="profilePic"  className='mt-5'>Foto de Perfil</label>
+                                    <label htmlFor="profilePic" className='photo-input'>
+                                        <LuCamera />
+                                        <span>Escolher Foto</span>
+                                    </label>
+                                    <input 
+                                        type="file" 
+                                        id="profilePic" 
+                                        accept="image/*" 
+                                        hidden 
+                                        onChange={(e) => handleFileChange(e, 'profile')} 
+                                    />
+                                </div>
+                                
+                                <div className="login-form">
+                                    <label htmlFor="banner" className='mt-5'>Banner</label>
+                                    <label htmlFor="banner" className='banner-input'>
+                                        <LuUpload />
+                                        <span className="text-sm text-gray-500">Clique para fazer upload</span>
+                                        <span className="text-xs text-gray-400 mt-1">PNG, JPG até 10MB</span>
+                                    </label>
+                                    <input 
+                                        type="file" 
+                                        id="banner" 
+                                        accept="image/*" 
+                                        onChange={(e) => handleFileChange(e, 'banner')} 
+                                        hidden 
+                                    />
+                                </div>
+                                
+                                <div className="login-form">
+                                    <label htmlFor="description" className='mt-5'>Descrição (opcional)</label>
+                                    <textarea 
+                                        id="description" 
+                                        maxLength={150} 
+                                        value={description} 
+                                        onChange={(e) => setDescription(e.target.value)} 
+                                        placeholder="Conte um pouco sobre você..." 
+                                    />
+                                    <small>{description.length}/150</small>
+                                </div>
+                                
+                                <button type='submit' className='login-button' disabled={uploading}>
+                                    {uploading ? 'Finalizando...' : 'Finalizar Cadastro'}
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Lado direito com preview */}
+            <div className="container-login">
+                <div className="login-logo">
+                    <img src="../newBubbleIcon.png" alt="logo" />
+                    <h1 className='login-tittle'>BUBBLE</h1>
+                </div>
+
+                {/* Preview do Perfil */}
+                <div className="profile-preview-container">
+                    {/* Banner Preview */}
+                    <div className="preview-banner">
+                        {bannerPreview ? (
+                            <img src={bannerPreview} alt="Banner Preview" />
+                        ) : (
+                            <div className="preview-banner-placeholder">
+                                <LuUpload size={40} />
+                                <p>Adicione um banner</p>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Profile Picture + Info */}
+                    <div className="preview-profile-info">
+                        <div className="preview-avatar">
+                            {profilePreview ? (
+                                <img src={profilePreview} alt="Profile Preview" />
+                            ) : (
+                                <div className="preview-avatar-placeholder">
+                                    <LuCamera size={32} />
+                                </div>
+                            )}
+                        </div>
+
+                        <div className="preview-user-details">
+                            <h2 className="preview-nickname">
+                                {nickname || 'Seu Nome'}
+                            </h2>
+                            <h6 className="preview-username">@{userData.username || 'username'}</h6>
+                            <div className='max-w-[100%] min-h-24 text-justify break-words mt-6 border-2 border-[#1a1a2e] rounded-lg px-3 py-1.5 relative'>
+                                {description}
+                            <h6 className='absolute bg-[#2a2a3e] px-2 no-underline bottom-25'>Bio:</h6>
+                            </div>
+                            {/* {description} */}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    )
+}
+
+function Success({ userData }) {
+    const navigate = useNavigate();
+    
+    return (
+        <main className='login-page'>
+            <div className="container-login">
+                <div className="login-logo">
+                    <img src="../newBubbleIcon.png" alt="logo" />
+                    <h1 className='login-tittle'>BUBBLE</h1>
+                </div>
+                <h2>Cadastro Completo! 🎉</h2>
+                <p>Bem-vindo, {userData.nickname}!</p>
+                <button 
+                    className='login-button'
+                    onClick={() => navigate('/')}
+                >
+                    Ir para o Feed
+                </button>
+            </div>
+        </main>
+    );
+}
+
+export default function MultiStepRegistration() {
+    const [step, setStep] = useState(1);
+    const [userData, setUserData] = useState(null);
+    const [profileData, setProfileData] = useState(null);
+
+    const handleStepOneComplete = (formData) => {
+        setUserData(formData);
+        setStep(2);
+    };
+
+    const handleStepTwoComplete = (data) => {
+        setProfileData(data);
+        setStep(3);
+    }
+    
+    return (
+        <>
+            {step === 1 && <StepOne onNext={handleStepOneComplete} />}
+            {step === 2 && <StepTwo userData={userData} onComplete={handleStepTwoComplete} />}
+            {step === 3 && <Success userData={profileData} />}
+        </>
+    )
+}

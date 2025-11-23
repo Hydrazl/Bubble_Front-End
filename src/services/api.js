@@ -11,3 +11,29 @@ export async function loginUser(email, password) {
 
   return data;
 }
+
+export async function registerUser(username, email, password) {
+  try {
+    const { data } = await axios.post(`${API_URL}/register`, {username, email, password})
+    return data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || 'Erro ao criar usuário');
+  }
+  
+}
+
+export async function completeProfile(formData) {
+  try {
+    const endpoint = `${API_URL}/complete-profile`; 
+    
+    const { data } = await axios.post(endpoint, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    
+    return data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || 'Erro ao finalizar cadastro');
+  }
+}

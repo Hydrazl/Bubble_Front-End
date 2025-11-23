@@ -39,26 +39,21 @@ export default function NewLogin() {
           <h1 className="login-tittle">BUBBLE</h1>
         </div>
 
-        <h2 className="login-tittle text-center">
-          Seja Bem-vindo<br />novamente
-        </h2>
+        <h2 className="login-tittle text-center">Seja Bem-vindo<br/>novamente</h2>
 
-        <h4 className="login-tittle">
-          Cadastre-se já e <br /> venha fazer parte de <br /> nossa comunidade
-        </h4>
+        <h4 className="login-tittle">Cadastre-se já e<br/>venha fazer parte de<br/>nossa comunidade</h4>
 
-        <p>
+        <p id="login-p">
           Ao você continuar, você estará concordando com nossos <br />
           <span>Termos de Uso</span> e <span>Política de Privacidade</span> da Bubble
         </p>
 
         <h3 className='mt-8'>Não possui uma conta?</h3>
 
-        <button type="button" className="signup-input" onClick={() => {navigate('/newregister')}}>
+        <button type="button" className="signup-input" onClick={() => {navigate('/register')}}>
           Cadastre-se
         </button>
       </div>
-
       <div className="container-login-form">
         <div className="login-block">
           <div className="login-return">
@@ -69,12 +64,11 @@ export default function NewLogin() {
             <div className="child-login-container-form">
               <form onSubmit={handleLogin}>
                 <div className="login-form">
-                  <label htmlFor="email">Email</label>
+                  <label htmlFor="email" className="mt-5">Email</label>
                   <input type="email" id="email" placeholder="Digite o seu Email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
                 </div>
-
                 <div className="login-form">
-                  <label htmlFor="password">Senha</label>
+                  <label htmlFor="password" className="mt-5">Senha</label>
                   <div className="password-wrapper">
                     <input type={showPassword ? "text" : "password"} id="password" placeholder="Digite a sua senha" value={password}
                     onChange={(e) => setPassword(e.target.value)} required />
@@ -86,9 +80,7 @@ export default function NewLogin() {
                     <Link>Esqueceu a sua senha?</Link>
                   </small>
                 </div>
-
                 {error && <p className="error-text">{error}</p>}
-
                 <button type="submit" className="login-button">
                   Acessar a conta
                 </button>
