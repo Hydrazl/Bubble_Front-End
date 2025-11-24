@@ -1,13 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import BubbleRecommended from '../../components/BubbleRecoment';
 import Header from '../../components/Header';
-import BannerProfile from './../../components/BannerProfile/index';
-import GridPost from './../../components/GridPost/index';
-import photoProfile from '../../assets/meusegundo place.jpeg';
-import banner from '../../assets/ocean.jpg';
-import imgBubble from '../../assets/gitbolha.png';
 import './Profile.css'
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000'
@@ -17,9 +11,9 @@ export default function Profile() {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [activeTab, setActiveTab] = useState('posts');
     
     const token = localStorage.getItem('token');
-
 
     useEffect(() => {
         if (!token || !userId) {
@@ -46,49 +40,124 @@ export default function Profile() {
     }, [userId, token]);
 
     if (loading) {
-        return <div style={{ color: 'white', padding: '50px' }}>Carregando...</div>;
+        return (
+            <div className="profile-container">
+                <div className="profile-header">
+                    <Header />
+                </div>
+                <div className="profile-main">
+                    <div style={{ color: '#666', padding: '50px' }}>Carregando...</div>
+                </div>
+            </div>
+        );
     }
 
     if (error) {
-        return <div style={{ color: 'red', padding: '50px' }}>Erro: {error}</div>;
+        return (
+            <div className="profile-container">
+                <div className="profile-header">
+                    <Header />
+                </div>
+                <div className="profile-main">
+                    <div style={{ color: 'red', padding: '50px' }}>Erro: {error}</div>
+                </div>
+            </div>
+        );
     }
 
     return (
-        <>
-            <header>
+        <div className="profile-container">
+            <div className="profile-header">
                 <Header />
-            </header>
+            </div>
 
-            <main className='-mt-130'>
-                <BannerProfile  
-                    name={data.nickname}
-                    bio={data.description || '⚡ Foco, visão e propósito'} 
-                    following={data.followingCount || 0}
-                    follows={data.followersCount || 0}
-                    bubbles={data.bubbleCount || 0}
-                    nickName={data.username ? `@${data.username}` : '@user'}
-                    photoProfile={photoProfile}
-                    banner={banner}
-                />
-                
-                <section className='menuBubbleRecommended mt-120'>
-                    <BubbleRecommended nameBubble={"jogo"} imgBubble={imgBubble} />
-                    <BubbleRecommended nameBubble={"jogo"} imgBubble={imgBubble} />
-                    <BubbleRecommended nameBubble={"jogo"} imgBubble={imgBubble} />
-                    <BubbleRecommended nameBubble={"jogo"} imgBubble={imgBubble} />
-                    <BubbleRecommended nameBubble={"jogo"} imgBubble={imgBubble} />
-                </section>
+            <main className="profile-main">
+                <div className="profile-content">
+                    {/* Banner */}
+                    <div className="profile-banner">
+                        {data?.banner ? (
+                            <img src={`${API_URL}/${data.banner}`} alt="Banner" />
+                        ) : (
+                            <div className="w-full h-full bg-gradient-to-r from-blue-400 to-purple-500"></div>
+                        )}
+                    </div>
 
-                <section className='menuPerfil'>
-                    <span className='abasProfile menuPerfilSelected'>Post</span>
-                    <span className='abasProfile'>Curtidas</span>
-                    <span className='abasProfile'>Salvos</span>
-                    <span className='abasProfile'>Privados</span>
-                    <span className='abasProfile'>Historico</span>
-                </section>
+                    {/* Info do Perfil */}
+                    <div className="profile-info">
+                        <div className="profile-avatar">
+                            {data?.profilePic ? (
+                                <img src={`${API_URL}/${data.profilePic}`} alt="Avatar" />
+                            ) : (
+                                <div className="w-full h-full flex items-center justify-center text-4xl text-gray-400">
+                                    👤
+                                </div>
+                            )}
+                        </div>
+                        
+                        <div className="profile-details">
+                            <h1 className="profile-name">{data?.nickname || 'Usuário'}</h1>
+                            <p className="profile-username">@{data?.username || userId}</p>
+                            
+                            <div className="profile-stats">
+                                <div className="profile-stat">
+                                    <span className="profile-stat-number">{data?.postsCount || 0}</span>
+                                    <span className="profile-stat-label">Posts</span>
+                                </div>
+                                <div className="profile-stat">
+                                    <span className="profile-stat-number">{data?.followersCount || 0}</span>
+                                    <span className="profile-stat-label">Seguidores</span>
+                                </div>
+                                <div className="profile-stat">
+                                    <span className="profile-stat-number">{data?.followingCount || 0}</span>
+                                    <span className="profile-stat-label">Seguindo</span>
+                                </div>
+                            </div>
 
-                <GridPost/>
+                            {data?.bio && (
+                                <p className="text-gray-700 mt-2">{data.bio}</p>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Tabs */}
+                    <div className="profile-tabs">
+                        <div 
+                            className={`profile-tab ${activeTab === 'posts' ? 'profile-tab-active' : ''}`}
+                            onClick={() => setActiveTab('posts')}
+                        >
+                            Posts
+                        </div>
+                        <div 
+                            className={`profile-tab ${activeTab === 'likes' ? 'profile-tab-active' : ''}`}
+                            onClick={() => setActiveTab('likes')}
+                        >
+                            Curtidas
+                        </div>
+                        <div 
+                            className={`profile-tab ${activeTab === 'saved' ? 'profile-tab-active' : ''}`}
+                            onClick={() => setActiveTab('saved')}
+                        >
+                            Salvos
+                        </div>
+                        <div 
+                            className={`profile-tab ${activeTab === 'private' ? 'profile-tab-active' : ''}`}
+                            onClick={() => setActiveTab('private')}
+                        >
+                            Privados
+                        </div>
+                    </div>
+
+                    {/* Conteúdo baseado na tab ativa */}
+                    <div className="profile-grid">
+                        {activeTab === 'posts' && (
+                            <div className="col-span-3 text-center text-gray-500 py-10">
+                                Nenhum post ainda
+                            </div>
+                        )}
+                        {/* Adicione conteúdo para outras tabs aqui */}
+                    </div>
+                </div>
             </main>
-        </>
+        </div>
     )
 }

@@ -1,18 +1,81 @@
 @import 'tailwindcss';
 
-.menuBubbleRecommended{
-    @apply flex flex-row justify-around w-300 relative top-210 left-123 px-2
+.profile-container {
+  @apply flex min-h-screen;
 }
 
-.menuPerfil{
-    @apply flex flex-row justify-around w-250 left-146 px-2 top-230 relative text-[var(--text)] text-4xl font-semibold
+.profile-header {
+  @apply fixed left-0 top-0 h-screen z-50;
 }
 
-.menuPerfilSelected {
-  position: relative; /* Pai precisa ser relativo */
+.profile-main {
+  @apply flex-1 ml-80 flex justify-center items-start pt-8;
 }
 
-.menuPerfilSelected::after {
-  content: '';
-  @apply w-full h-1 bg-[var(--text)] rounded bottom-[-.3rem] left-0 absolute
+.profile-content {
+  @apply w-full max-w-4xl bg-white rounded-xl shadow-lg p-6;
+}
+
+.profile-banner {
+  @apply bg-amber-100 w-full h-64 rounded-xl overflow-hidden mb-6 relative;
+}
+
+.profile-banner img {
+  @apply w-full h-full object-cover;
+}
+
+.profile-info {
+  @apply flex items-center gap-6 mb-8 px-4;
+}
+
+.profile-avatar {
+  @apply w-32 h-32 rounded-full border-4 border-white shadow-lg -mt-20 relative z-10 bg-gray-200;
+}
+
+.profile-avatar img {
+  @apply w-full h-full rounded-full object-cover;
+}
+
+.profile-details {
+  @apply flex-1 mt-4;
+}
+
+.profile-name {
+  @apply text-3xl font-bold text-gray-800 mb-2;
+}
+
+.profile-username {
+  @apply text-lg text-gray-500 mb-3;
+}
+
+.profile-stats {
+  @apply flex gap-6 mb-4;
+}
+
+.profile-stat {
+  @apply flex flex-col items-center;
+}
+
+.profile-stat-number {
+  @apply text-2xl font-bold text-gray-800;
+}
+
+.profile-stat-label {
+  @apply text-sm text-gray-500;
+}
+
+.profile-tabs {
+  @apply flex gap-1 border-b border-gray-200 mb-6;
+}
+
+.profile-tab {
+  @apply px-6 py-3 cursor-pointer text-gray-600 font-medium transition-all hover:bg-gray-50 rounded-t-lg;
+}
+
+.profile-tab-active {
+  @apply text-blue-600 border-b-2 border-blue-600 bg-blue-50;
+}
+
+.profile-grid {
+  @apply grid grid-cols-3 gap-4;
 }

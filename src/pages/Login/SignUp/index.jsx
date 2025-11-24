@@ -88,15 +88,15 @@ function StepOne({ onNext }) {
                         <div className='child-login-container-form'>
                             <form onSubmit={handleRegister}>
                                 <div className="login-form">
-                                    <label htmlFor="username">Nome de usuário</label>
+                                    <label htmlFor="username" className='mt-5'>Nome de usuário</label>
                                     <input type="text" id="username" name='username' placeholder='Digite o seu nome de usuário' value={formData.username} onChange={handleChange} required/>
                                 </div>
                                 <div className="login-form">
-                                    <label htmlFor="email">Email</label>
+                                    <label htmlFor="email" className='mt-5'>Email</label>
                                     <input type="email" id="email" name='email' value={formData.email} onChange={handleChange} placeholder='Digite o seu Email' required/>
                                 </div>
                                 <div className="login-form">
-                                    <label htmlFor="password">Senha</label>
+                                    <label htmlFor="password" className='mt-5'>Senha</label>
                                     <div className="password-wrapper">
                                         <input type={showPassword ? "text" : "password"} id="password" name='password' placeholder="Digite a sua senha" value={formData.password}
                                         onChange={handleChange} className={errors.password ? 'inout-error' : ''} required />
@@ -106,7 +106,7 @@ function StepOne({ onNext }) {
                                     </div>
                                 </div>
                                 <div className="login-form">
-                                    <label htmlFor="password">Confirme sua senha</label>
+                                    <label htmlFor="password" className='mt-5'>Confirme sua senha</label>
                                     <div className="password-wrapper">
                                         <input type={showConfirmPassword ? "text" : "password"} id="confirmPassword" name='confirmPassword' placeholder="Digite novamente a sua senha" value={formData.confirmPassword}
                                         onChange={handleChange} className={errors.confirmPassword ? 'input-error' : ''} required />
