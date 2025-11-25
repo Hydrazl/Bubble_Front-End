@@ -78,83 +78,85 @@ export default function Profile() {
                         {data?.banner ? (
                             <img src={`${API_URL}/${data.banner}`} alt="Banner" />
                         ) : (
-                            <div className="w-full h-full bg-gradient-to-r from-blue-400 to-purple-500"></div>
+                            <div className="w-full h-full bg-gradient-to-tl from-blue-900 to-cyan-800"></div>
                         )}
                     </div>
 
-                    {/* Info do Perfil */}
-                    <div className="profile-info">
-                        <div className="profile-avatar">
-                            {data?.profilePic ? (
-                                <img src={`${API_URL}/${data.profilePic}`} alt="Avatar" />
-                            ) : (
-                                <div className="w-full h-full flex items-center justify-center text-4xl text-gray-400">
-                                    👤
-                                </div>
-                            )}
-                        </div>
-                        
-                        <div className="profile-details">
-                            <h1 className="profile-name">{data?.nickname || 'Usuário'}</h1>
-                            <p className="profile-username">@{data?.username || userId}</p>
+                    <div className="profile-child-container">
+                        {/* Info do Perfil */}
+                        <div className="profile-info">
+                            <div className="profile-avatar">
+                                {data?.profilePic ? (
+                                    <img src={`${API_URL}/${data.profilePic}`} alt="Avatar" />
+                                ) : (
+                                    <div className="w-full h-full flex items-center justify-center text-4xl text-gray-400">
+                                        <img src='https://cdn-icons-png.flaticon.com/512/3177/3177440.png' alt='Avatar' />
+                                    </div>
+                                )}
+                            </div>
                             
-                            <div className="profile-stats">
-                                <div className="profile-stat">
-                                    <span className="profile-stat-number">{data?.postsCount || 0}</span>
-                                    <span className="profile-stat-label">Posts</span>
+                            <div className="profile-details">
+                                <h1 className="profile-name">{data?.nickname || 'Usuário'}</h1>
+                                <p className="profile-username">@{data?.username || userId}</p>
+                                
+                                <div className="profile-stats">
+                                    <div className="profile-stat">
+                                        <span className="profile-stat-number">{data?.postsCount || 0}</span>
+                                        <span className="profile-stat-label">Posts</span>
+                                    </div>
+                                    <div className="profile-stat">
+                                        <span className="profile-stat-number">{data?.followersCount || 0}</span>
+                                        <span className="profile-stat-label">Seguidores</span>
+                                    </div>
+                                    <div className="profile-stat">
+                                        <span className="profile-stat-number">{data?.followingCount || 0}</span>
+                                        <span className="profile-stat-label">Seguindo</span>
+                                    </div>
                                 </div>
-                                <div className="profile-stat">
-                                    <span className="profile-stat-number">{data?.followersCount || 0}</span>
-                                    <span className="profile-stat-label">Seguidores</span>
-                                </div>
-                                <div className="profile-stat">
-                                    <span className="profile-stat-number">{data?.followingCount || 0}</span>
-                                    <span className="profile-stat-label">Seguindo</span>
-                                </div>
-                            </div>
 
-                            {data?.bio && (
-                                <p className="text-gray-700 mt-2">{data.bio}</p>
+                                {data?.bio && (
+                                    <p className="text-gray-700 mt-2">{data.bio}</p>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* Tabs */}
+                        <div className="profile-tabs">
+                            <div 
+                                className={`profile-tab ${activeTab === 'posts' ? 'profile-tab-active' : ''}`}
+                                onClick={() => setActiveTab('posts')}
+                            >
+                                Posts
+                            </div>
+                            <div 
+                                className={`profile-tab ${activeTab === 'likes' ? 'profile-tab-active' : ''}`}
+                                onClick={() => setActiveTab('likes')}
+                            >
+                                Curtidas
+                            </div>
+                            <div 
+                                className={`profile-tab ${activeTab === 'saved' ? 'profile-tab-active' : ''}`}
+                                onClick={() => setActiveTab('saved')}
+                            >
+                                Salvos
+                            </div>
+                            <div 
+                                className={`profile-tab ${activeTab === 'private' ? 'profile-tab-active' : ''}`}
+                                onClick={() => setActiveTab('private')}
+                            >
+                                Privados
+                            </div>
+                        </div>
+
+                        {/* Conteúdo baseado na tab ativa */}
+                        <div className="profile-grid">
+                            {activeTab === 'posts' && (
+                                <div className="col-span-3 text-center text-gray-500 py-10">
+                                    Nenhum post ainda
+                                </div>
                             )}
+                            {/* Adicione conteúdo para outras tabs aqui */}
                         </div>
-                    </div>
-
-                    {/* Tabs */}
-                    <div className="profile-tabs">
-                        <div 
-                            className={`profile-tab ${activeTab === 'posts' ? 'profile-tab-active' : ''}`}
-                            onClick={() => setActiveTab('posts')}
-                        >
-                            Posts
-                        </div>
-                        <div 
-                            className={`profile-tab ${activeTab === 'likes' ? 'profile-tab-active' : ''}`}
-                            onClick={() => setActiveTab('likes')}
-                        >
-                            Curtidas
-                        </div>
-                        <div 
-                            className={`profile-tab ${activeTab === 'saved' ? 'profile-tab-active' : ''}`}
-                            onClick={() => setActiveTab('saved')}
-                        >
-                            Salvos
-                        </div>
-                        <div 
-                            className={`profile-tab ${activeTab === 'private' ? 'profile-tab-active' : ''}`}
-                            onClick={() => setActiveTab('private')}
-                        >
-                            Privados
-                        </div>
-                    </div>
-
-                    {/* Conteúdo baseado na tab ativa */}
-                    <div className="profile-grid">
-                        {activeTab === 'posts' && (
-                            <div className="col-span-3 text-center text-gray-500 py-10">
-                                Nenhum post ainda
-                            </div>
-                        )}
-                        {/* Adicione conteúdo para outras tabs aqui */}
                     </div>
                 </div>
             </main>
