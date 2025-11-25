@@ -32,14 +32,14 @@ function NewPost() {
     };
 
     addPost(newPost);
-    window.location.href = "/";
+    window.location.href = "/home";
   }
 
   return (
     <>
       <Header />
 
-      <main className="mainNewLogin">
+      <main className="mainNewPost">
         <h1 className="titlenewpost">New Post</h1>
 
         <section className="inputsnewpost">
@@ -73,8 +73,8 @@ function NewPost() {
             </div>
           </div>
 
-          <div className="imgPost">
-            <ImgUpload onSelect={handleSelectedImage} />
+          <div className="imgPost -mt-48">
+            <ImgUpload onSelect={handleSelectedImage}/>
           </div>
 
         </section>
