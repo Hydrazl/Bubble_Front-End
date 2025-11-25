@@ -20,19 +20,45 @@ function NewPost() {
     setImagePreviewUrl(url);
   }
 
-  function handlePublish() {
-    const newPost = {
-      author: "Lukas_kkj",
-      userTag: "@Lucas213",
-      text: postText,
-      image: imagePreviewUrl,
-      likes: 0,
-      comments: 0,
-      createdAt: new Date(),
-    };
+  async function handlePublish() {
+    const token = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
 
-    addPost(newPost);
-    window.location.href = "/home";
+    if (!token || !userId) {
+      alert("Você não está logado!");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("userId", userId);
+    formData.append("description", postText);
+
+    const fileInput = document.querySelector("#imageUploadInput");
+    if (fileInput && fileInput.files[0]) {
+      formData.append("media", fileInput.files[0]);
+    }
+
+    try {
+      const req = await fetch("http://localhost:5000/api/posts", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+
+      const res = await req.json();
+
+      if (!req.ok) {
+        alert(res.message || "Erro ao criar post.");
+        return;
+      }
+
+      window.location.href = "/home";
+
+    } catch (error) {
+      alert("Erro no servidor.");
+    }
   }
 
   return (
@@ -43,7 +69,7 @@ function NewPost() {
         <h1 className="titlenewpost">New Post</h1>
 
         <section className="inputsnewpost">
-          
+
           <div className="conteiner-title">
             <textarea
               placeholder="Bublique algo... Como foi o seu dia?..."
@@ -74,7 +100,7 @@ function NewPost() {
           </div>
 
           <div className="imgPost -mt-48">
-            <ImgUpload onSelect={handleSelectedImage}/>
+            <ImgUpload onSelect={handleSelectedImage} />
           </div>
 
         </section>
@@ -145,55 +171,55 @@ function NewPost() {
     </>
   );
 
-    return (
-        <>
-            <Header />
-            <main>
-                <div>
-                    <h1>New Post</h1>
-                </div>
+  return (
+    <>
+      <Header />
+      <main>
+        <div>
+          <h1>New Post</h1>
+        </div>
 
-                <div>
-                    <p>Título</p>
-                </div>
+        <div>
+          <p>Título</p>
+        </div>
 
-                <article>
-                    <div>
-                        <p>Publique algo. Como foi o seu dia?... </p>
-                    </div>
+        <article>
+          <div>
+            <p>Publique algo. Como foi o seu dia?... </p>
+          </div>
 
-                    <section>
-                        <div>
-                            <div>
-                                <p>#</p>
-                            </div>
-                            <div>
-                                <IonIcon icon={arrowForwardOutline} />
-                            </div>
-                        </div>
-                    </section>
-                </article>
+          <section>
+            <div>
+              <div>
+                <p>#</p>
+              </div>
+              <div>
+                <IonIcon icon={arrowForwardOutline} />
+              </div>
+            </div>
+          </section>
+        </article>
 
-               <h1>Marcar pessoas</h1>
-                <div>
-                    <p>Digite o nome da pessoa</p>
-                </div>
-                
-                <h1>Localização</h1>
-                <div>
-                    <p>Adicionar Localização</p>
-                </div>
+        <h1>Marcar pessoas</h1>
+        <div>
+          <p>Digite o nome da pessoa</p>
+        </div>
 
-                <h1>Imagens</h1>
-                <div>
-                    <img src="/public/imagem_para_baixar.png" />
-                    <div>+</div>
-                </div>
+        <h1>Localização</h1>
+        <div>
+          <p>Adicionar Localização</p>
+        </div>
 
-                
-            </main>
-        </>
-    );
+        <h1>Imagens</h1>
+        <div>
+          <img src="/public/imagem_para_baixar.png" />
+          <div>+</div>
+        </div>
+
+
+      </main>
+    </>
+  );
 }
 
 export default NewPost;
