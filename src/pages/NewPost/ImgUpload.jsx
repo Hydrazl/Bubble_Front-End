@@ -15,8 +15,8 @@ export default function ImgUpload({ onSelect }) {
 
     const url = URL.createObjectURL(file);
 
-    setPreviewUrl(url);   
-    onSelect(file);     
+    setPreviewUrl(url);
+    onSelect(file);
   }
 
   return (
@@ -37,6 +37,7 @@ export default function ImgUpload({ onSelect }) {
         )}
 
         <input
+          id="imageUploadInput" 
           type="file"
           accept="image/*"
           ref={fileInputRef}
