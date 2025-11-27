@@ -37,3 +37,18 @@ export async function completeProfile(formData) {
     throw new Error(error.response?.data?.message || 'Erro ao finalizar cadastro');
   }
 }
+
+export async function createPost(formData) {
+  try {
+    const endpoint = `${API_URL}/posts`;
+    const { data } = await axios.post(endpoint, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      },
+    })
+
+    return data
+  } catch (error) {
+    throw new Error(error.response?.data?.message)
+  }
+}

@@ -39,7 +39,7 @@ function NewPost() {
     }
 
     try {
-      const req = await fetch("http://localhost:5000/api/posts", {
+      const req = await fetch("http://localhost:4000/posts", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -73,7 +73,7 @@ function NewPost() {
           <div className="conteiner-title">
             <textarea
               placeholder="Bublique algo... Como foi o seu dia?..."
-              className="inputcommets"
+              className="inputcommets resize-none"
               value={postText}
               onChange={(e) => setPostText(e.target.value)}
             />
@@ -113,7 +113,7 @@ function NewPost() {
           <div className="profileelements">
             <img src={ProfilePic} alt="profile" />
             <div className="textprofile">
-              <span>Lukas_kkj</span>
+              <span>{data?.nickname}</span>
               <span className="text-sm">@Lucas213</span>
             </div>
           </div>

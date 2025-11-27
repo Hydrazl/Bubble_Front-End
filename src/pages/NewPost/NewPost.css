@@ -45,8 +45,9 @@
 .addImg img{
     @apply w-22 h-22 rounded-2xl;
 }
+
 .buttonAddImg{
-    @apply w-20 h-20 bg-gray-800 flex items-center justify-center rounded-xl wrap-normal text-5xl font-bold;
+    @apply w-20 h-20 bg-gray-800 flex items-center justify-center rounded-xl wrap-normal text-5xl font-bold cursor-pointer;
 }
 
 /* Aside */
