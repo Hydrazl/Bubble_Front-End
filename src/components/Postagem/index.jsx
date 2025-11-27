@@ -9,8 +9,8 @@ import PopupShared from '../PopupShared';
 import axios from "axios";
 
 export default function Post({
-  idPost,      //  ADICIONE ISSO NO PAI (id verdadeiro do post)
-  userIdPost,  //  ID do dono do post
+  idPost,      
+  userIdPost,  
   name,
   id,
   description,
@@ -25,7 +25,7 @@ export default function Post({
   const [openPopup, setOpenPopup] = useState(false);
   const [openPopupshared, setOpenshared] = useState(false);
 
-  const user = JSON.parse(localStorage.getItem("user"));   // usuário logado
+  const user = JSON.parse(localStorage.getItem("user"));   // usuário ta vivo
   const token = localStorage.getItem("token");
 
   // Deleta o post
@@ -37,7 +37,7 @@ export default function Post({
         headers: { Authorization: `Bearer ${token}` }
       });
 
-      if (onDelete) onDelete(idPost); // remove da lista no componente pai
+      if (onDelete) onDelete(idPost); // remove da lista do componente pai
 
       alert("Post deletado!");
     } catch (err) {

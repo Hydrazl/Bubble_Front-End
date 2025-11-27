@@ -9,10 +9,11 @@ import { useState } from "react";
 import { usePosts } from "../../context/PostContext";
 
 function NewPost() {
-
   const [postText, setPostText] = useState("");
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
   const { addPost } = usePosts();
+
+  const user = JSON.parse(localStorage.getItem("user"));
 
   function handleSelectedImage(file) {
     if (!file) return;
@@ -21,9 +22,15 @@ function NewPost() {
   }
 
   function handlePublish() {
+    if (!user) {
+      alert("Você precisa estar logado para poder fazer um post.");
+      return;
+    }
+
     const newPost = {
-      author: "Lukas_kkj",
-      userTag: "@Lucas213",
+      author: user.username,
+      userTag: "@" + user.username,
+      userId: user.Id,
       text: postText,
       image: imagePreviewUrl,
       likes: 0,
@@ -87,10 +94,10 @@ function NewPost() {
         <div className="conteinerProfilePreview">
 
           <div className="profileelements">
-            <img src={ProfilePic} alt="profile" />
+            <img src={user?.profilePic || ProfilePic} alt="profile" />
             <div className="textprofile">
-              <span>Lukas_kkj</span>
-              <span className="text-sm">@Lucas213</span>
+              <span>{user?.username}</span>
+              <span className="text-sm">@{user?.username}</span>
             </div>
           </div>
 
