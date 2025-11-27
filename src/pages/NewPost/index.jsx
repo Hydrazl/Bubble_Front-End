@@ -9,10 +9,11 @@ import { useState } from "react";
 import { usePosts } from "../../context/PostContext";
 
 function NewPost() {
-
   const [postText, setPostText] = useState("");
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
   const { addPost } = usePosts();
+
+  const user = JSON.parse(localStorage.getItem("user")) || null;
 
   function handleSelectedImage(file) {
     if (!file) return;
@@ -22,7 +23,7 @@ function NewPost() {
 
   async function handlePublish() {
     const token = localStorage.getItem("token");
-    const userId = localStorage.getItem("userId");
+    const userId = localStorage.getItem("userId") || (user && user.id);
 
     if (!token || !userId) {
       alert("Você não está logado!");
@@ -54,9 +55,24 @@ function NewPost() {
         return;
       }
 
-      window.location.href = "/home";
+      // opcional: atualizar contexto local
+      if (res.post) {
+        addPost({
+          id: res.post.id,
+          author: user?.username || user?.nickname || "Você",
+          userTag: user?.username ? `@${user.username}` : `@${user?.nickname || "user"}`,
+          userId: res.post.userId || userId,
+          text: res.post.description,
+          image: res.post.media ? `http://localhost:4000/${res.post.media}` : null,
+          likes: 0,
+          comments: 0,
+          createdAt: res.post.createdAt || new Date(),
+        });
+      }
 
+      window.location.href = "/home";
     } catch (error) {
+      console.error("Erro no publish:", error);
       alert("Erro no servidor.");
     }
   }
@@ -69,10 +85,9 @@ function NewPost() {
         <h1 className="titlenewpost">New Post</h1>
 
         <section className="inputsnewpost">
-
           <div className="conteiner-title">
             <textarea
-              placeholder="Bublique algo... Como foi o seu dia?..."
+              placeholder="Publique algo... Como foi o seu dia?..."
               className="inputcommets resize-none"
               value={postText}
               onChange={(e) => setPostText(e.target.value)}
@@ -102,7 +117,6 @@ function NewPost() {
           <div className="imgPost -mt-48">
             <ImgUpload onSelect={handleSelectedImage} />
           </div>
-
         </section>
       </main>
 
@@ -111,15 +125,14 @@ function NewPost() {
 
         <div className="conteinerProfilePreview">
           <div className="profileelements">
-            <img src={ProfilePic} alt="profile" />
+            <img src={user?.profilePic || ProfilePic} alt="profile" />
             <div className="textprofile">
-              <span>{data?.nickname}</span>
-              <span className="text-sm">@Lucas213</span>
+              <span>{user?.username || user?.nickname || "Seu nome"}</span>
+              <span className="text-sm">@{user?.username || user?.nickname || "you"}</span>
             </div>
           </div>
 
           <div className="conteinerPostPreview">
-
             <div className="text-post">
               <p className="titulo-post">
                 {postText || "O que você escrever aqui aparecerá na prévia..."}
@@ -130,10 +143,9 @@ function NewPost() {
               {imagePreviewUrl ? (
                 <img src={imagePreviewUrl} alt="preview" />
               ) : (
-                <div className="placeholder-image"></div>
+                <div className="placeholder-image" />
               )}
             </div>
-
           </div>
 
           <div className="displayLikePreview">
@@ -166,58 +178,7 @@ function NewPost() {
             <span>Cancelar</span>
           </div>
         </div>
-
       </aside>
-    </>
-  );
-
-  return (
-    <>
-      <Header />
-      <main>
-        <div>
-          <h1>New Post</h1>
-        </div>
-
-        <div>
-          <p>Título</p>
-        </div>
-
-        <article>
-          <div>
-            <p>Publique algo. Como foi o seu dia?... </p>
-          </div>
-
-          <section>
-            <div>
-              <div>
-                <p>#</p>
-              </div>
-              <div>
-                <IonIcon icon={arrowForwardOutline} />
-              </div>
-            </div>
-          </section>
-        </article>
-
-        <h1>Marcar pessoas</h1>
-        <div>
-          <p>Digite o nome da pessoa</p>
-        </div>
-
-        <h1>Localização</h1>
-        <div>
-          <p>Adicionar Localização</p>
-        </div>
-
-        <h1>Imagens</h1>
-        <div>
-          <img src="/public/imagem_para_baixar.png" />
-          <div>+</div>
-        </div>
-
-
-      </main>
     </>
   );
 }
