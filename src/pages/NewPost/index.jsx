@@ -10,13 +10,18 @@ import { usePosts } from "../../context/PostContext";
 
 function NewPost() {
   const [postText, setPostText] = useState("");
+  const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
   const { addPost } = usePosts();
 
   const user = JSON.parse(localStorage.getItem("user")) || null;
+  const backendURL = "http://localhost:4000";
+  
+  const profileImage = user?.profilePic && !user.profilePic.startsWith("http") ? `${backendURL}/${user.profilePic}` : user?.profilePic || ProfilePic;
 
   function handleSelectedImage(file) {
     if (!file) return;
+    setSelectedImage(file);
     const url = URL.createObjectURL(file);
     setImagePreviewUrl(url);
   }
@@ -34,9 +39,8 @@ function NewPost() {
     formData.append("userId", userId);
     formData.append("description", postText);
 
-    const fileInput = document.querySelector("#imageUploadInput");
-    if (fileInput && fileInput.files[0]) {
-      formData.append("media", fileInput.files[0]);
+    if (selectedImage) {
+      formData.append("postImage", selectedImage);
     }
 
     try {
@@ -48,34 +52,30 @@ function NewPost() {
         body: formData,
       });
 
-      const res = await req.json();
+      const resText = await req.text();
+
+      let res;
+      try {
+        res = JSON.parse(resText);
+      } catch (e) {
+        console.error("Resposta inesperada do servidor:", resText);
+        alert("Erro no servidor.");
+        return;
+      }
 
       if (!req.ok) {
         alert(res.message || "Erro ao criar post.");
         return;
       }
 
-      // opcional: atualizar contexto local
-      if (res.post) {
-        addPost({
-          id: res.post.id,
-          author: user?.username || user?.nickname || "Você",
-          userTag: user?.username ? `@${user.username}` : `@${user?.nickname || "user"}`,
-          userId: res.post.userId || userId,
-          text: res.post.description,
-          image: res.post.media ? `http://localhost:4000/${res.post.media}` : null,
-          likes: 0,
-          comments: 0,
-          createdAt: res.post.createdAt || new Date(),
-        });
-      }
-
+      // tudo certo
       window.location.href = "/home";
     } catch (error) {
       console.error("Erro no publish:", error);
       alert("Erro no servidor.");
     }
   }
+
 
   return (
     <>
@@ -114,7 +114,7 @@ function NewPost() {
             </div>
           </div>
 
-          <div className="imgPost -mt-48">
+          <div className="imgPost">
             <ImgUpload onSelect={handleSelectedImage} />
           </div>
         </section>
@@ -125,10 +125,10 @@ function NewPost() {
 
         <div className="conteinerProfilePreview">
           <div className="profileelements">
-            <img src={user?.profilePic || ProfilePic} alt="profile" />
+            <img src={profileImage} alt="profile" />
             <div className="textprofile">
-              <span>{user?.username || user?.nickname || "Seu nome"}</span>
-              <span className="text-sm">@{user?.username || user?.nickname || "you"}</span>
+              <span>{user?.nickname || "Seu nome"}</span>
+              <span className="text-sm">@{user?.nickname || user?.nickname || "you"}</span>
             </div>
           </div>
 
