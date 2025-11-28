@@ -15,7 +15,7 @@ function NewPost() {
   const { addPost } = usePosts();
 
   const user = JSON.parse(localStorage.getItem("user")) || null;
-  const backendURL = "http://localhost:4000";
+  const backendURL = import.meta.env.VITE_API_URL;
   
   const profileImage = user?.profilePic && !user.profilePic.startsWith("http") ? `${backendURL}/${user.profilePic}` : user?.profilePic || ProfilePic;
 
@@ -44,7 +44,7 @@ function NewPost() {
     }
 
     try {
-      const req = await fetch("http://localhost:4000/posts", {
+      const req = await fetch(`${backendURL}/posts`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -128,7 +128,7 @@ function NewPost() {
             <img src={profileImage} alt="profile" />
             <div className="textprofile">
               <span>{user?.nickname || "Seu nome"}</span>
-              <span className="text-sm">@{user?.nickname || user?.nickname || "you"}</span>
+              <span className="text-sm">@{user?.username || "you"}</span>
             </div>
           </div>
 
