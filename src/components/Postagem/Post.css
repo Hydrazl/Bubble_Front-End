@@ -57,3 +57,7 @@
     @apply h-125 justify-self-center 
 }
 
+.ft-perfil img {
+  cursor: pointer;
+  pointer-events: auto;
+}

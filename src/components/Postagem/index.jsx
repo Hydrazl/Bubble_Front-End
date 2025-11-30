@@ -6,12 +6,14 @@ import LikeButton from '../LikeButton';
 import { useState, useEffect } from "react";
 import Popup from "../Popup";
 import PopupShared from '../PopupShared'; // mesmo componente usado no GridPost
+import { useNavigate } from 'react-router-dom';
 
 export default function Post({
-  name, id, description, url_image_perfil,
+  name, id, userId, description, url_image_perfil,
   url_image_post, like_num, com_num
 }) {
 
+  const navigate = useNavigate();
   const [openPopup, setOpenPopup] = useState(false);
   const [openPopupshared, setOpenshared] = useState(false);
 
@@ -36,12 +38,19 @@ export default function Post({
     <>
       <section className='conteiner-post'>
         <div className='conteiner-perfil'>
-          <div className='ft-perfil'>
-            <img src={url_image_perfil} alt='perfil'/>
+          <div className='ft-perfil' 
+            onClick={(e) => {
+              e.stopPropagation();
+              console.log('Clicou!');
+              navigate(`/profile/${userId}`);
+            }}
+            style={{ cursor: 'pointer' }}
+          >
+            <img src={url_image_perfil} alt='perfil' />
           </div>
           <div className='nome-perfil'>
             <h2>{name}</h2>
-            <p className='arroba-perfil'>{id}</p>
+            <p className='arroba-perfil'>@{id}</p>
           </div>
         </div>
 
