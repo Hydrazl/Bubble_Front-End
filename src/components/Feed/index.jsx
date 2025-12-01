@@ -62,7 +62,7 @@ export default function Feed() {
             {/* Posts estáticos */}
             <Post
                 name="Yasmin Ferreira"
-                id="@Ferreira_Yas"
+                id="Ferreira_Yas"
                 description="Iniciando o dia da melhora maneira possível, logo cedo já programando insanos programas. #vivaacomputção #trabalhemenquantoelesdormem"
                 url_image_perfil={ftPerfil}
                 url_image_post={ftPost}
@@ -71,7 +71,7 @@ export default function Feed() {
             />
             <Post
                 name="NoobMaster"
-                id="@Noob_master123"
+                id="Noob_master123"
                 description="Esse novo SilkSong tá demais!!! #SilkSong #hashtag #turururu"
                 url_image_perfil={ftPerfil1}
                 url_image_post={ftPost1}
@@ -80,7 +80,7 @@ export default function Feed() {
             />
             <Post
                 name="Andreia Silva"
-                id="@Silva-de-andreia"
+                id="Silva-de-andreia"
                 description="Esse AP em Caraguatatuba tem uma das melhores vistas que eu já tive! #viagens"
                 url_image_perfil={ftPerfil2}
                 url_image_post={ftPost2}
@@ -89,7 +89,7 @@ export default function Feed() {
             />
             <Post
                 name="Davi Britto"
-                id="@davibritto"
+                id="davibritto"
                 description="Mais um dia abençoado pelo nosso Senhor Jesus Cristo! #Deus #Abençoado #DaviBritto #calabreso"
                 url_image_perfil={ftPerfil3}
                 url_image_post={ftPost3}

@@ -1,60 +1,125 @@
-import './editprofile.css'
-import banner from '../../../assets/ocean.jpg';
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import photoProfile from '../../../assets/meusegundo place.jpeg';
-import {faPenToSquare} from "@fortawesome/free-solid-svg-icons";
-import '../../BannerProfile/banner.css'
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import bannerFallback from "../../../assets/ocean.jpg";
+import photoFallback from "../../../assets/meusegundo place.jpeg";
+import "./editprofile.css";
 
-export default function EditProfile(){
-    return(
-        <>
-            <div className='conteinerSetigns'>
 
-                <div className='conteinerEditinfoPrin'>
+export default function EditProfile() {
 
-                    <div className='editTextNames'>
+    const [profile, setProfile] = useState({
+        name: "",
+        username: "",
+        bio: "",
+        bannerUrl: "",
+        photoUrl: ""
+     });
 
-                        <div className='yourName'>
-                            <h3>Seu nome</h3>
-                            <input placeholder="henri barki" className='inputText'></input>
-                        </div>
+  const [loading, setLoading] = useState(true);
 
-                        <div className='yourUsername'>
-                            <h3>Seu @</h3>
-                            <input placeholder="@ronaldo" className='inputText'></input>
-                        </div>
+  useEffect(() => {
+    async function fetchProfile() {
+      try {
+        const res = await fetch("/complete-profile");
+        const data = await res.json();
+        setProfile({
+          name: data.name || "",
+          username: data.username || "",
+          bio: data.bio || "",
+          bannerUrl: data.bannerUrl || "",
+          photoUrl: data.photoUrl || "",
+        });
+      } catch (err) {
+        console.error("Erro ao carregar perfil", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchProfile();
+  }, []);
 
-                    </div>
+  async function handleSave() {
+    try {
+      await fetch("/api/profile", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(profile),
+      });
+      alert("Perfil atualizado com sucesso.");
+    } catch (err) {
+      console.error("Falha ao atualizar perfil", err);
+    }
+  }
 
-                    <div className='editBanner'>
-                        <h3>Banner</h3>
-                        <img src={banner}/>
-                        <FontAwesomeIcon icon={faPenToSquare} className='text-white w-5 h-5'/>
-                    </div>
+  if (loading) return <div className="text-white p-6">Carregando...</div>;
 
-                </div>
+  return (
+    <div className="conteinerSetings">
+      <div className="conteinerEditinfoPrin">
+        <div className="editTextNames">
+          <div className="yourName">
+            <h3>Seu nome</h3>
+            <input
+              value={profile.name}
+              onChange={(e) => setProfile({ ...profile, name: e.target.value })}
+              className="inputText"
+            />
+          </div>
 
-                <div className='conteinerEditInfoSencu'>
+          <div className="yourUsername">
+            <h3>Seu @</h3>
+            <input
+              value={profile.username}
+              onChange={(e) => setProfile({ ...profile, username: e.target.value })}
+              className="inputText"
+            />
+          </div>
+        </div>
 
-                    <div className='yourBio'>
-                        <h3>Bio</h3>
-                        <input placeholder='Deus fé e Familia'></input>
-                    </div>
+        <div className="editBanner">
+          <h3>Banner</h3>
+          <div className="bannerWrapper">
+            <img src={profile.bannerUrl} alt="banner" />
+            <FontAwesomeIcon icon={faPenToSquare} className="editIcon" />
+          </div>
+        </div>
+      </div>
 
-                    <div className='editPhotoProfile'>
+      <div className="conteinerEditInfoSencu">
+        <div className="yourBio">
+          <h3>Bio</h3>
+          <textarea
+            value={profile.bio}
+            onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
+            className="bioTextArea"
+            maxLength={200}
+          />
+        </div>
 
-                        <h3>Sua foto de perfil</h3>
+        <div className="editPhotoProfile">
+          <h3>Sua foto de perfil</h3>
+          <div className="photosConteiner">
+            <img
+              src={profile.photoUrl}
+              className="photoProfileSquare"
+              alt="profile square"
+            />
+            <img
+              src={profile.photoUrl}
+              className="photoProfileBall"
+              alt="profile round"
+            />
+            <FontAwesomeIcon icon={faPenToSquare} className="editIcon" />
+          </div>
+        </div>
+      </div>
 
-                        <div className='photosConteiner'>
-                            <img src={photoProfile} className='photoProfileSquare'></img>
-                            <img src={photoProfile} className='photoProfileBall'></img>
-                            <FontAwesomeIcon icon={faPenToSquare} className='text-white w-5 h-5'/>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </>
-    )
+      <button className="saveButton" onClick={handleSave}>
+        Salvar alterações
+      </button>
+    </div>
+  );
 }

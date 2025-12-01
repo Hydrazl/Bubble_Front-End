@@ -14,6 +14,7 @@ import Sent from "./pages/Login/Sent";
 import Unfound from "./pages/Login/Unfound";
 import Status from './components/Status';
 import NewPost from './pages/NewPost';
+import EditProfile from "./components/pagesConfig/EditProfile";
 
 
 function AppRoutes() {
@@ -35,6 +36,7 @@ function AppRoutes() {
                 <Route path="/settings" element={<Settings />}></Route>
                 <Route path="/status" element={<Status/>}></Route>
                 <Route path="/newpost" element={<NewPost/>}></Route>
+                <Route path="/editProfile" element={<EditProfile/>}></Route>
             </Routes>
         </BrowserRouter>
     )

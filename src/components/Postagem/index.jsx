@@ -15,6 +15,7 @@ export default function Post({
   const navigate = useNavigate();
   const [openPopup, setOpenPopup] = useState(false);
   const [openPopupshared, setOpenshared] = useState(false);
+  const backendURL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     if (openPopupshared) {
@@ -44,8 +45,7 @@ export default function Post({
   async function handleDeletePost() {
   try {
     const token = localStorage.getItem('token');
-
-    const response = await fetch(`http://localhost:4000/home/${postId}`, {
+    const response = await fetch(`${backendURL}/home/${postId}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`,
