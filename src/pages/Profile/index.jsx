@@ -149,9 +149,10 @@ export default function Profile() {
                                     >
                                     {isFollowing ? 'Seguindo' : 'Seguir'}
                                 </button>)}
-                                 {data?.description && (
-                                    <p className="text-gray-700 mt-2">{data.description}</p>
-                                )}
+                                 {data?.description && (<><div className='p-1 border-2 rounded-xl border-gray-600 w-full justify-center mt-2 relative'>
+                                    <span className='absolute -top-3 left-4 px-1 font-bold bg-white'>Bio</span>
+                                    <p className="text-gray-700">{data.description}</p>
+                                </div></>)}
                             </div>
                         </div>
 
