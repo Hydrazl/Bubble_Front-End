@@ -4,7 +4,6 @@ import { useAuth } from '../../context/AuthContext';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faHouse, faCompass, faComments, faGear, faUser } from "@fortawesome/free-solid-svg-icons";
 import whiteBubbling from '../../assets/white_icon_bubbling.png'
-import blackBubbling from '../../assets/black_icon_bubbling.png'
 
 export default function Header() {
     const { user } = useAuth(); 
@@ -24,7 +23,7 @@ export default function Header() {
                         <Link to='/trending' className='borbulhando header-link'><li><img src={whiteBubbling} alt="Borbulhando" /> Borbulhando</li></Link>
                         <Link to='/explorer' className='header-link'><li><FontAwesomeIcon icon={faCompass}/> Explorar</li></Link>
                         <Link to='/bulhufas' className='header-link'><li><FontAwesomeIcon icon={faComments}/> Bulhufas</li></Link>
-                        <Link to='/notifications' className='mt-20 lg:mt-40 xl:mt-72 mb-5 header-link'><li><FontAwesomeIcon icon={faBell}/> Flops</li></Link>
+                        <Link to='/notifications' className='mt-20 lg:mt-40 xl:mt-65 mb-5 header-link'><li><FontAwesomeIcon icon={faBell}/> Flops</li></Link>
                     </ul>
 
                     <ul className='nav' id='person_nav'>

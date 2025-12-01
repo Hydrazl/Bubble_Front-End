@@ -4,6 +4,10 @@
   @apply flex min-h-screen;
 }
 
+.profile-child-container {
+  @apply grid grid-cols-1 px-6;
+}
+
 .profile-header {
   @apply fixed left-0 top-0 h-screen z-50;
 }
@@ -13,11 +17,11 @@
 }
 
 .profile-content {
-  @apply w-full max-w-4xl bg-white rounded-xl shadow-lg p-6;
+  @apply w-full max-w-4xl bg-white rounded-xl shadow-lg;
 }
 
 .profile-banner {
-  @apply bg-amber-100 w-full h-64 rounded-xl overflow-hidden mb-6 relative;
+  @apply bg-amber-100 w-full h-64 rounded-t-xl  overflow-hidden mb-6 relative;
 }
 
 .profile-banner img {

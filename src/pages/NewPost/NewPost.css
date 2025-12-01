@@ -45,8 +45,9 @@
 .addImg img{
     @apply w-22 h-22 rounded-2xl;
 }
+
 .buttonAddImg{
-    @apply w-20 h-20 bg-gray-800 flex items-center justify-center rounded-xl wrap-normal text-5xl font-bold;
+    @apply w-20 h-20 bg-gray-800 flex items-center justify-center rounded-xl wrap-normal text-5xl font-bold cursor-pointer;
 }
 
 /* Aside */
@@ -115,3 +116,17 @@
     @apply text-3xl mr-2;
 }
 
+/*Botão de filtrar*/
+.bubbleSelect {
+  @apply w-full p-2 rounded-xl bg-white border border-gray-300 text-gray-700 
+    focus:outline-none focus:ring-2 focus:ring-blue-400 
+    transition-all duration-200 cursor-pointer mt-2;
+}
+
+.bubbleSelect option {
+  @apply text-gray-700;
+}
+
+.divBubbleSelect h2 {
+  @apply text-4xl font-semibold text-gray-600 mb-1 mt-1.5;
+}
