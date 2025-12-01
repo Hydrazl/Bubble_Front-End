@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 
+<<<<<<< HEAD
 .conteinerSetings {
   @apply flex flex-col gap-8 p-8 w-full text-white bg-[#0f1a33] ml-60 mt-20;
 }
@@ -84,4 +85,14 @@
 
 .saveButton:hover {
   @apply bg-[#1d37c7];
+=======
+.conteinerSetigns{
+    @apply items-center text-white flex flex-col
+}
+
+
+
+.editBanner{
+    @apply w-[700px] h-[300px]
+>>>>>>> e7ebb0949b2c376058c5680f5f295c781ae3244f
 }

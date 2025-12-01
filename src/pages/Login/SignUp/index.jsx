@@ -180,45 +180,64 @@ function StepTwo({userData, onComplete}) {
         }
     }
 
-    const handleFinish = async () => {
-        if (!nickname.trim()) {
-            alert('Para continuar defina um nome de Exibição');
-            return;
-        }
-
-        setUploading(true)
-
-        try {
-            // Primeiro cria o usuário
-            const { username, email, password } = userData;
-            const registerResponse = await registerUser(username, email, password);
-            console.log('Usuário criado:', registerResponse)
-            
-            const userId = registerResponse.user?.id || registerResponse.userId || registerResponse.id;
-
-            if (!userId) {
-                throw new Error('ID do usuário não foi retornado');
-            }
-
-            // Depois completa o perfil
-            const formData = new FormData();
-            formData.append('userId', userId)
-            formData.append('nickname', nickname)
-            formData.append('description', description);
-
-            if (profilePic) formData.append('profilePic', profilePic)
-            if (banner) formData.append('banner', banner)
-
-            const profileData = await completeProfile(formData)
-
-            onComplete(profileData);
-        } catch (error) {
-            const message = error.response?.data?.message || error.message || 'Erro ao finalizar cadastro';
-            alert('Erro: ' + message);
-        } finally {
-            setUploading(false)
-        }
+const handleFinish = async () => {
+    if (!nickname.trim()) {
+        alert('Para continuar defina um nome de Exibição');
+        return;
     }
+
+    if (nickname.trim().length < 3) {
+        alert('O nome de exibição deve ter pelo menos 3 caracteres');
+        return;
+    }
+
+    setUploading(true)
+
+    try {
+        // Primeiro cria o usuário
+        const { username, email, password } = userData;
+        const registerResponse = await registerUser(username, email, password);
+        console.log('Usuário criado:', registerResponse)
+        
+        const userId = registerResponse.user?.id || registerResponse.userId || registerResponse.id;
+
+        if (!userId) {
+            throw new Error('ID do usuário não foi retornado');
+        }
+
+        const formData = new FormData();
+        formData.append('userId', userId)
+        formData.append('nickname', nickname.trim())
+        formData.append('description', description);
+
+        if (description && description.trim()) {
+            if (description.length > 150) {
+                alert('Descrição não pode ter mais de 150 caracteres');
+                return;
+            }
+            formData.append('bio', description.trim())
+        }
+
+        if (profilePic) {
+            formData.append('profilePic', profilePic)
+        }
+        
+        if (banner) {
+            formData.append('banner', banner)
+        }
+
+        const profileData = await completeProfile(formData)
+
+        onComplete(profileData);
+    } catch (error) {
+        const message = error.response?.data?.error || error.response?.data?.message || error.message || 'Erro ao finalizar cadastro';
+        alert('Erro: ' + message);
+        
+        console.error('Erro completo:', error);
+    } finally {
+        setUploading(false)
+    }
+}
 
     const handleSkip = () =>{
         handleFinish();

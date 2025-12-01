@@ -7,6 +7,30 @@ import './Profile.css'
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000'
 
 export default function Profile() {
+    const [isFollowing, setIsFollowing] = useState(false);
+    const [followersCount, setFollowersCount] = useState(0);
+
+    const handleFollow = async () => {
+    try {
+        const response = await axios.post(
+        `${API_URL}/users/${userId}/follow`,
+        {},
+        {
+            headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+            }
+        }
+        );
+        
+        setIsFollowing(!isFollowing);
+        setFollowersCount(prev => isFollowing ? prev - 1 : prev + 1);
+    } catch (error) {
+        console.error('Erro ao seguir:', error);
+    }
+    };
+
+
     const { userId } = useParams();
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -28,7 +52,7 @@ export default function Profile() {
             }
         })
         .then(res => {
-            console.log('✅ Dados recebidos:', res.data);
+            console.log('Dados recebidos:', res.data);
             setData(res.data);
             setLoading(false);
         })
@@ -64,6 +88,7 @@ export default function Profile() {
             </div>
         );
     }
+    console.log(data.profilePic)
 
     return (
         <div className="profile-container">
@@ -93,6 +118,12 @@ export default function Profile() {
                                         <img src='https://cdn-icons-png.flaticon.com/512/3177/3177440.png' alt='Avatar' />
                                     </div>
                                 )}
+                                <button 
+                                onClick={handleFollow}
+                                className={isFollowing ? 'btn-following' : 'btn-follow'}
+                                >
+                                {isFollowing ? 'Seguindo' : 'Seguir'}
+                                </button>
                             </div>
                             
                             <div className="profile-details">
@@ -114,8 +145,8 @@ export default function Profile() {
                                     </div>
                                 </div>
 
-                                {data?.bio && (
-                                    <p className="text-gray-700 mt-2">{data.bio}</p>
+                                {data?.description && (
+                                    <p className="text-gray-700 mt-2">{data.description}</p>
                                 )}
                             </div>
                         </div>
