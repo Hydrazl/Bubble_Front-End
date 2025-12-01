@@ -219,18 +219,10 @@ const handleFinish = async () => {
         }
 
         if (profilePic) {
-            if (profilePic.size > 5 * 1024 * 1024) {
-                alert('A foto de perfil deve ter no máximo 5MB');
-                return;
-            }
             formData.append('profilePic', profilePic)
         }
         
         if (banner) {
-            if (banner.size > 10 * 1024 * 1024) {
-                alert('O banner deve ter no máximo 10MB');
-                return;
-            }
             formData.append('banner', banner)
         }
 

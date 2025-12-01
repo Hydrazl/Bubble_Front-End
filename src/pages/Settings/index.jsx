@@ -7,7 +7,7 @@ import EditProfile from '../../components/pagesConfig/EditProfile';
 
 function Settings() {
     return (
-        <>
+        <div className='conteinerGeralSetting'>
         <header>
             <ConfigNav />
         </header>
@@ -16,7 +16,7 @@ function Settings() {
            <EditProfile/>
         </main>
 
-        </>
+        </div>
     )
 }
 
