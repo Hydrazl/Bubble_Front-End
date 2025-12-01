@@ -2,7 +2,7 @@ import './ButtonGoBack.css';
 import { useGoBack } from "../../hook/useGoBack";
 import { SlArrowRight } from "react-icons/sl";
 
-export default function ButtonGoBack({ fallbackPath = '/' }) {
+export default function ButtonGoBack({ fallbackPath = '/home' }) {
         const goBack = useGoBack (fallbackPath);
 
         return (    

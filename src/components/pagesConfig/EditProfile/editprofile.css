@@ -1,2 +1,87 @@
 @import 'tailwindcss';
 
+.conteinerSetings {
+  @apply flex flex-col gap-8 p-8 w-full text-white bg-[#0f1a33] ml-60 mt-20;
+}
+
+
+.conteinerEditinfoPrin {
+  @apply flex justify-between gap-8;
+}
+
+.editTextNames {
+  @apply flex flex-col gap-6 w-[40%];
+}
+
+.yourName,
+.yourUsername {
+  @apply flex flex-col gap-2;
+}
+
+.inputText {
+  @apply p-3 rounded-lg bg-[#1c294b] text-white outline-none;
+}
+
+
+.editBanner {
+  @apply flex flex-col gap-2 w-[60%];
+}
+
+.bannerWrapper {
+  @apply relative;
+}
+
+.bannerWrapper img {
+  @apply w-full h-[150px] object-cover rounded-lg;
+}
+
+.editIcon {
+  @apply absolute right-3 bottom-3 cursor-pointer text-xl transition;
+}
+
+.editIcon:hover {
+  @apply opacity-80;
+}
+
+
+.conteinerEditInfoSencu {
+  @apply flex justify-between gap-8;
+}
+
+.yourBio {
+  @apply flex flex-col gap-2 w-[50%];
+}
+
+.bioTextArea {
+  @apply w-full min-h-[120px] bg-[#1c294b] rounded-lg p-4 outline-none resize-none text-white;
+}
+
+
+.editPhotoProfile {
+  @apply flex flex-col gap-2 w-[50%];
+}
+
+.photosConteiner {
+  @apply flex items-center gap-4 relative;
+}
+
+.photoProfileSquare {
+  @apply w-[100px] h-[100px] object-cover rounded-lg;
+}
+
+.photoProfileBall {
+  @apply w-[100px] h-[100px] object-cover rounded-full;
+}
+
+.photosConteiner .editIcon {
+  @apply absolute right-[-35px] top-[35px];
+}
+
+
+.saveButton {
+  @apply px-6 py-3 bg-[#2b4cff] text-white rounded-lg cursor-pointer text-base transition mt-4;
+}
+
+.saveButton:hover {
+  @apply bg-[#1d37c7];
+}
