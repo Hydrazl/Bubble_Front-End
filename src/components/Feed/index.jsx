@@ -32,6 +32,10 @@ export default function Feed() {
         }
     };
 
+    const handleRemovePost = (id) => {
+        setPosts(prevPosts => prevPosts.filter((posts) => post.id !== id));
+    };
+
     if (loading) {
         return <div>Carregando posts...</div>;
     }
@@ -44,12 +48,14 @@ export default function Feed() {
                     key={post.id}
                     name={post.author?.nickname || "Usuário"}
                     id={post.author?.username || "@user"}
+                    postId={post.id}
                     userId={post.author?.id || ""}
                     description={post.description || ""}
                     url_image_perfil={post.author?.profilePic || "https://cdn-icons-png.flaticon.com/512/3177/3177440.png"}
                     url_image_post={`${API_URL}/uploads/users/${post.media}`}
                     like_num={0}
                     com_num={0}
+                    onDelete={handleRemovePost}
                 />
             ))}
 

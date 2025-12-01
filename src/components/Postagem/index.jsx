@@ -1,7 +1,6 @@
 import './Post.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faComments, faShareNodes } from "@fortawesome/free-solid-svg-icons";
-
+import { faComments, faShareNodes, faTrash } from "@fortawesome/free-solid-svg-icons";
 import LikeButton from '../LikeButton';
 import { useState, useEffect } from "react";
 import Popup from "../Popup";
@@ -9,17 +8,17 @@ import PopupShared from '../PopupShared'; // mesmo componente usado no GridPost
 import { useNavigate } from 'react-router-dom';
 
 export default function Post({
-  name, id, userId, description, url_image_perfil,
-  url_image_post, like_num, com_num
+  name, id, postId, userId, description, url_image_perfil,
+  url_image_post, like_num, com_num, onDelete
 }) {
 
   const navigate = useNavigate();
   const [openPopup, setOpenPopup] = useState(false);
   const [openPopupshared, setOpenshared] = useState(false);
 
-  useEffect(()=>{
-    if (openPopupshared){
-        document.body.classList.add('no-scroll');
+  useEffect(() => {
+    if (openPopupshared) {
+      document.body.classList.add('no-scroll');
     } else {
       document.body.classList.remove('no-scroll');
     }
@@ -33,12 +32,33 @@ export default function Post({
     }
   }, [openPopup]);
 
+  // funcao pra deleta o post
+  async function handleDeletePost() {
+  try {
+    const token = localStorage.getItem('token');
+
+    const response = await fetch(`http://localhost:4000/posts/${postId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error('Erro ao tentar deletar post');
+    }
+
+    window.location.reload();
+  } catch (err) {
+    console.log('Erro:', err);
+  }
+}
 
   return (
     <>
       <section className='conteiner-post'>
         <div className='conteiner-perfil'>
-          <div className='ft-perfil' 
+          <div className='ft-perfil'
             onClick={(e) => {
               e.stopPropagation();
               console.log('Clicou!');
@@ -54,13 +74,25 @@ export default function Post({
           </div>
         </div>
 
+        {/* Botão de deletar ta aqui jão */}
+        <div
+          className='delete-post'
+          onClick={() => {
+            console.log('Clico apago')
+            handleDeletePost();
+          }}
+          style={{ cursor: 'pointer' }}
+        >
+          <FontAwesomeIcon icon={faTrash} />
+        </div>
+
         <div className='conteudo-post'>
           <div className='text-post'>
             <p className='titulo-post'>{description}</p>
           </div>
 
           <div className='midia-post'>
-            <img src={url_image_post} alt='post'/>
+            <img src={url_image_post} alt='post' />
           </div>
 
           <div className='display-like'>
@@ -69,13 +101,13 @@ export default function Post({
               <LikeButton />
             </div>
 
-            <div 
-              className='coments' 
+            <div
+              className='coments'
               onClick={() => setOpenPopup(true)}
               style={{ cursor: "pointer" }}
             >
               <h3 className='num-coments'>{com_num}</h3>
-              <FontAwesomeIcon icon={faComments} className='coment'/>
+              <FontAwesomeIcon icon={faComments} className='coment' />
             </div>
 
             <div className='input-coments'>
@@ -83,30 +115,30 @@ export default function Post({
             </div>
 
             <div className='share'
-              onClick={()=> setOpenshared(true)}
-              style={{cursor:"pointer"}}
-              >
-              <FontAwesomeIcon icon={faShareNodes}/>
+              onClick={() => setOpenshared(true)}
+              style={{ cursor: "pointer" }}
+            >
+              <FontAwesomeIcon icon={faShareNodes} />
             </div>
           </div>
         </div>
       </section>
 
-        {openPopup && (
-          <Popup 
-            fechar={() => setOpenPopup(false)} 
-            post={{
+      {openPopup && (
+        <Popup
+          fechar={() => setOpenPopup(false)}
+          post={{
             name,
             id,
             url_image_perfil,
             url_image_post,
-    }}
-  />
-)}
+          }}
+        />
+      )}
 
-{openPopupshared && (
-    <PopupShared fechar={() => setOpenshared(false)}/>
-    )}
+      {openPopupshared && (
+        <PopupShared fechar={() => setOpenshared(false)} />
+      )}
 
     </>
   );
