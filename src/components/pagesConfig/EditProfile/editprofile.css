@@ -1,2 +1,11 @@
 @import 'tailwindcss';
 
+.conteinerSetigns{
+    @apply items-center text-white flex flex-col
+}
+
+
+
+.editBanner{
+    @apply w-[700px] h-[300px]
+}
