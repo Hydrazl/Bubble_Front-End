@@ -36,7 +36,7 @@ function AppRoutes() {
                 <Route path="/settings" element={<Settings />}></Route>
                 <Route path="/status" element={<Status/>}></Route>
                 <Route path="/newpost" element={<NewPost/>}></Route>
-                <Route path="/editProfile" element={<EditProfile/>}></Route>
+                <Route path="/config/edit-profile/:userId" element={<EditProfile />} />
             </Routes>
         </BrowserRouter>
     )
