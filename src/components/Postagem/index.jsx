@@ -6,12 +6,12 @@ import { useState, useEffect } from "react";
 import Popup from "../Popup";
 import PopupShared from '../PopupShared'; // mesmo componente usado no GridPost
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext.jsx';
 
 export default function Post({
   name, id, postId, userId, description, url_image_perfil,
   url_image_post, like_num, com_num, onDelete
 }) {
-
   const navigate = useNavigate();
   const [openPopup, setOpenPopup] = useState(false);
   const [openPopupshared, setOpenshared] = useState(false);
@@ -32,12 +32,20 @@ export default function Post({
     }
   }, [openPopup]);
 
+  const { user } = useAuth();
+  const userStorage = localStorage.getItem('user');
+  const adminStorage = localStorage.getItem('admin');
+  const userParsed = userStorage ? JSON.parse(userStorage) : null;
+  const isAdmin = user?.admin || adminStorage === true || userParsed?.admin === true;
+  const currentUserId = user?.id || userParsed?.id;
+  console.log(user?.admin)
+
   // funcao pra deleta o post
   async function handleDeletePost() {
   try {
     const token = localStorage.getItem('token');
 
-    const response = await fetch(`http://localhost:4000/posts/${postId}`, {
+    const response = await fetch(`http://localhost:4000/home/${postId}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -73,18 +81,19 @@ export default function Post({
             <p className='arroba-perfil'>@{id}</p>
           </div>
         </div>
-
         {/* Botão de deletar ta aqui jão */}
-        <div
-          className='delete-post'
-          onClick={() => {
-            console.log('Clico apago')
-            handleDeletePost();
-          }}
-          style={{ cursor: 'pointer' }}
-        >
-          <FontAwesomeIcon icon={faTrash} />
-        </div>
+        {(isAdmin === true || currentUserId === userId) && (
+          <div
+            className='delete-post'
+            onClick={() => {
+              console.log('Clico apago')
+              handleDeletePost();
+            }}
+            style={{ cursor: 'pointer' }}
+          >
+            <FontAwesomeIcon icon={faTrash} />
+          </div>
+        )}
 
         <div className='conteudo-post'>
           <div className='text-post'>
