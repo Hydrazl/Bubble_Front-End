@@ -39,11 +39,6 @@ function NewPost() {
       return;
     }
 
-    if (!bubbleId) {
-      alert("Escolha uma bolha antes de publicar!");
-      return;
-    }
-
     const formData = new FormData();
     formData.append("userId", userId);
     formData.append("description", postText);

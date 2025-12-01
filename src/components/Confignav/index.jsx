@@ -17,7 +17,7 @@ export default function ConfigNav(){
                         <span className='linkConfigNav'>Privacidade</span>
                 </div>
 
-                <h2>Configuração Geral</h2>
+                <h2>Configuração Geral</h2> 
 
                 <div className='optionconfig'>
                         <Link to='/persoprofile' className='linkConfigNav'>Personalizar</Link>

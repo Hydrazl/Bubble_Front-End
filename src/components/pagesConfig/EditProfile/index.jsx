@@ -1,26 +1,27 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import bannerFallback from "../../../assets/ocean.jpg";
 import photoFallback from "../../../assets/meusegundo place.jpeg";
 import "./editprofile.css";
 
+
 export default function EditProfile() {
-  const [profile, setProfile] = useState({
-    name: "",
-    username: "",
-    bio: "",
-    bannerUrl: "",
-    photoUrl: "",
-  });
+
+    const [profile, setProfile] = useState({
+        name: "",
+        username: "",
+        bio: "",
+        bannerUrl: "",
+        photoUrl: ""
+     });
 
   const [loading, setLoading] = useState(true);
 
-  // 🔹 Carrega dados iniciais do perfil
   useEffect(() => {
     async function fetchProfile() {
       try {
-        const res = await fetch("/api/profile");
+        const res = await fetch("/complete-profile");
         const data = await res.json();
         setProfile({
           name: data.name || "",
@@ -38,45 +39,15 @@ export default function EditProfile() {
     fetchProfile();
   }, []);
 
-  // 🔹 Manipula troca da imagem (banner ou foto)
-  function handleImageChange(e, type) {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    const previewUrl = URL.createObjectURL(file);
-
-    setProfile((prev) => ({
-      ...prev,
-      [type]: previewUrl,
-    }));
-
-    // 🔹 Guarda o próprio arquivo para envio posterior ao backend
-    setFiles((prev) => ({ ...prev, [type]: file }));
-  }
-
-  // 🔹 Guarda arquivos reais para envio ao backend
-  const [files, setFiles] = useState({
-    bannerUrl: null,
-    photoUrl: null,
-  });
-
-  // 🔹 Atualiza perfil no backend (texto + arquivos) — BACKEND virá depois
   async function handleSave() {
     try {
-      const formData = new FormData();
-
-      formData.append("name", profile.name);
-      formData.append("username", profile.username);
-      formData.append("bio", profile.bio);
-
-      if (files.bannerUrl) formData.append("banner", files.bannerUrl);
-      if (files.photoUrl) formData.append("photo", files.photoUrl);
-
       await fetch("/api/profile", {
         method: "PUT",
-        body: formData,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(profile),
       });
-
       alert("Perfil atualizado com sucesso.");
     } catch (err) {
       console.error("Falha ao atualizar perfil", err);
@@ -88,7 +59,6 @@ export default function EditProfile() {
   return (
     <div className="conteinerSetings">
       <div className="conteinerEditinfoPrin">
-
         <div className="editTextNames">
           <div className="yourName">
             <h3>Seu nome</h3>
@@ -112,24 +82,11 @@ export default function EditProfile() {
         <div className="editBanner">
           <h3>Banner</h3>
           <div className="bannerWrapper">
-            <img src={profile.bannerUrl || bannerFallback} alt="banner" />
-
-  
-            <input
-              type="file"
-              accept="image/*"
-              className="hidden"
-              id="bannerInput"
-              onChange={(e) => handleImageChange(e, "bannerUrl")}
-            />
-
-            <label htmlFor="bannerInput">
-              <FontAwesomeIcon icon={faPenToSquare} className="editIcon cursor-pointer" />
-            </label>
+            <img src={profile.bannerUrl} alt="banner" />
+            <FontAwesomeIcon icon={faPenToSquare} className="editIcon" />
           </div>
         </div>
       </div>
-
 
       <div className="conteinerEditInfoSencu">
         <div className="yourBio">
@@ -146,33 +103,19 @@ export default function EditProfile() {
           <h3>Sua foto de perfil</h3>
           <div className="photosConteiner">
             <img
-              src={profile.photoUrl || photoFallback}
+              src={profile.photoUrl}
               className="photoProfileSquare"
               alt="profile square"
             />
-
             <img
-              src={profile.photoUrl || photoFallback}
+              src={profile.photoUrl}
               className="photoProfileBall"
               alt="profile round"
             />
-
-  
-            <input
-              type="file"
-              accept="image/*"
-              className="hidden"
-              id="photoInput"
-              onChange={(e) => handleImageChange(e, "photoUrl")}
-            />
-
-            <label htmlFor="photoInput">
-              <FontAwesomeIcon icon={faPenToSquare} className="editIcon cursor-pointer" />
-            </label>
+            <FontAwesomeIcon icon={faPenToSquare} className="editIcon" />
           </div>
         </div>
       </div>
-
 
       <button className="saveButton" onClick={handleSave}>
         Salvar alterações

@@ -7,7 +7,9 @@ import EditProfile from '../../components/pagesConfig/EditProfile';
 
 function Settings() {
     return (
-        <div className='conteinerGeralSetting'>
+        <>
+       <div className="flex bg-[#0f1a33] ">
+
         <header>
             <ConfigNav />
         </header>
@@ -17,6 +19,8 @@ function Settings() {
         </main>
 
         </div>
+        </>
+
     )
 }
 
