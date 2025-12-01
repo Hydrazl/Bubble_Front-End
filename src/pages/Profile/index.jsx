@@ -9,6 +9,9 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000'
 export default function Profile() {
     const [isFollowing, setIsFollowing] = useState(false);
     const [followersCount, setFollowersCount] = useState(0);
+    const userStorage = localStorage.getItem('user');
+    const userParsed = userStorage ? JSON.parse(userStorage) : null;
+    const currentUserId = userParsed?.id;
 
     const handleFollow = async () => {
     try {
@@ -88,7 +91,6 @@ export default function Profile() {
             </div>
         );
     }
-    console.log(data.profilePic)
 
     return (
         <div className="profile-container">
@@ -118,12 +120,6 @@ export default function Profile() {
                                         <img src='https://cdn-icons-png.flaticon.com/512/3177/3177440.png' alt='Avatar' />
                                     </div>
                                 )}
-                                <button 
-                                onClick={handleFollow}
-                                className={isFollowing ? 'btn-following' : 'btn-follow'}
-                                >
-                                {isFollowing ? 'Seguindo' : 'Seguir'}
-                                </button>
                             </div>
                             
                             <div className="profile-details">
@@ -144,8 +140,16 @@ export default function Profile() {
                                         <span className="profile-stat-label">Seguindo</span>
                                     </div>
                                 </div>
+                            </div>
 
-                                {data?.description && (
+                            <div className="profile-follow">
+                                {String(currentUserId) !== String(userId) && (<button 
+                                    onClick={handleFollow}
+                                    className={isFollowing ? 'btn-following' : 'btn-follow'}
+                                    >
+                                    {isFollowing ? 'Seguindo' : 'Seguir'}
+                                </button>)}
+                                 {data?.description && (
                                     <p className="text-gray-700 mt-2">{data.description}</p>
                                 )}
                             </div>
