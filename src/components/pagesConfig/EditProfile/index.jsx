@@ -8,48 +8,50 @@ import '../../BannerProfile/banner.css'
 export default function EditProfile(){
     return(
         <>
-            <div className='conteinerEditProfile'>
+            <div className='conteinerSetigns'>
 
-                <div className='formsEdit'>
+                <div className='conteinerEditinfoPrin'>
 
-                   <div className='editInfoName'> 
+                    <div className='editTextNames'>
 
-                        <h3>Seu Nome</h3>
-                        <input type='text' className='inputStyle'></input>
+                        <div className='yourName'>
+                            <h3>Seu nome</h3>
+                            <input placeholder="henri barki" className='inputText'></input>
+                        </div>
 
-                    </div>
-
-                    <div className='editInfoUserName'>
-
-                        <h3></h3>
-                        <input type='text' className='inputStyle'></input>
-
-                    </div>
-
-                    <div className='editbio'>
-
-                        <h3>Bio</h3>
-                        <input type='text' className='inputStyleBio'></input>
+                        <div className='yourUsername'>
+                            <h3>Seu @</h3>
+                            <input placeholder="@ronaldo" className='inputText'></input>
+                        </div>
 
                     </div>
 
                     <div className='editBanner'>
-
-                        <h3>Editar Banner</h3>
-                        <img src={banner} alt='Banner do perfil' className='imgBannerEdit'/>
-                        <FontAwesomeIcon icon={faPenToSquare} className='iconEdit' />
-
+                        <h3>Banner</h3>
+                        <img src={banner}/>
+                        <FontAwesomeIcon icon={faPenToSquare} className='text-white w-5 h-5'/>
                     </div>
 
-                    <div className='editPhoto'>
+                </div>
 
-                        <h3>Editar foto de perfil</h3>
-                        <img src={photoProfile} alt='Foto do perfil' className='imgPhotoEditSqrt'/>
-                        <img src={photoProfile} alt='Foto do perfil' className='imgPhotoEditAround'/>
-                        <FontAwesomeIcon icon={faPenToSquare} className='iconEdit' />
+                <div className='conteinerEditInfoSencu'>
 
+                    <div className='yourBio'>
+                        <h3>Bio</h3>
+                        <input placeholder='Deus fé e Familia'></input>
                     </div>
 
+                    <div className='editPhotoProfile'>
+
+                        <h3>Sua foto de perfil</h3>
+
+                        <div className='photosConteiner'>
+                            <img src={photoProfile} className='photoProfileSquare'></img>
+                            <img src={photoProfile} className='photoProfileBall'></img>
+                            <FontAwesomeIcon icon={faPenToSquare} className='text-white w-5 h-5'/>
+
+                        </div>
+                    </div>
                 </div>
 
             </div>
