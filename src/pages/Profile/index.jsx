@@ -60,7 +60,7 @@ export default function Profile() {
             setLoading(false);
         })
         .catch(err => {
-            console.error('❌ Erro:', err.response?.data || err);
+            console.error('Erro:', err.response?.data || err);
             setError(err.response?.data?.message || 'Erro ao carregar perfil');
             setLoading(false);
         })

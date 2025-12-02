@@ -2,7 +2,7 @@
 
 /* Login Containers */
 .login-page {
-    @apply w-screen h-screen grid grid-cols-2 text-white; 
+    @apply w-screen h-screen flex justify-center items-center text-white; 
 }
 
 .container-login {
@@ -35,7 +35,7 @@ h2.login-tittle {
 }
 
 h4.login-tittle {
-    @apply text-2xl text-center text-3xl font-light mt-15;
+    @apply text-2xl text-center font-light mt-15;
 }
 
 .container-login p, span {
@@ -60,7 +60,7 @@ h4.login-tittle {
 }
 
 .parent-login-container-form {
-    @apply p-15;
+    @apply p-10;
 }
 
 h3.login-tittle {
@@ -121,7 +121,7 @@ input[type="file"]::before {
 }
 
 .separator {
-    @apply flex items-center text-center my-6 text-[#888] text-[0.85rem] w-[75%] before:content-[''] before:flex-1 before:border-b-2 before:border-[#ddd] after:content-[''] after:flex-1 after:border-b-2 after:border-[#ddd] not-empty:before:mr-7 not-empty:after:ml-7 justify-self-center;
+    @apply flex items-center text-center  text-[#888] text-[0.85rem] w-[75%] before:content-[''] before:flex-1 before:border-b-2 before:border-[#ddd] after:content-[''] after:flex-1 after:border-b-2 after:border-[#ddd] not-empty:before:mr-7 not-empty:after:ml-7 justify-self-center;
 }
 
 .separator p {
@@ -129,11 +129,15 @@ input[type="file"]::before {
 }
 
 .account-form {
-    @apply flex justify-center gap-2.5 w-full;
+    @apply flex justify-center items-center gap-2.5 w-full bg-gray-800 rounded-full cursor-pointer;
+}
+
+.account-cast{
+    @apply flex justify-center gap-4
 }
 
 .account-input {
-    @apply bg-blue-500 flex-1 rounded-full p-[0.2rem];
+    @apply flex items-center p-[0.2rem];
 }
 
 .account-input p {
