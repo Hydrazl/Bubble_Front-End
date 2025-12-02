@@ -143,16 +143,20 @@ export default function Profile() {
                             </div>
 
                             <div className="profile-follow">
-                                {String(currentUserId) !== String(userId) && (<button 
-                                    onClick={handleFollow}
-                                    className={isFollowing ? 'btn-following' : 'btn-follow'}
+                                {String(currentUserId) !== String(userId) && (
+                                    <button 
+                                        onClick={handleFollow}
+                                        className={isFollowing ? 'btn-following' : 'btn-follow'}
                                     >
-                                    {isFollowing ? 'Seguindo' : 'Seguir'}
-                                </button>)}
-                                 {data?.description && (<><div className='p-1 border-2 rounded-xl border-gray-600 w-full justify-center mt-2 relative'>
-                                    <span className='absolute -top-3 left-4 px-1 font-bold bg-white'>Bio</span>
-                                    <p className="text-gray-700">{data.description}</p>
-                                </div></>)}
+                                        {isFollowing ? 'Seguindo' : 'Seguir'}
+                                    </button>
+                                )}
+                                {data?.description && (
+                                    <div className="profile-bio-box">
+                                        <span className="profile-bio-label">Bio</span>
+                                        <p className="profile-bio-text">{data.description}</p>
+                                    </div>
+                                )}
                             </div>
                         </div>
 
