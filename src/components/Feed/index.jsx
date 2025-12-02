@@ -33,7 +33,7 @@ export default function Feed() {
     };
 
     const handleRemovePost = (id) => {
-        setPosts(prevPosts => prevPosts.filter((posts) => post.id !== id));
+        setPosts(prevPosts => prevPosts.filter((posts) => posts.id !== id));
     };
 
     if (loading) {

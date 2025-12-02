@@ -56,7 +56,7 @@ export default function Post({
       throw new Error('Erro ao tentar deletar post');
     }
 
-    window.location.reload();
+    if (onDelete) onDelete(postId);
   } catch (err) {
     console.log('Erro:', err);
   }
