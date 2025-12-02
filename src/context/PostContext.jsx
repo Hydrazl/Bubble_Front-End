@@ -1,43 +1,32 @@
-import { createContext, useContext, useState, useEffect } from 'react';
-import { getPosts } from '../services/api';
+import { createContext, useContext, useState, useEffect } from "react";
+import { getPosts } from "../services/api";
 
-const PostContext = createContext();
+export const PostContext = createContext();
 
-export const PostProvider = ({ children }) => {
-    const [posts, setPosts] = useState([]);
-    const [loading, setLoading] = useState(true);
+export function PostProvider({ children }) {
+  const [posts, setPosts] = useState([]);
+  const [filter, setFilter] = useState("");
 
-    const loadPosts = async () => {
-        try {
-            setLoading(true);
-            const data = await getPosts();
-            setPosts(data);
-        } catch (error) {
-            console.error('Erro ao carregar posts:', error);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        loadPosts();
-    }, []);
-
-    const addPost = (newPost) => {
-        setPosts([newPost, ...posts]);
-    };
-
-    return (
-        <PostContext.Provider value={{ posts, loadPosts, addPost, loading }}>
-            {children}
-        </PostContext.Provider>
-    );
-};
-
-export const usePosts = () => {
-    const context = useContext(PostContext);
-    if (!context) {
-        throw new Error('usePosts deve ser usado dentro de um PostProvider');
+  async function loadPosts(selectedFilter = "") {
+    try {
+      const data = await getPosts(selectedFilter);
+      setPosts(data);
+    } catch (err) {
+      console.log("Erro ao carregar posts:", err);
     }
-    return context;
-};
+  }
+
+  useEffect(() => {
+    loadPosts(filter);
+  }, [filter]);
+
+  return (
+    <PostContext.Provider value={{ posts, setFilter }}>
+      {children}
+    </PostContext.Provider>
+  );
+}
+
+export function usePosts() {
+  return useContext(PostContext);
+}

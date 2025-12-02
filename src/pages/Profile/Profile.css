@@ -29,7 +29,7 @@
 }
 
 .profile-info {
-  @apply flex items-center gap-6 mb-8 px-4;
+  @apply flex items-center gap-6 mb-8 mt-2 px-4;
 }
 
 .profile-avatar {
@@ -85,13 +85,13 @@
 }
 
 .profile-follow {
-  @apply flex items-center gap-6 mb-4;
+  @apply flex items-center gap-6 mb-4 min-w-3xs max-w-96 relative self-baseline-last;
 }
 
 .btn-follow {
-  @apply bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-all;
+  @apply bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-all absolute -right-5 bottom-32;
 }
 
 .btn-following {
-  @apply bg-gray-200 text-gray-600 px-6 py-3 rounded-lg cursor-not-allowed;
+  @apply bg-gray-200 text-gray-600 px-6 py-3 rounded-lg cursor-not-allowed absolute -right-5 bottom-32;
 }
