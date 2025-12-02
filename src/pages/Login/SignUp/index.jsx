@@ -123,17 +123,23 @@ function StepOne({ onNext }) {
                             </form>
 
                             <div className='separator'><p>ou continue com</p></div>
-                            <div className="account-form">
-                                <div className="account-input">
-                                    <div className="icon-register"><FcGoogle className='bg-white rounded-full p-1 px-2'/><p>Google</p></div>
+
+                            <div className="account-cast">
+
+                                <div>
+                                    <div className="flex flex-col items-center justify-center rounded-full text-2xl h-20 w-20 bg-gray-800" ><FcGoogle/></div>
                                 </div>
-                                <div className="account-input">
-                                    <div className="icon-register"><FaFacebook className='bg-white rounded-full p-1 px-2'/><p>FaceBook</p></div>
+
+                                <div>
+                                    <div className="flex flex-col items-center justify-center rounded-full text-2xl h-20 w-20 bg-gray-800" ><FaFacebook/></div>
                                 </div>
-                                <div className="account-input">
-                                    <div className="icon-register"><FaXTwitter className='bg-white rounded-full p-1 px-2'/><p>  X  </p></div>
+
+                                <div>
+                                    <div className="flex flex-col items-center justify-center rounded-full text-2xl h-20 w-20 bg-gray-800" > <FaXTwitter/></div>
                                 </div>
+
                             </div>
+
                         </div>
                     </div>
                 </div>
