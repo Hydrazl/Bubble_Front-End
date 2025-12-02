@@ -380,7 +380,7 @@ function Success({ userData }) {
     const navigate = useNavigate();
     
     return (
-        <main className='login-page'>
+        <main className=' w-screen h-screen flex justify-center items-center text-white'>
             <div className="container-login">
                 <div className="login-logo">
                     <img src="../newBubbleIcon.png" alt="logo" />
