@@ -2,7 +2,7 @@
 
 /* Login Containers */
 .login-page {
-    @apply w-screen h-screen flex justify-center items-center text-white; 
+    @apply w-screen h-screen grid grid-cols-2 text-white; 
 }
 
 .container-login {
