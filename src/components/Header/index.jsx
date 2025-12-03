@@ -12,7 +12,7 @@ export default function Header() {
         <header>
             <div className='content'>
                 <div className='logo_content'>
-                    <Link to='/' className='flex flex-row gap-2 items'>
+                    <Link to='/home' className='flex flex-row gap-2 items'>
                         <img src='../newBubbleIcon.png' alt="logo" className='header-logo' />
                         <p className="teste">BUBBLE</p>
                     </Link>

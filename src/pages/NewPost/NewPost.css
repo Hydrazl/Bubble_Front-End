@@ -97,7 +97,7 @@
 }
 
 .ButtonsPublicar, .ButtonCancel {
-    @apply w-100 h-20 bg-gray-800 text-2xl rounded-2xl  flex items-center justify-center mt-4; 
+    @apply w-100 h-20 bg-gray-800 text-2xl rounded-2xl  flex items-center justify-center mt-4 cursor-pointer; 
 }
 
 .ButtonsPublicar span, .ButtonCancel span{

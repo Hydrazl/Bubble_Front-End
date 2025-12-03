@@ -7,6 +7,7 @@ import ProfilePic from "../../assets/tl.png";
 import ImgUpload from "./ImgUpload";
 import { useState } from "react";
 import { usePosts } from "../../context/PostContext";
+import { useNavigate } from "react-router-dom";
 
 function NewPost() {
   const [postText, setPostText] = useState("");
@@ -14,6 +15,7 @@ function NewPost() {
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
   const [bubbleId, setBubbleId] = useState("");
   const { addPost } = usePosts();
+  const navigate = useNavigate()
 
   const user = JSON.parse(localStorage.getItem("user")) || null;
   const backendURL = import.meta.env.VITE_API_URL;
@@ -64,7 +66,7 @@ function NewPost() {
         return;
       }
 
-      window.location.href = `/bubble/${bubbleId}`;
+      window.location.href = '/home';
     } catch (error) {
       alert("Erro no servidor.");
     }
@@ -187,7 +189,7 @@ function NewPost() {
           </div>
 
           <div className="ButtonCancel">
-            <span>Cancelar</span>
+            <span onClick={(e) => navigate('/home') }>Cancelar</span>
           </div>
         </div>
       </aside>
