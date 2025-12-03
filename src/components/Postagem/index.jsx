@@ -100,9 +100,11 @@ export default function Post({
             <p className='titulo-post'>{description}</p>
           </div>
 
-          <div className='midia-post'>
-            <img src={url_image_post} alt='post' />
-          </div>
+          {url_image_post && (
+            <div className='midia-post'>
+              <img src={url_image_post} alt='post' />
+            </div>
+          )}
 
           <div className='display-like'>
             <div className='like'>

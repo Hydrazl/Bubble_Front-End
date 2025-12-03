@@ -50,11 +50,11 @@
 }
 
 .midia-post{
-    @apply justify-self-center bg-[var(--segundary)] w-200 rounded-3xl
+    @apply justify-self-center bg-[var(--segundary)] w-200 rounded-3xl overflow-hidden mb-4
 }
 
 .midia-post img{
-    @apply h-125 justify-self-center 
+    @apply w-full h-auto object-contain rounded-3xl transition-transform duration-300 hover:scale-105
 }
 
 .ft-perfil img {

@@ -52,7 +52,7 @@ export default function Feed() {
                     userId={post.author?.id || ""}
                     description={post.description || ""}
                     url_image_perfil={post.author?.profilePic || "https://cdn-icons-png.flaticon.com/512/3177/3177440.png"}
-                    url_image_post={`${API_URL}/uploads/users/${post.media}`}
+                    url_image_post={ post.media ? `${API_URL}/uploads/users/${post.media}` : ""}
                     like_num={0}
                     com_num={0}
                     onDelete={handleRemovePost}
