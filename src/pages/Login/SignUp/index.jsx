@@ -392,7 +392,7 @@ function Success({ userData }) {
                     className='login-button'
                     onClick={() => navigate('/')}
                 >
-                    Ir para o Feed
+                    Ir para o Login
                 </button>
             </div>
         </main>
