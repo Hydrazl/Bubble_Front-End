@@ -56,7 +56,7 @@ export default function ConfigNav(){
                 </div>
             </div>
 
-            <div>
+            <div className='p-4'>
                 <ButtonGoBack/>
             </div>
 

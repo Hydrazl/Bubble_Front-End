@@ -2,7 +2,7 @@
 @import 'tailwindcss';
 
 .conteinerConfigNav{
-    @apply bg-[rgb(7,15,34)] h-screen w-[20vw] flex flex-col text-lg gap-3 text-white
+    @apply bg-[rgb(7,15,34)] h-screen w-[20vw] flex flex-col text-lg gap-3 text-white p-5
 }
 
 .conteinerConfigNav h2{ 

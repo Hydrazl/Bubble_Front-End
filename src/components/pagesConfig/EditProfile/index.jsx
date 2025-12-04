@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,10 +8,7 @@ import "./editprofile.css";
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
 export default function EditProfile() {
-
   const token = localStorage.getItem("token");
-
-  // PEGAR O ID DO USUÁRIO DO TOKEN DECODIFICADO
   const userId = JSON.parse(atob(token.split(".")[1])).id;
 
   const [profile, setProfile] = useState({
@@ -21,80 +19,56 @@ export default function EditProfile() {
     profilePic: ""
   });
 
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [bannerFile, setBannerFile] = useState(null);
+  const [profilePicFile, setProfilePicFile] = useState(null);
 
-  useEffect(() => {
+useEffect(() => {
+  async function fetchProfile() {
+    const res = await axios.get(`${API_URL}/profile`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
 
-    async function fetchProfile() {
-      try {
+    const data = res.data;
 
-        const res = await axios.get(`${API_URL}/profile/${userId}`, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-
-        const data = res.data;
-
-        setProfile({
-          nickname: data.nickname || "",
-          username: data.username || "",
-          description: data.description || "",
-          banner: data.banner ? `${API_URL}/${data.banner}` : "",
-          profilePic: data.profilePic ? `${API_URL}/${data.profilePic}` : ""
-        });
-
-      } catch (err) {
-        console.error("Erro ao carregar perfil:", err);
-        setError("Não foi possível carregar os dados do perfil.");
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchProfile();
-
-  }, [userId, token]);
-
-  async function handleSave() {
-    try {
-      await axios.put(
-        `${API_URL}/profile/${userId}`,
-        {
-          nickname: profile.nickname,
-          username: profile.username,
-          description: profile.description
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json"
-          }
-        }
-      );
-
-      alert("Perfil atualizado com sucesso.");
-
-    } catch (err) {
-      console.error("Erro ao atualizar perfil:", err);
-      alert("Falha ao atualizar perfil");
-    }
+    setProfile({
+      nickname: data.nickname || "",
+      username: data.username || "",
+      description: data.description || "",
+      banner: data.banner ? `${API_URL}/${data.banner}` : "",
+      profilePic: data.profilePic ? `${API_URL}/${data.profilePic}` : ""
+    });
   }
 
-  if (loading) return <div className="text-white p-6">Carregando...</div>;
-  if (error) return <div className="text-red-500 p-6">{error}</div>;
+  fetchProfile();
+}, [token]);
+
+  async function handleSave() {
+    const formData = new FormData();
+    formData.append("nickname", profile.nickname);
+    formData.append("username", profile.username);
+    formData.append("description", profile.description);
+
+    if (bannerFile) formData.append("banner", bannerFile);
+    if (profilePicFile) formData.append("profilePic", profilePicFile);
+
+    await axios.put(`${API_URL}/profile`, formData, {
+  headers: {
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "multipart/form-data"
+  }
+});
+    alert("Perfil atualizado.");
+  }
 
   return (
     <div className="conteinerSetings">
       <div className="conteinerEditinfoPrin">
         <div className="editTextNames">
-
           <div className="yourName">
             <h3>Seu nome</h3>
             <input
               value={profile.nickname}
-              onChange={(e) =>
-                setProfile({ ...profile, nickname: e.target.value })
-              }
+              onChange={(e) => setProfile({ ...profile, nickname: e.target.value })}
               className="inputText"
             />
           </div>
@@ -103,9 +77,7 @@ export default function EditProfile() {
             <h3>Seu @</h3>
             <input
               value={profile.username}
-              onChange={(e) =>
-                setProfile({ ...profile, username: e.target.value })
-              }
+              onChange={(e) => setProfile({ ...profile, username: e.target.value })}
               className="inputText"
             />
           </div>
@@ -115,10 +87,18 @@ export default function EditProfile() {
           <h3>Banner</h3>
           <div className="bannerWrapper">
             <img
-              src={profile.banner || "https://via.placeholder.com/600x200"}
+              src={bannerFile ? URL.createObjectURL(bannerFile) : (profile.banner || "https://via.placeholder.com/600x200")}
               alt="banner"
             />
-            <FontAwesomeIcon icon={faPenToSquare} className="editIcon" />
+            <label>
+              <FontAwesomeIcon icon={faPenToSquare} className="editIcon" />
+              <input
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                onChange={(e) => setBannerFile(e.target.files[0])}
+              />
+            </label>
           </div>
         </div>
       </div>
@@ -128,9 +108,7 @@ export default function EditProfile() {
           <h3>Bio</h3>
           <textarea
             value={profile.description}
-            onChange={(e) =>
-              setProfile({ ...profile, description: e.target.value })
-            }
+            onChange={(e) => setProfile({ ...profile, description: e.target.value })}
             className="bioTextArea"
             maxLength={200}
           />
@@ -139,17 +117,28 @@ export default function EditProfile() {
         <div className="editPhotoProfile">
           <h3>Sua foto de perfil</h3>
           <div className="photosConteiner">
+
             <img
-              src={profile.profilePic || "https://via.placeholder.com/150"}
+              src={profilePicFile ? URL.createObjectURL(profilePicFile) : (profile.profilePic || "https://via.placeholder.com/150")}
               className="photoProfileSquare"
-              alt="profile square"
+              alt="profile"
             />
+
             <img
-              src={profile.profilePic || "https://via.placeholder.com/150"}
+              src={profilePicFile ? URL.createObjectURL(profilePicFile) : (profile.profilePic || "https://via.placeholder.com/150")}
               className="photoProfileBall"
-              alt="profile round"
+              alt="profile"
             />
-            <FontAwesomeIcon icon={faPenToSquare} className="editIcon" />
+
+            <label>
+              <FontAwesomeIcon icon={faPenToSquare} className="editIcon" />
+              <input
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                onChange={(e) => setProfilePicFile(e.target.files[0])}
+              />
+            </label>
           </div>
         </div>
       </div>
