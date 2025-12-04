@@ -10,12 +10,15 @@ import { useAuth } from '../../context/AuthContext.jsx';
 
 export default function Post({
   name, id, postId, userId, description, url_image_perfil,
-  url_image_post, like_num, com_num, onDelete
+  url_image_post, like_num, com_num, onDelete, initialLiked = false
 }) {
   const navigate = useNavigate();
   const [openPopup, setOpenPopup] = useState(false);
   const [openPopupshared, setOpenshared] = useState(false);
   const backendURL = import.meta.env.VITE_API_URL;
+
+  const [likesCount, setLikesCount] = useState(like_num);
+  const [isLiked, setIsLiked] = useState(initialLiked);
 
   useEffect(() => {
     if (openPopupshared) {
@@ -41,26 +44,35 @@ export default function Post({
   const currentUserId = user?.id || userParsed?.id;
   console.log(user?.admin)
 
+  const handleLikeChange = (likeData) => {
+    if (likeData.likesCount !== undefined) {
+      setLikesCount(likeData.likesCount);
+    } else if (likeData.liked !== undefined) {
+      setLikesCount((prev) => (likeData.liked ? prev + 1 : prev - 1));
+    }
+    setIsLiked(likeData.liked);
+  };
+
   // funcao pra deleta o post
   async function handleDeletePost() {
-  try {
-    const token = localStorage.getItem('token');
-    const response = await fetch(`${backendURL}/home/${postId}`, {
-      method: 'DELETE',
-      headers: {
-        'Authorization': `Bearer ${token}`,
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${backendURL}/home/${postId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Erro ao tentar deletar post');
       }
-    });
 
-    if (!response.ok) {
-      throw new Error('Erro ao tentar deletar post');
+      if (onDelete) onDelete(postId);
+    } catch (err) {
+      console.log('Erro:', err);
     }
-
-    if (onDelete) onDelete(postId);
-  } catch (err) {
-    console.log('Erro:', err);
   }
-}
 
   return (
     <>
@@ -108,8 +120,8 @@ export default function Post({
 
           <div className='display-like'>
             <div className='like'>
-              <h3 className='num-like'>{like_num}</h3>
-              <LikeButton />
+              <h3 className='num-like'>{likesCount}</h3>
+              <LikeButton postId={postId} initialLiked={initialLiked} onLikeChange={handleLikeChange} initialCount={like_num} />
             </div>
 
             <div

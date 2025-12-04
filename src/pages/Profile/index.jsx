@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../../components/Header';
+import { followUser, checkFollowStatus } from '../../services/api';
 import './Profile.css'
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000'
@@ -9,38 +10,29 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000'
 export default function Profile() {
     const [isFollowing, setIsFollowing] = useState(false);
     const [followersCount, setFollowersCount] = useState(0);
+    const [followingCount, setFollowingCount] = useState(0);
+    const [postsCount, setPostsCount] = useState(0);
     const userStorage = localStorage.getItem('user');
     const userParsed = userStorage ? JSON.parse(userStorage) : null;
     const currentUserId = userParsed?.id;
-
-    const handleFollow = async () => {
-    try {
-        const response = await axios.post(
-        `${API_URL}/users/${userId}/follow`,
-        {},
-        {
-            headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-            }
-        }
-        );
-        
-        setIsFollowing(!isFollowing);
-        setFollowersCount(prev => isFollowing ? prev - 1 : prev + 1);
-    } catch (error) {
-        console.error('Erro ao seguir:', error);
-    }
-    };
-
 
     const { userId } = useParams();
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [activeTab, setActiveTab] = useState('posts');
-    
+
     const token = localStorage.getItem('token');
+
+    const handleFollow = async () => {
+        try {
+            await followUser(userId);
+            setIsFollowing(!isFollowing);
+            setFollowersCount(prev => isFollowing ? prev - 1 : prev + 1);
+        } catch (error) {
+            console.error('Erro ao seguir:', error);
+        }
+    };
 
     useEffect(() => {
         if (!token || !userId) {
@@ -48,23 +40,49 @@ export default function Profile() {
             setLoading(false);
             return;
         }
-        
-        axios.get(`${API_URL}/profile/${userId}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
+
+        // Função para carregar dados do perfil
+        const loadProfileData = async () => {
+            try {
+                // Carrega dados do perfil
+                const profileRes = await axios.get(`${API_URL}/profile/${userId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+
+                console.log('=== DADOS DO PERFIL ===');
+                console.log('Perfil:', profileRes.data);
+
+                setData(profileRes.data);
+                setFollowersCount(profileRes.data.followersCount || 0);
+                setFollowingCount(profileRes.data.followingCount || 0);
+                setPostsCount(profileRes.data.postsCount || 0);
+
+                // Verifica status de seguir apenas se não for o próprio perfil
+                if (String(currentUserId) !== String(userId)) {
+                    try {
+                        const followStatus = await checkFollowStatus(userId);
+                        console.log('Status de seguir:', followStatus);
+                        setIsFollowing(followStatus.isFollowing || false);
+                    } catch (err) {
+                        console.error('Erro ao verificar status de seguir:', err);
+                        setIsFollowing(false);
+                    }
+                } else {
+                    setIsFollowing(false);
+                }
+
+                setLoading(false);
+            } catch (err) {
+                console.error('Erro:', err.response?.data || err);
+                setError(err.response?.data?.message || 'Erro ao carregar perfil');
+                setLoading(false);
             }
-        })
-        .then(res => {
-            console.log('Dados recebidos:', res.data);
-            setData(res.data);
-            setLoading(false);
-        })
-        .catch(err => {
-            console.error('Erro:', err.response?.data || err);
-            setError(err.response?.data?.message || 'Erro ao carregar perfil');
-            setLoading(false);
-        })
-    }, [userId, token]);
+        };
+
+        loadProfileData();
+    }, [userId, token, currentUserId]);
 
     if (loading) {
         return (
@@ -121,22 +139,22 @@ export default function Profile() {
                                     </div>
                                 )}
                             </div>
-                            
+
                             <div className="profile-details">
                                 <h1 className="profile-name">{data?.nickname || 'Usuário'}</h1>
                                 <p className="profile-username">@{data?.username || userId}</p>
-                                
+
                                 <div className="profile-stats">
                                     <div className="profile-stat">
-                                        <span className="profile-stat-number">{data?.postsCount || 0}</span>
+                                        <span className="profile-stat-number">{postsCount}</span>
                                         <span className="profile-stat-label">Posts</span>
                                     </div>
                                     <div className="profile-stat">
-                                        <span className="profile-stat-number">{data?.followersCount || 0}</span>
+                                        <span className="profile-stat-number">{followersCount}</span>
                                         <span className="profile-stat-label">Seguidores</span>
                                     </div>
                                     <div className="profile-stat">
-                                        <span className="profile-stat-number">{data?.followingCount || 0}</span>
+                                        <span className="profile-stat-number">{followingCount}</span>
                                         <span className="profile-stat-label">Seguindo</span>
                                     </div>
                                 </div>
@@ -144,7 +162,7 @@ export default function Profile() {
 
                             <div className="profile-follow">
                                 {String(currentUserId) !== String(userId) && (
-                                    <button 
+                                    <button
                                         onClick={handleFollow}
                                         className={isFollowing ? 'btn-following' : 'btn-follow'}
                                     >
@@ -162,25 +180,25 @@ export default function Profile() {
 
                         {/* Tabs */}
                         <div className="profile-tabs">
-                            <div 
+                            <div
                                 className={`profile-tab ${activeTab === 'posts' ? 'profile-tab-active' : ''}`}
                                 onClick={() => setActiveTab('posts')}
                             >
                                 Posts
                             </div>
-                            <div 
+                            <div
                                 className={`profile-tab ${activeTab === 'likes' ? 'profile-tab-active' : ''}`}
                                 onClick={() => setActiveTab('likes')}
                             >
                                 Curtidas
                             </div>
-                            <div 
+                            <div
                                 className={`profile-tab ${activeTab === 'saved' ? 'profile-tab-active' : ''}`}
                                 onClick={() => setActiveTab('saved')}
                             >
                                 Salvos
                             </div>
-                            <div 
+                            <div
                                 className={`profile-tab ${activeTab === 'private' ? 'profile-tab-active' : ''}`}
                                 onClick={() => setActiveTab('private')}
                             >

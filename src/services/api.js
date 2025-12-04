@@ -62,11 +62,15 @@ export async function createPost(formData) {
 
 export async function getPosts(filter = "") {
   try {
-    const endpoint = `${API_URL}/posts${
-      filter ? `?filter=${filter}` : ""
-    }`;
+    const endpoint = `${API_URL}/posts${filter ? `?filter=${filter}` : ""
+      }`;
+    const token = localStorage.getItem("token");
 
-    const { data } = await axios.get(endpoint);
+    const { data } = await axios.get(endpoint, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return data;
 
   } catch (err) {
@@ -124,5 +128,101 @@ export async function updatePost(id, formData) {
     throw new Error(
       error.response?.data?.message || "Erro ao atualizar post"
     );
+  }
+}
+
+export async function toggleLike(postId) {
+  try {
+    const endpoint = `${API_URL}/posts/${postId}/like`;
+    const token = localStorage.getItem("token");
+
+    const { data } = await axios.post(endpoint, {}, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return data;
+  } catch (error) {
+    throw new Error(
+      error.response?.data?.message || "Erro ao curtir post"
+    );
+  }
+}
+
+export async function checkLike(postId) {
+  try {
+    const endpoint = `${API_URL}/posts/${postId}/like`;
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      return { liked: false };
+    }
+
+    const { data } = await axios.get(endpoint, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return data;
+  } catch (error) {
+    console.error("Erro ao verificar like:", error);
+    return { liked: false };
+  }
+}
+
+export async function getPostLikes(postId) {
+  try {
+    const endpoint = `${API_URL}/posts/${postId}/likes`;
+
+    const { data } = await axios.get(endpoint);
+    return data;
+  } catch (error) {
+    console.error("Erro ao buscar likes:", error);
+    throw new Error(
+      error.response?.data?.message || "Erro ao buscar likes"
+    );
+  }
+}
+
+export async function followUser(userId) {
+  try {
+    const endpoint = `${API_URL}/users/${userId}/follow`;
+    const token = localStorage.getItem("token");
+
+    const { data } = await axios.post(endpoint, {}, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return data;
+  } catch (error) {
+    throw new Error(
+      error.response?.data?.message || "Erro ao seguir usuário"
+    );
+  }
+}
+
+export async function checkFollowStatus(userId) {
+  try {
+    const endpoint = `${API_URL}/users/${userId}/is-following`;
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      return { isFollowing: false };
+    }
+
+    const { data } = await axios.get(endpoint, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return data;
+  } catch (error) {
+    console.error("Erro ao verificar status de seguir:", error);
+    return { isFollowing: false };
   }
 }
