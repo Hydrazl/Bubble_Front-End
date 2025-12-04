@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../../components/Header';
-import { followUser, checkFollowStatus } from '../../services/api';
+import { followUser, checkFollowStatus, getPosts, checkLike } from '../../services/api';
+import Post from '../../components/Postagem';
 import './Profile.css'
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000'
@@ -11,6 +12,9 @@ export default function Profile() {
     const [isFollowing, setIsFollowing] = useState(false);
     const [followersCount, setFollowersCount] = useState(0);
     const [followingCount, setFollowingCount] = useState(0);
+    
+    const [userPosts, setUserPosts] = useState([]);
+    const [loadingPosts, setLoadingPosts] = useState(false);
     const [postsCount, setPostsCount] = useState(0);
     const userStorage = localStorage.getItem('user');
     const userParsed = userStorage ? JSON.parse(userStorage) : null;
@@ -32,6 +36,38 @@ export default function Profile() {
         } catch (error) {
             console.error('Erro ao seguir:', error);
         }
+    };
+
+    const loadUserPosts = async () => {
+        try {
+            setLoadingPosts(true);
+            const posts = await getPosts(userId);
+
+            const postsWithLikes = await Promise.all(
+                posts.map(async (post) => {
+                    const like = await checkLike(post.id);
+                    console.log(`Post ${post.id} - Like data:`, like);
+                    // Preserve the original likesCount from the post, only update the liked status
+                    return { 
+                        ...post, 
+                        liked: like.liked,
+                        likesCount: post.likesCount // Keep the original likesCount from getPosts()
+                    };
+                })
+            );
+
+            console.log('Posts with likes:', postsWithLikes);
+            setUserPosts(postsWithLikes);
+        } catch (error) {
+            console.error('Erro ao carregar posts:', error);
+            setUserPosts([]);
+        } finally {
+            setLoadingPosts(false);
+        }
+    };
+
+    const handleRemovePost = (id) => {
+        setUserPosts(prevPosts => prevPosts.filter((post) => post.id !== id));
     };
 
     useEffect(() => {
@@ -82,6 +118,7 @@ export default function Profile() {
         };
 
         loadProfileData();
+        loadUserPosts();
     }, [userId, token, currentUserId]);
 
     if (loading) {
@@ -180,37 +217,40 @@ export default function Profile() {
 
                         {/* Tabs */}
                         <div className="profile-tabs">
-                            <div
-                                className={`profile-tab ${activeTab === 'posts' ? 'profile-tab-active' : ''}`}
-                                onClick={() => setActiveTab('posts')}
-                            >
+                            <div className={`profile-tab ${activeTab === 'posts' ? 'profile-tab-active' : ''}`} onClick={() => setActiveTab('posts')}>
                                 Posts
                             </div>
-                            <div
-                                className={`profile-tab ${activeTab === 'likes' ? 'profile-tab-active' : ''}`}
-                                onClick={() => setActiveTab('likes')}
-                            >
+                            <div className={`profile-tab ${activeTab === 'likes' ? 'profile-tab-active' : ''}`} onClick={() => setActiveTab('likes')}>
                                 Curtidas
-                            </div>
-                            <div
-                                className={`profile-tab ${activeTab === 'saved' ? 'profile-tab-active' : ''}`}
-                                onClick={() => setActiveTab('saved')}
-                            >
-                                Salvos
-                            </div>
-                            <div
-                                className={`profile-tab ${activeTab === 'private' ? 'profile-tab-active' : ''}`}
-                                onClick={() => setActiveTab('private')}
-                            >
-                                Privados
                             </div>
                         </div>
 
                         {/* Conteúdo baseado na tab ativa */}
                         <div className="profile-grid">
                             {activeTab === 'posts' && (
-                                <div className="col-span-3 text-center text-gray-500 py-10">
-                                    Nenhum post ainda
+                                <div className="col-span-3">
+                                    {loadingPosts ? (
+                                        <div className="col-span-1 text-center text-gray-500 py-10">
+                                            Carregando posts...
+                                        </div>
+                                    ) : (
+                                        userPosts.map((post) => (
+                                            <Post
+                                                key={post.id}
+                                                name={post.author?.nickname || "Usuário"}
+                                                id={post.author?.username || "@user"}
+                                                postId={post.id}
+                                                userId={post.author?.id || ""}
+                                                description={post.description || ""}
+                                                url_image_perfil={`${API_URL}/${post.author?.profilePic}` || "https://cdn-icons-png.flaticon.com/512/3177/3177440.png"}
+                                                url_image_post={post.media ? `${API_URL}/uploads/users/${post.media}` : ''}
+                                                initialLiked={post.liked}
+                                                like_num={post.likesCount}
+                                                com_num={post.commentsCount}
+                                                onDelete={handleRemovePost}
+                                            />
+                                        ))
+                                    )}
                                 </div>
                             )}
                             {/* Adicione conteúdo para outras tabs aqui */}

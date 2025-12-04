@@ -36,6 +36,11 @@ export default function Post({
     }
   }, [openPopup]);
 
+  // Sync likesCount with prop when it changes (e.g., after page reload)
+  useEffect(() => {
+    setLikesCount(like_num);
+  }, [like_num]);
+
   const { user } = useAuth();
   const userStorage = localStorage.getItem('user');
   const adminStorage = localStorage.getItem('admin');

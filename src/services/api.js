@@ -60,7 +60,7 @@ export async function createPost(formData) {
   }
 }
 
-export async function getPosts(filter = "") {
+export async function getPosts(filter) {
   try {
     const endpoint = `${API_URL}/posts${filter ? `?filter=${filter}` : ""
       }`;
