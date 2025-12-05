@@ -41,10 +41,16 @@ export default function Profile() {
     const loadUserPosts = async () => {
         try {
             setLoadingPosts(true);
-            const posts = await getPosts(userId);
+            // Fetch all posts and filter by userId
+            const allPosts = await getPosts();
+            
+            // Filter posts to only show posts from this user
+            const userFilteredPosts = allPosts.filter(post => 
+                String(post.author?.id) === String(userId)
+            );
 
             const postsWithLikes = await Promise.all(
-                posts.map(async (post) => {
+                userFilteredPosts.map(async (post) => {
                     const like = await checkLike(post.id);
                     console.log(`Post ${post.id} - Like data:`, like);
                     // Preserve the original likesCount from the post, only update the liked status
@@ -242,7 +248,7 @@ export default function Profile() {
                                                 postId={post.id}
                                                 userId={post.author?.id || ""}
                                                 description={post.description || ""}
-                                                url_image_perfil={`${API_URL}/${post.author?.profilePic}` || "https://cdn-icons-png.flaticon.com/512/3177/3177440.png"}
+                                                url_image_perfil={post.author?.profilePic ? `${API_URL}/${post.author?.profilePic}` : "https://cdn-icons-png.flaticon.com/512/3177/3177440.png"}
                                                 url_image_post={post.media ? `${API_URL}/uploads/users/${post.media}` : ''}
                                                 initialLiked={post.liked}
                                                 like_num={post.likesCount}

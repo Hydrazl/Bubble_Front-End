@@ -81,6 +81,26 @@ export async function getPosts(filter) {
   }
 }
 
+export async function getUserPosts(userId) {
+  try {
+    const endpoint = `${API_URL}/users/${userId}/posts`;
+    const token = localStorage.getItem("token");
+
+    const { data } = await axios.get(endpoint, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return data;
+
+  } catch (err) {
+    console.log("Erro ao tentar buscar posts do usuário", err);
+    throw new Error(
+      err.response?.data?.message || "Erro ao buscar posts do usuário"
+    );
+  }
+}
+
 export async function getPostById(id) {
   try {
     const endpoint = `${API_URL}/posts/${id}`;
