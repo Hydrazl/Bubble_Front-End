@@ -246,3 +246,97 @@ export async function checkFollowStatus(userId) {
     return { isFollowing: false };
   }
 }
+
+export async function getNotifications() {
+  try {
+    const endpoint = `${API_URL}/notifications`;
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      throw new Error("Token não encontrado");
+    }
+
+    const { data } = await axios.get(endpoint, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return data.notifications || [];
+  } catch (error) {
+    console.error("Erro ao buscar notificações:", error);
+    throw new Error(
+      error.response?.data?.message || "Erro ao buscar notificações"
+    );
+  }
+}
+
+export async function markNotificationAsRead(notificationId) {
+  try {
+    const endpoint = `${API_URL}/notifications/${notificationId}/read`;
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      throw new Error("Token não encontrado");
+    }
+
+    const { data } = await axios.patch(endpoint, {}, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return data;
+  } catch (error) {
+    console.error("Erro ao marcar notificação como lida:", error);
+    throw new Error(
+      error.response?.data?.message || "Erro ao marcar notificação como lida"
+    );
+  }
+}
+
+export async function markAllNotificationsAsRead() {
+  try {
+    const endpoint = `${API_URL}/notifications/read-all`;
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      throw new Error("Token não encontrado");
+    }
+
+    const { data } = await axios.patch(endpoint, {}, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return data;
+  } catch (error) {
+    console.error("Erro ao marcar todas notificações como lidas:", error);
+    throw new Error(
+      error.response?.data?.message || "Erro ao marcar notificações como lidas"
+    );
+  }
+}
+
+export async function getUnreadNotificationsCount() {
+  try {
+    const endpoint = `${API_URL}/notifications/unread-count`;
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      return { count: 0 };
+    }
+
+    const { data } = await axios.get(endpoint, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return { count: data.unreadCount || 0 };
+  } catch (error) {
+    console.error("Erro ao buscar contagem de notificações não lidas:", error);
+    return { count: 0 };
+  }
+}
