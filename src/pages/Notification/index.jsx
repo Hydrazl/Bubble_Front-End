@@ -47,7 +47,7 @@ export default function Notifications() {
     const getNotificationText = (notification) => {
         const type = notification.notificationType;
         const sender = notification.actor;
-        
+
         switch (type) {
             case 'like':
                 return `${sender?.nickname || 'Alguém'} curtiu seu post`;
@@ -87,7 +87,7 @@ export default function Notifications() {
                         <h1 className="notification-headtext">Flops</h1>
                         <div className="notification-headtext"><IoMdNotifications /></div>
                     </section>
-                    <div className="notifications">
+                    <div className="notifications-box">
                         <p style={{ textAlign: 'center', padding: '20px' }}>Carregando notificações...</p>
                     </div>
                 </main>
@@ -107,7 +107,7 @@ export default function Notifications() {
                         <h1 className="notification-headtext">Flops</h1>
                         <div className="notification-headtext"><IoMdNotifications /></div>
                     </section>
-                    <div className="notifications">
+                    <div className="notifications-box">
                         <p style={{ textAlign: 'center', padding: '20px', color: 'red' }}>
                             Erro ao carregar notificações: {error}
                         </p>
@@ -134,7 +134,7 @@ export default function Notifications() {
                     <h1 className="notification-headtext">Flops</h1>
                     <div className="notification-headtext"><IoMdNotifications /></div>
                 </section>
-                <div className="notifications">
+                <div className="notifications-box">
                     {notifications.length === 0 ? (
                         <p style={{ textAlign: 'center', padding: '20px' }}>
                             Você não tem notificações ainda

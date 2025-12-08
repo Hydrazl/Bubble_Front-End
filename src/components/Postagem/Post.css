@@ -1,10 +1,10 @@
 @import 'tailwindcss';
 
 .post_roll{
-    @apply flex absolute flex-col items-center justify-center w-full h-full gap-15 my-202
+    @apply flex absolute flex-col items-center justify-center w-full h-full gap-5 my-20
 }
 .conteiner-post {
-    @apply flex flex-col relative my-10 mb-20 p-3 px-5 rounded-2xl bg-[var(--bg-secondary)] shadow-[var(--bg-shadow)] border-[1px] border-[var(--bg-border)] text-[var(--text)] w-230 justify-self-center;
+    @apply flex flex-col relative my-10 mb-5 p-3 px-5 rounded-2xl bg-[var(--bg-secondary)] shadow-[var(--bg-shadow)] border-[1px] border-[var(--bg-border)] text-[var(--text)] w-230 justify-self-center;
 }
 .conteiner-perfil, .like, .coments, .display-like{
     @apply flex flex-row select-none 
@@ -73,7 +73,7 @@
 }
 
 .edit-post svg {
-  @apply text-[#00aaff] transition duration-200;
+  @apply text-[#00aaff] transition duration-200 absolute top-[50px] right-[10px] text-[20px];
 }
 
 .edit-post svg:hover {
