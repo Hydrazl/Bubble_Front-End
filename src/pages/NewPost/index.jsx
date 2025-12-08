@@ -5,17 +5,18 @@ import { faComments, faShareNodes } from "@fortawesome/free-solid-svg-icons";
 import Like from "../../components/LikeButton";
 import ProfilePic from "../../assets/tl.png";
 import ImgUpload from "./ImgUpload";
-import { useState } from "react";
-import { usePosts } from "../../context/PostContext";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 function NewPost() {
   const [postText, setPostText] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
   const [bubbleId, setBubbleId] = useState("");
-  const { addPost } = usePosts();
-  const navigate = useNavigate()
+
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const editId = searchParams.get("edit");
 
   const user = JSON.parse(localStorage.getItem("user")) || null;
   const backendURL = import.meta.env.VITE_API_URL;
@@ -25,11 +26,35 @@ function NewPost() {
       ? `${backendURL}/${user.profilePic}`
       : user?.profilePic || ProfilePic;
 
+  useEffect(() => {
+    if (!editId) return;
+
+    async function fetchPost() {
+      try {
+        const res = await fetch(`${backendURL}/api/posts/${editId}`);
+        const data = await res.json();
+
+        setPostText(data.description || "");
+        setBubbleId(data.bubbleId || "");
+
+        if (data.media) {
+          const fullImage = data.media.startsWith("http")
+            ? data.media
+            : `${backendURL}/${data.media}`;
+          setImagePreviewUrl(fullImage);
+        }
+      } catch (error) {
+        console.log("Erro ao carregar post:", error);
+      }
+    }
+
+    fetchPost();
+  }, [editId]);
+
   function handleSelectedImage(file) {
     if (!file) return;
     setSelectedImage(file);
-    const url = URL.createObjectURL(file);
-    setImagePreviewUrl(url);
+    setImagePreviewUrl(URL.createObjectURL(file));
   }
 
   async function handlePublish() {
@@ -50,9 +75,15 @@ function NewPost() {
       formData.append("postImage", selectedImage);
     }
 
+    const url = editId
+      ? `${backendURL}/api/posts/${editId}`
+      : `${backendURL}/api/posts`;
+
+    const method = editId ? "PUT" : "POST";
+
     try {
-      const res = await fetch(`${backendURL}/posts`, {
-        method: "POST",
+      const res = await fetch(url, {
+        method,
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -62,11 +93,11 @@ function NewPost() {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.message || "Erro ao criar post.");
+        alert(data.message || "Erro ao criar/editar post.");
         return;
       }
 
-      window.location.href = '/home';
+      navigate("/home");
     } catch (error) {
       alert("Erro no servidor.");
     }
@@ -77,10 +108,11 @@ function NewPost() {
       <Header />
 
       <main className="mainNewPost">
-        <h1 className="titlenewpost">New Post</h1>
+        <h1 className="titlenewpost">
+          {editId ? "Editar Post" : "Novo Post"}
+        </h1>
 
         <section className="inputsnewpost">
-
           <div className="conteiner-title">
             <textarea
               placeholder="Publique algo... Como foi o seu dia?..."
@@ -129,7 +161,6 @@ function NewPost() {
           <div className="imgPost">
             <ImgUpload onSelect={handleSelectedImage} />
           </div>
-
         </section>
       </main>
 
@@ -185,11 +216,11 @@ function NewPost() {
 
         <div className="conteinerPublicar">
           <div className="ButtonsPublicar" onClick={handlePublish}>
-            <span>Publicar</span>
+            <span>{editId ? "Salvar Alterações" : "Publicar"}</span>
           </div>
 
           <div className="ButtonCancel">
-            <span onClick={(e) => navigate('/home') }>Cancelar</span>
+            <span onClick={() => navigate("/home")}>Cancelar</span>
           </div>
         </div>
       </aside>

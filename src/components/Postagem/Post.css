@@ -71,3 +71,19 @@
     @apply opacity-100;
     color: red;
 }
+
+.edit-post svg {
+  @apply text-[#00aaff] transition duration-200;
+}
+
+.edit-post svg:hover {
+  @apply text-[#0088cc];
+}
+
+.delete-post svg {
+  @apply text-[#ff4444] transition duration-200;
+}
+
+.delete-post svg:hover {
+  @apply text-[#cc0000];
+}

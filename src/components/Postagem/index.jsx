@@ -1,10 +1,10 @@
 import './Post.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComments, faShareNodes, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faComments, faShareNodes, faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import LikeButton from '../LikeButton';
 import { useState, useEffect } from "react";
 import Popup from "../Popup";
-import PopupShared from '../PopupShared'; // mesmo componente usado no GridPost
+import PopupShared from '../PopupShared';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
 
@@ -12,6 +12,7 @@ export default function Post({
   name, id, postId, userId, description, url_image_perfil,
   url_image_post, like_num, com_num, onDelete, initialLiked = false
 }) {
+
   const navigate = useNavigate();
   const [openPopup, setOpenPopup] = useState(false);
   const [openPopupshared, setOpenshared] = useState(false);
@@ -21,22 +22,15 @@ export default function Post({
   const [isLiked, setIsLiked] = useState(initialLiked);
 
   useEffect(() => {
-    if (openPopupshared) {
-      document.body.classList.add('no-scroll');
-    } else {
-      document.body.classList.remove('no-scroll');
-    }
-  }, [openPopupshared])
+    if (openPopupshared) document.body.classList.add('no-scroll');
+    else document.body.classList.remove('no-scroll');
+  }, [openPopupshared]);
 
   useEffect(() => {
-    if (openPopup) {
-      document.body.classList.add('no-scroll');
-    } else {
-      document.body.classList.remove('no-scroll');
-    }
+    if (openPopup) document.body.classList.add('no-scroll');
+    else document.body.classList.remove('no-scroll');
   }, [openPopup]);
 
-  // Sync likesCount with prop when it changes (e.g., after page reload)
   useEffect(() => {
     setLikesCount(like_num);
   }, [like_num]);
@@ -45,9 +39,9 @@ export default function Post({
   const userStorage = localStorage.getItem('user');
   const adminStorage = localStorage.getItem('admin');
   const userParsed = userStorage ? JSON.parse(userStorage) : null;
+
   const isAdmin = user?.admin || adminStorage === true || userParsed?.admin === true;
   const currentUserId = user?.id || userParsed?.id;
-  console.log(user?.admin)
 
   const handleLikeChange = (likeData) => {
     if (likeData.likesCount !== undefined) {
@@ -58,22 +52,17 @@ export default function Post({
     setIsLiked(likeData.liked);
   };
 
-  // funcao pra deleta o post
   async function handleDeletePost() {
     try {
       const token = localStorage.getItem('token');
       const response = await fetch(`${backendURL}/home/${postId}`, {
         method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        }
+        headers: { 'Authorization': `Bearer ${token}` }
       });
 
-      if (!response.ok) {
-        throw new Error('Erro ao tentar deletar post');
-      }
-
+      if (!response.ok) throw new Error('Erro ao tentar deletar post');
       if (onDelete) onDelete(postId);
+
     } catch (err) {
       console.log('Erro:', err);
     }
@@ -83,32 +72,42 @@ export default function Post({
     <>
       <section className='conteiner-post'>
         <div className='conteiner-perfil'>
-          <div className='ft-perfil'
+          <div
+            className='ft-perfil'
             onClick={(e) => {
               e.stopPropagation();
-              console.log('Clicou!');
               navigate(`/profile/${userId}`);
             }}
             style={{ cursor: 'pointer' }}
           >
             <img src={url_image_perfil} alt='perfil' />
           </div>
+
           <div className='nome-perfil'>
             <h2>{name}</h2>
             <p className='arroba-perfil'>@{id}</p>
           </div>
         </div>
-        {/* Botão de deletar ta aqui jão */}
+
         {(isAdmin === true || currentUserId === userId) && (
-          <div
-            className='delete-post'
-            onClick={() => {
-              console.log('Clico apago')
-              handleDeletePost();
-            }}
-            style={{ cursor: 'pointer' }}
-          >
-            <FontAwesomeIcon icon={faTrash} />
+          <div>
+
+            {/* EDITAR — CORRIGIDO */}
+            <div
+              className="edit-post cursor-pointer"
+              onClick={() => navigate(`/newpost?edit=${postId}`)}
+            >
+              <FontAwesomeIcon icon={faPenToSquare} />
+            </div>
+
+            {/* DELETAR */}
+            <div
+              className="delete-post cursor-pointer"
+              onClick={handleDeletePost}
+            >
+              <FontAwesomeIcon icon={faTrash} />
+            </div>
+
           </div>
         )}
 
@@ -126,7 +125,12 @@ export default function Post({
           <div className='display-like'>
             <div className='like'>
               <h3 className='num-like'>{likesCount}</h3>
-              <LikeButton postId={postId} initialLiked={initialLiked} onLikeChange={handleLikeChange} initialCount={like_num} />
+              <LikeButton
+                postId={postId}
+                initialLiked={initialLiked}
+                onLikeChange={handleLikeChange}
+                initialCount={like_num}
+              />
             </div>
 
             <div
@@ -139,10 +143,14 @@ export default function Post({
             </div>
 
             <div className='input-coments'>
-              <input placeholder='Comente algo!!!' className='pero-insput-coments' />
+              <input
+                placeholder='Comente algo!!!'
+                className='pero-insput-coments'
+              />
             </div>
 
-            <div className='share'
+            <div
+              className='share'
               onClick={() => setOpenshared(true)}
               style={{ cursor: "pointer" }}
             >
@@ -155,19 +163,13 @@ export default function Post({
       {openPopup && (
         <Popup
           fechar={() => setOpenPopup(false)}
-          post={{
-            name,
-            id,
-            url_image_perfil,
-            url_image_post,
-          }}
+          post={{ name, id, url_image_perfil, url_image_post }}
         />
       )}
 
       {openPopupshared && (
         <PopupShared fechar={() => setOpenshared(false)} />
       )}
-
     </>
   );
 }
