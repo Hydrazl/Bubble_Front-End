@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, forwardRef, useImperativeHandle } from "react";
 import Post from "../../components/Postagem";
 import { getPosts, checkLike } from "../../services/api";
 
-export default function Feed() {
+const Feed = forwardRef((props, ref) => {
     const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -41,6 +41,11 @@ export default function Feed() {
         }
     };
 
+    // Expor método reloadPosts para componente pai
+    useImperativeHandle(ref, () => ({
+        reloadPosts: loadPosts
+    }));
+
     const handleRemovePost = (id) => {
         setPosts(prevPosts => prevPosts.filter((posts) => posts.id !== id));
     };
@@ -72,4 +77,6 @@ export default function Feed() {
             ))}
         </main>
     );
-}
+});
+
+export default Feed;
