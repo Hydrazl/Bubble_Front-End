@@ -16,8 +16,6 @@ export default function Feed() {
             setLoading(true);
             const data = await getPosts();
             console.log('Posts carregados:', data);
-
-            // Verifica o status de like para cada post
             const postsWithLikeStatus = await Promise.all(
                 data.map(async (post) => {
                     try {
@@ -35,8 +33,6 @@ export default function Feed() {
                     }
                 })
             );
-
-            console.log('Posts com status de like:', postsWithLikeStatus);
             setPosts(postsWithLikeStatus);
         } catch (error) {
             console.error('Erro ao carregar posts:', error);

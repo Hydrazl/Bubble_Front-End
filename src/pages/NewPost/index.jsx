@@ -13,6 +13,7 @@ function NewPost() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
   const [bubbleId, setBubbleId] = useState("");
+  const [existingMediaPath, setExistingMediaPath] = useState("");
 
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -31,17 +32,25 @@ function NewPost() {
 
     async function fetchPost() {
       try {
-        const res = await fetch(`${backendURL}/api/posts/${editId}`);
+        const res = await fetch(`${backendURL}/posts/${editId}`);
         const data = await res.json();
+
+        console.log("=== DEBUG EDIT POST ===");
+        console.log("Post completo do backend:", data);
+        console.log("Campo media:", data.media);
+        console.log("======================");
 
         setPostText(data.description || "");
         setBubbleId(data.bubbleId || "");
 
         if (data.media) {
-          const fullImage = data.media.startsWith("http")
-            ? data.media
-            : `${backendURL}/${data.media}`;
+          // Save the original media path from backend
+          setExistingMediaPath(data.media);
+
+          // Construir URL da imagem seguindo o mesmo padrão do Feed
+          const fullImage = `${backendURL}/uploads/users/${data.media}`;
           setImagePreviewUrl(fullImage);
+          console.log("Imagem carregada:", fullImage);
         }
       } catch (error) {
         console.log("Erro ao carregar post:", error);
@@ -55,6 +64,8 @@ function NewPost() {
     if (!file) return;
     setSelectedImage(file);
     setImagePreviewUrl(URL.createObjectURL(file));
+    // Clear existing media path when new image is selected
+    setExistingMediaPath("");
   }
 
   async function handlePublish() {
@@ -71,15 +82,30 @@ function NewPost() {
     formData.append("description", postText);
     formData.append("bubbleId", bubbleId);
 
+    console.log("=== DEBUG PUBLISH ===");
+    console.log("editId:", editId);
+    console.log("selectedImage:", selectedImage);
+    console.log("existingMediaPath:", existingMediaPath);
+
+    // If editing and no new image selected, send existing media path
+    if (editId && !selectedImage && existingMediaPath) {
+      formData.append("existingMedia", existingMediaPath);
+      console.log("Enviando existingMedia:", existingMediaPath);
+    }
+
+    // If new image selected, send it
     if (selectedImage) {
       formData.append("postImage", selectedImage);
+      console.log("Enviando nova imagem:", selectedImage.name);
     }
 
     const url = editId
-      ? `${backendURL}/api/posts/${editId}`
-      : `${backendURL}/api/posts`;
+      ? `${backendURL}/posts/${editId}`
+      : `${backendURL}/posts`;
 
     const method = editId ? "PUT" : "POST";
+    console.log("URL:", url);
+    console.log("Method:", method);
 
     try {
       const res = await fetch(url, {
@@ -91,6 +117,8 @@ function NewPost() {
       });
 
       const data = await res.json();
+      console.log("Resposta do backend:", data);
+      console.log("====================");
 
       if (!res.ok) {
         alert(data.message || "Erro ao criar/editar post.");
@@ -100,6 +128,7 @@ function NewPost() {
       navigate("/home");
     } catch (error) {
       alert("Erro no servidor.");
+      console.error("Erro:", error);
     }
   }
 

@@ -12,7 +12,7 @@ export default function Profile() {
     const [isFollowing, setIsFollowing] = useState(false);
     const [followersCount, setFollowersCount] = useState(0);
     const [followingCount, setFollowingCount] = useState(0);
-    
+
     const [userPosts, setUserPosts] = useState([]);
     const [loadingPosts, setLoadingPosts] = useState(false);
     const [postsCount, setPostsCount] = useState(0);
@@ -43,9 +43,9 @@ export default function Profile() {
             setLoadingPosts(true);
             // Fetch all posts and filter by userId
             const allPosts = await getPosts();
-            
+
             // Filter posts to only show posts from this user
-            const userFilteredPosts = allPosts.filter(post => 
+            const userFilteredPosts = allPosts.filter(post =>
                 String(post.author?.id) === String(userId)
             );
 
@@ -54,8 +54,8 @@ export default function Profile() {
                     const like = await checkLike(post.id);
                     console.log(`Post ${post.id} - Like data:`, like);
                     // Preserve the original likesCount from the post, only update the liked status
-                    return { 
-                        ...post, 
+                    return {
+                        ...post,
                         liked: like.liked,
                         likesCount: post.likesCount // Keep the original likesCount from getPosts()
                     };
@@ -251,7 +251,7 @@ export default function Profile() {
                                                 url_image_perfil={post.author?.profilePic ? `${API_URL}/${post.author?.profilePic}` : "https://cdn-icons-png.flaticon.com/512/3177/3177440.png"}
                                                 url_image_post={post.media ? `${API_URL}/uploads/users/${post.media}` : ''}
                                                 initialLiked={post.liked}
-                                                like_num={post.likesCount}
+                                                like_num={post.likesCount}  
                                                 com_num={post.commentsCount}
                                                 onDelete={handleRemovePost}
                                             />
