@@ -4,6 +4,7 @@ import Post from "../../components/Postagem";
 import Header from "../../components/Header";
 import Aside from "../../components/Aside";
 import Status from "../../components/Status";
+import { getPosts, checkLike } from "../../services/api";
 
 const BubblePage = () => {
     const { id } = useParams(); // id da bolha da URL
@@ -16,9 +17,22 @@ const BubblePage = () => {
         const fetchPosts = async () => {
             try {
                 setLoading(true);
-                const res = await fetch(`${API_URL}/bubbles/${id}/posts`);
-                const data = await res.json();
-                setPosts(data);
+                // Use standard API service which handles tokens and correct endpoints
+                const data = await getPosts(id);
+                
+                // Add like status check similar to Feed for consistency
+                const postsWithLikeStatus = await Promise.all(
+                    data.map(async (post) => {
+                        try {
+                            const likeStatus = await checkLike(post.id);
+                            return { ...post, liked: likeStatus.liked || false };
+                        } catch (error) {
+                            return { ...post, liked: false };
+                        }
+                    })
+                );
+
+                setPosts(postsWithLikeStatus);
             } catch (err) {
                 console.error("Erro ao buscar posts da bolha:", err);
             } finally {
@@ -43,15 +57,15 @@ const BubblePage = () => {
             <Aside />
 
             <main className="feed-container">
-                {posts.length === 0 && <p>Nenhum post nesta bolha ainda.</p>}
+                {posts.length === 0 && <p className="text-white p-4">Nenhum post nesta bolha ainda.</p>}
 
                 {posts.map((post) => (
                     <Post
                         key={post.id}
                         postId={post.id}
                         userId={post.author?.id || ""}
-                        name={post.author?.name || post.author?.nickname || "Usuário"}
-                        id={post.author?.username ? `${post.author.username}` : "@user"}
+                        name={post.author?.nickname || "Usuário"}
+                        id={post.author?.username || "@user"}
                         description={post.description || ""}
                         url_image_perfil={
                             post.author?.profilePic

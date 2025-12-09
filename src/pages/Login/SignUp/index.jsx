@@ -386,7 +386,7 @@ function Success({ userData }) {
                     <img src="../newBubbleIcon.png" alt="logo" />
                     <h1 className='login-tittle'>BUBBLE</h1>
                 </div>
-                <h2>Cadastro Completo! 🎉</h2>
+                <h2>Cadastro Completo!</h2>
                 <p>Bem-vindo, {userData.nickname}!</p>
                 <button 
                     className='login-button'
