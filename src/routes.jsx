@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from './pages/Home';
+import BubblePage from "./pages/Home/BubblePage";
 import Trending from './pages/Trending';
 import Notification from "./pages/Notification";
 import Profile from './pages/Profile';
@@ -24,7 +25,7 @@ function AppRoutes() {
                 <Route path="/colors" element={<Colors />}></Route>
                 <Route path="/notifications" element={<Notification />}></Route>
                 <Route path="/home" element={<Home />}></Route>
-                <Route path="/bubble/:id" element={<Home />}></Route>
+                <Route path="/bubble/:id" element={<BubblePage />}></Route>
                 <Route path="/profile/:userId" element={<Profile />}></Route>
                 <Route path="/register" element={<Register />}></Route>
                 <Route path="/login/forgot" element={<Forgot />}></Route>

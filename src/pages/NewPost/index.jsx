@@ -1,11 +1,11 @@
-import "./NewPost.css";
-import Header from "../../components/Header";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faComments, faShareNodes } from "@fortawesome/free-solid-svg-icons";
-import Like from "../../components/LikeButton";
-import ImgUpload from "./ImgUpload";
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import Header from "../../components/Header";
+import ImgUpload from "./ImgUpload";
+import Like from "../../components/LikeButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faComments, faShareNodes } from "@fortawesome/free-solid-svg-icons";
+import "./NewPost.css";
 
 function NewPost() {
   const [postText, setPostText] = useState("");
@@ -20,13 +20,14 @@ function NewPost() {
   const editId = searchParams.get("edit");
 
   const user = JSON.parse(localStorage.getItem("user")) || null;
-  const backendURL = import.meta.env.VITE_API_URL;
+  const backendURL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
   const profileImage =
     user?.profilePic && !user.profilePic.startsWith("http")
       ? `${backendURL}/${user.profilePic}`
-      : user?.profilePic || ProfilePic;
+      : user?.profilePic || "https://cdn-icons-png.flaticon.com/512/3177/3177440.png";
 
+  // Busca bolhas do backend
   useEffect(() => {
     async function fetchBubbles() {
       try {
@@ -37,10 +38,10 @@ function NewPost() {
         console.error("Erro ao carregar bolhas:", err);
       }
     }
-
     fetchBubbles();
   }, []);
 
+  // Se estiver editando, busca post existente
   useEffect(() => {
     if (!editId) return;
 
@@ -54,11 +55,10 @@ function NewPost() {
 
         if (data.media) {
           setExistingMediaPath(data.media);
-          const fullImage = `${backendURL}/uploads/users/${data.media}`;
-          setImagePreviewUrl(fullImage);
+          setImagePreviewUrl(`${backendURL}/uploads/users/${data.media}`);
         }
       } catch (error) {
-        console.log("Erro ao carregar post:", error);
+        console.error("Erro ao carregar post:", error);
       }
     }
 
@@ -74,7 +74,7 @@ function NewPost() {
 
   async function handlePublish() {
     const token = localStorage.getItem("token");
-    const userId = localStorage.getItem("userId") || (user && user.id);
+    const userId = user?.id || localStorage.getItem("userId");
 
     if (!token || !userId) {
       alert("Você não está logado!");
@@ -97,26 +97,22 @@ function NewPost() {
     const url = editId
       ? `${backendURL}/posts/${editId}`
       : `${backendURL}/posts`;
-
     const method = editId ? "PUT" : "POST";
 
     try {
       const res = await fetch(url, {
         method,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
         body: formData,
       });
 
       const data = await res.json();
-
       if (!res.ok) {
         alert(data.message || "Erro ao criar/editar post.");
         return;
       }
 
-      navigate("/home");
+      navigate("/home"); // Redireciona para Home após publicar
     } catch (error) {
       alert("Erro no servidor.");
     }
@@ -127,55 +123,30 @@ function NewPost() {
       <Header />
 
       <main className="mainNewPost">
-        <h1 className="titlenewpost">
-          {editId ? "Editar Post" : "Novo Post"}
-        </h1>
+        <h1 className="titlenewpost">{editId ? "Editar Post" : "Novo Post"}</h1>
 
         <section className="inputsnewpost">
-          <div className="conteiner-title">
-            <textarea
-              placeholder="Publique algo... Como foi o seu dia?..."
-              className="inputcommets resize-none"
-              value={postText}
-              onChange={(e) => setPostText(e.target.value)}
-            />
-          </div>
+          <textarea
+            placeholder="Publique algo... Como foi o seu dia?"
+            className="inputcommets resize-none"
+            value={postText}
+            onChange={(e) => setPostText(e.target.value)}
+          />
 
-          <div className="conteiner-infoadd">
-            <div className="divprofiles">
-              <h2>Marcar pessoas (opcional)</h2>
-              <input
-                type="text"
-                placeholder="Digite o @ da pessoa"
-                className="inputinfo"
-              />
-            </div>
-
-            <div className="divLocal">
-              <h2>Localização (opcional)</h2>
-              <input
-                type="text"
-                placeholder="Adicionar Local"
-                className="inputinfo"
-              />
-            </div>
-
-            <div className="divBubbleSelect">
-              <h2>Escolher Bolha</h2>
-
-              <select
-                className="bubbleSelect"
-                value={bubbleId}
-                onChange={(e) => setBubbleId(e.target.value)}
-              >
-                <option value="">Selecione uma bolha...</option>
-                {bubbles.map((b) => (
-                  <option key={b.id} value={b.id}>
-                    {b.name}
-                  </option>
-                ))}
-              </select>
-            </div>
+          <div className="divBubbleSelect">
+            <h2>Escolher Bolha (opcional)</h2>
+            <select
+              className="bubbleSelect"
+              value={bubbleId}
+              onChange={(e) => setBubbleId(e.target.value)}
+            >
+              <option value="">Nenhuma bolha selecionada</option>
+              {bubbles.map((b) => (
+                <option key={b.id} value={b.id}>
+                  {b.name}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="imgPost">
@@ -191,18 +162,15 @@ function NewPost() {
           <div className="profileelements">
             <img src={profileImage} alt="profile" />
             <div className="textprofile">
-              <span>{user?.nickname || "Seu nome"}</span>
+              <span>{user?.name || user?.nickname || "Seu nome"}</span>
               <span className="text-sm">@{user?.username || "you"}</span>
             </div>
           </div>
 
           <div className="conteinerPostPreview">
-            <div className="text-post">
-              <p className="titulo-post">
-                {postText ||
-                  "O que você escrever aqui aparecerá na prévia..."}
-              </p>
-            </div>
+            <p className="titulo-post">
+              {postText || "O que você escrever aqui aparecerá na prévia..."}
+            </p>
 
             <div className="midiaPostPreview">
               {imagePreviewUrl ? (
@@ -222,10 +190,6 @@ function NewPost() {
             <div className="comentsPreview">
               <FontAwesomeIcon icon={faComments} className="coment" />
               <h3 className="num-coments">00</h3>
-            </div>
-
-            <div className="inputComentsPreview">
-              <input placeholder="Comente algo!!!" />
             </div>
 
             <div className="share">

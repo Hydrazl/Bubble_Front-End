@@ -1,9 +1,9 @@
-import './Header.css'
-import { Link } from 'react-router-dom'
+import './Header.css';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBell, faHouse, faCompass, faGear, faUser } from "@fortawesome/free-solid-svg-icons";
-import whiteBubbling from '../../assets/white_icon_bubbling.png'
+import { faBell, faHouse, faCompass, faGear, faUser, faPlus } from "@fortawesome/free-solid-svg-icons";
+import whiteBubbling from '../../assets/white_icon_bubbling.png';
 import { useEffect, useState } from 'react';
 import { getUnreadNotificationsCount } from '../../services/api';
 
@@ -16,7 +16,6 @@ export default function Header() {
         const interval = setInterval(() => {
             loadUnreadCount();
         }, 30000);
-
         return () => clearInterval(interval);
     }, []);
 
@@ -31,7 +30,6 @@ export default function Header() {
 
     useEffect(() => {
         window.updateNotificationCount = loadUnreadCount;
-        
         return () => {
             delete window.updateNotificationCount;
         };
@@ -46,10 +44,21 @@ export default function Header() {
                         <p className="teste">BUBBLE</p>
                     </Link>
                 </div>
+
                 <nav>
                     <ul className='nav' id='pages_nav'>
-                        <Link to='/home' className='header-link'><li><FontAwesomeIcon icon={faHouse} /> Início</li></Link>
-                        <Link to='/trending' className='borbulhando header-link'><li><img src={whiteBubbling} alt="Borbulhando" /> Borbulhando</li></Link>
+                        <Link to='/home' className='header-link'>
+                            <li><FontAwesomeIcon icon={faHouse} /> Início</li>
+                        </Link>
+
+                        <Link to='/trending' className='borbulhando header-link'>
+                            <li><img src={whiteBubbling} alt="Borbulhando" /> Borbulhando</li>
+                        </Link>
+
+                        <Link to='/newpost' className='header-link new-post-link'>
+                            <li><FontAwesomeIcon icon={faPlus} /> Novo Post</li>
+                        </Link>
+
                         <Link to='/notifications' className='mt-20 lg:mt-40 xl:mt-106 mb-5 header-link notification-link'>
                             <li>
                                 <FontAwesomeIcon icon={faBell} /> Flops
@@ -61,11 +70,16 @@ export default function Header() {
                     </ul>
 
                     <ul className='nav' id='person_nav'>
-                        <Link to={`/profile/${user.id}`} className='header-link'><li><FontAwesomeIcon icon={faUser} />Seu Perfil</li></Link>
-                        <Link to='/settings' className='header-link'><li><FontAwesomeIcon icon={faGear} />Configurações</li></Link>
+                        <Link to={`/profile/${user.id}`} className='header-link'>
+                            <li><FontAwesomeIcon icon={faUser} /> Seu Perfil</li>
+                        </Link>
+
+                        <Link to='/settings' className='header-link'>
+                            <li><FontAwesomeIcon icon={faGear} /> Configurações</li>
+                        </Link>
                     </ul>
                 </nav>
             </div>
         </header>
-    )
+    );
 }
