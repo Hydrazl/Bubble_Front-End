@@ -1,12 +1,9 @@
 import '../Login.css'
-import bg2 from '../../../assets/login-bg2.png'
 import ButtonGoBack from '../../../components/ButtonGoBack'
 
 export default function Sent() {
     return (
         <main>
-            <img src={bg2} className="half-image2" />
-            <img src={bg2} className="half-image" />
             <div className='login-main'>
                 <div className='login-container' >
                     <div className="container" id='forgot-main'>

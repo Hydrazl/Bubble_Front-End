@@ -3,7 +3,6 @@ import Header from "../../components/Header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComments, faShareNodes } from "@fortawesome/free-solid-svg-icons";
 import Like from "../../components/LikeButton";
-import ProfilePic from "../../assets/tl.png";
 import ImgUpload from "./ImgUpload";
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";

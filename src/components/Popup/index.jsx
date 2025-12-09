@@ -1,6 +1,5 @@
 // src/components/Popup/index.jsx
 import './popUp.css';
-
 import Commets from '../CommetsGeral';
 import { useState, useEffect } from "react";
 

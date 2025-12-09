@@ -1,8 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from './pages/Home';
 import Trending from './pages/Trending';
-import Explorer from './pages/Explorer';
-import Chat from './pages/Chat';
 import Notification from "./pages/Notification";
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
@@ -24,8 +22,6 @@ function AppRoutes() {
                 <Route path="/" element={<Login />}></Route>
                 <Route path="/trending" element={<Trending />}></Route>
                 <Route path="/colors" element={<Colors />}></Route>
-                <Route path="/explorer" element={<Explorer />}></Route>
-                <Route path="/bulhufas" element={<Chat />}></Route>
                 <Route path="/notifications" element={<Notification />}></Route>
                 <Route path="/home" element={<Home />}></Route>
                 <Route path="/bubble/:id" element={<Home />}></Route>
