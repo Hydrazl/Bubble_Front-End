@@ -39,5 +39,9 @@
 }
 
 .row.user img.avatar {
-  @apply w-7 h-7 rounded-full;
+  @apply w-7 h-7 rounded-full object-cover;
+}
+
+.row.post img.post-thumb {
+  @apply w-8 h-8 rounded-md object-cover border border-white/10;
 }

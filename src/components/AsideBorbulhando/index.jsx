@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './asideBorbulhando.css';
-import place from '../../assets/place.jpg';
 
 export default function AsideBorbulhando() {
   const [topUsers, setTopUsers] = useState([]);
@@ -9,9 +8,10 @@ export default function AsideBorbulhando() {
   const [loadingUsers, setLoadingUsers] = useState(true);
   const [loadingPosts, setLoadingPosts] = useState(true);
 
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+
   useEffect(() => {
-    // Ajuste baseURL se seu backend rodar em outra porta
-    const api = axios.create({ baseURL: 'http://localhost:4000' });
+    const api = axios.create({ baseURL: API_URL });
 
     let cancelled = false;
 
@@ -35,12 +35,19 @@ export default function AsideBorbulhando() {
     })();
 
     return () => { cancelled = true; };
-  }, []);
+  }, [API_URL]);
 
   function avatarOrPlaceholder(url) {
-    if (!url) return place;
-    // se o backend expõe '/uploads/...' já vai estar completo
-    return url.startsWith('http') ? url : `http://localhost:3000${url}`;
+    if (!url) return 'https://cdn-icons-png.flaticon.com/512/3177/3177440.png';
+    
+    if (url.startsWith('http')) return url;
+
+    // Remove leading slash if present to avoid double slashes when joining
+    const cleanUrl = url.startsWith('/') ? url.slice(1) : url;
+    
+    // If it's just a filename (common in this app), assume it needs /uploads/ or just base depending on how it's stored
+    // Based on Feed component: `${API_URL}/${post.author.profilePic}`
+    return `${API_URL}/${cleanUrl}`;
   }
 
   return (
@@ -58,9 +65,26 @@ export default function AsideBorbulhando() {
             <div className='row'>Nenhum post encontrado</div>
           ) : (
             topPosts.map((p, i) => (
-              <div className='row' key={p.id}>
+              <div className='row post' key={p.id}>
                 <span className='index'>{i+1}</span>
-                <span className='label'>{p.title}</span>
+                {p.media && (
+                  <img 
+                    src={`${API_URL}/uploads/users/${p.media}`} 
+                    className='post-thumb' 
+                    alt="Post media" 
+                    onError={(e) => e.target.style.display = 'none'}
+                  />
+                )}
+                {/* Posts usually have 'description', not 'title' */}
+                <span className='label' style={{
+                  whiteSpace: 'nowrap', 
+                  overflow: 'hidden', 
+                  textOverflow: 'ellipsis', 
+                  maxWidth: p.media ? '140px' : '180px',
+                  display: 'inline-block'
+                }}>
+                  {p.description || "Sem descrição"}
+                </span>
               </div>
             ))
           )}
@@ -78,7 +102,12 @@ export default function AsideBorbulhando() {
             topUsers.map((u, idx) => (
               <div className='row user' key={u.id}>
                 <span className='index'>{idx + 1}</span>
-                <img src={avatarOrPlaceholder(u.profilePic)} className='avatar' alt={u.username}/>
+                {/* Users from /trending/users likely aren't wrapped in 'author' */}
+                <img 
+                  src={avatarOrPlaceholder(u.profilePic || u.author?.profilePic)} 
+                  className='avatar' 
+                  alt={u.username}
+                />
                 <a className='label' href={`/profile/${u.username}`}>@{u.username}</a>
                 <span style={{marginLeft:'8px', fontSize:'0.8em', color:'#666'}}>
                   • {u.followersCount ?? 0}

@@ -16,7 +16,7 @@ export default function BubblefromTreding({ posts }) {
                     }}
                 >
                     <img
-                        src={`http://localhost:4000/${p.media}`}
+                        src={`http://localhost:4000/uploads/users/${p.media}`}
                         alt={p.description}
                         onError={(e) => e.target.src = '/fallback.png'} // fallback
                     />

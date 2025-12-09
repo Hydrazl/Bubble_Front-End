@@ -71,16 +71,24 @@ export default function Popup({ fechar, post }) {
         <main>
           <section className='Coments'>
             {comments.length === 0 && <p>Nenhum comentário ainda.</p>}
-            {comments.map(c => (
-                <Commets
-                    key={c.id}
-                    imgProfile={c.author?.profilePic}
-                    NameProfile={c.author?.username || 'usuário'}
-                    CommetsTextContent={c.content}
-                    like_num={0}
-                    com_num={0}
-                />
-            ))}
+            {comments.map(c => {
+                 const author = c.author || {};
+                 const profilePicUrl = author.profilePic 
+                    ? `${backendURL}/${author.profilePic}` 
+                    : "https://cdn-icons-png.flaticon.com/512/3177/3177440.png";
+                 const displayName = author.nickname || author.username || "Usuário";
+
+                 return (
+                    <Commets
+                        key={c.id}
+                        imgProfile={profilePicUrl}
+                        NameProfile={displayName}
+                        CommetsTextContent={c.content}
+                        like_num={0}
+                        com_num={0}
+                    />
+                 );
+            })}
           </section>
         </main>
       </div>
