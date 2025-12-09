@@ -25,7 +25,7 @@ function NewPost() {
   const profileImage =
     user?.profilePic && !user.profilePic.startsWith("http")
       ? `${backendURL}/${user.profilePic}`
-      : user?.profilePic || ProfilePic;
+      : user?.profilePic || "https://cdn-icons-png.flaticon.com/512/3177/3177440.png";
 
   useEffect(() => {
     async function fetchBubbles() {
