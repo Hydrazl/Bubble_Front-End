@@ -18,7 +18,7 @@
 }
 
 
-/* flutuação controlada */
+
 @keyframes float {
     0% { transform: translate(0,0); }
     25% { transform: translate(8px,-10px); }

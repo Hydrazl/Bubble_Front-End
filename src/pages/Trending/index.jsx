@@ -1,33 +1,57 @@
 import './Trending.css'
 import Header from '../../components/Header'
-import BubblefromTreding from './../../components/BubblefromTreding/index';
-import place from '../../assets/place.jpg'
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import BubblefromTreding from '../../components/BubblefromTreding';
 import AsideBorbulhando from '../../components/AsideBorbulhando';
 
-const images = [place, place,place, place,place, place,place, place,place, place]
 
 function Trending() {
+
+    const [posts, setPosts] = useState([]); // declara o estado
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchPosts = async () => {
+            try {
+                const res = await axios.get('http://localhost:4000/trending');
+                setPosts(res.data);
+            } catch (err) {
+                console.error(err);
+                setError('Erro ao carregar trending posts');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchPosts();
+    }, []);
+
+    if (loading) return <p>Carregando...</p>;
+    if (error) return <p>{error}</p>;
+
+   
     return (
         <>
-        <header>
-            <Header/>
-        </header>
+            <header>
+                <Header/>
+            </header>
 
-        <main>
-            <div className='tituloTredding' > 
-                <h1 className='titulo'>Borbulhando</h1>
-                <h3 className='subTitulo'>Principais Bolhas que estam estourando...</h3>
-            </div>
+            <main>
+                <div className='tituloTredding'> 
+                    <h1 className='titulo'>Borbulhando</h1>
+                    <h3 className='subTitulo'>Principais Bolhas que estam estourando...</h3>
+                </div>
 
-            <BubblefromTreding img1={place} img2={place} img3={place} img4={place} img5={place} img6={place} img7={place} img8={place} img9={place} img10={place}/>
-        </main>
+                <BubblefromTreding posts={posts} />
+            </main>
 
-        <aside>
-            <AsideBorbulhando/>
-        </aside>
-
+            <aside>
+                <AsideBorbulhando/>
+            </aside>
         </>
     )
 }
 
-export default Trending
+export default Trending;

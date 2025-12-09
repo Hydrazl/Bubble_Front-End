@@ -1,50 +1,28 @@
-import './bubblefromTreding.css'
+import './bubblefromTreding.css';
 
+export default function BubblefromTreding({ posts }) {
+    const calculateScale = (likes) => 1 + Math.min(likes / 100, 0.4);
 
-export default function BubblefromTreding({img1,img2, img3, img4, img5, img6, img7, img8, img9}){
-    return(
-        <>
-           <div className='BubbleGroup'>
-
-                <div className='BubbleImg'>
-                    <img src={img1}/>
+    return (
+        <div className='BubbleGroup'>
+            {posts.slice(0, 9).map((p, index) => (
+                <div
+                    key={p.id} // ✅ chave única
+                    className='BubbleImg'
+                    id={index === 0 ? '' : `position${index}`}
+                    style={{
+                        transform: `scale(${calculateScale(p.likesCount)})`,
+                        animation: `float ${3 + (index % 3)}s ease-in-out infinite`
+                    }}
+                >
+                    <img
+                        src={`http://localhost:4000/${p.media}`}
+                        alt={p.description}
+                        onError={(e) => e.target.src = '/fallback.png'} // fallback
+                    />
                 </div>
-
-                <div className='BubbleImg' id='position'>
-                    <img src={img2}/>
-                </div>
-
-                <div className='BubbleImg' id='position2'>
-                    <img src={img3}/>
-                </div>
-
-                <div className='BubbleImg' id='position3'>
-                    <img src={img4}/>
-                </div>
-
-                <div className='BubbleImg' id='position4'>
-                    <img src={img5}/>
-                </div>
-
-                <div className='BubbleImg' id='position5'>
-                    <img src={img6}/>
-                </div>
-
-                <div className='BubbleImg' id='position6'>
-                    <img src={img7}/>
-                </div>
-
-                <div className='BubbleImg' id='position7'>
-                    <img src={img8}/>
-                </div>
-
-                <div className='BubbleImg' id='position8'>
-                    <img src={img9}/>
-                </div>
-
-           </div>
-
-        </>
-    )
+            ))}
+        </div>
+    );
 }
 
