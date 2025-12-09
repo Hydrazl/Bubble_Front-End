@@ -12,6 +12,8 @@ export default function Profile() {
     const [isFollowing, setIsFollowing] = useState(false);
     const [followersCount, setFollowersCount] = useState(0);
     const [followingCount, setFollowingCount] = useState(0);
+    const [likedPosts, setLikedPosts] = useState([]);
+    const [loadingLiked, setLoadingLiked] = useState(false);
 
     const [userPosts, setUserPosts] = useState([]);
     const [loadingPosts, setLoadingPosts] = useState(false);
@@ -41,10 +43,9 @@ export default function Profile() {
     const loadUserPosts = async () => {
         try {
             setLoadingPosts(true);
-          
+
             const allPosts = await getPosts();
 
-           
             const userFilteredPosts = allPosts.filter(post =>
                 String(post.author?.id) === String(userId)
             );
@@ -52,17 +53,14 @@ export default function Profile() {
             const postsWithLikes = await Promise.all(
                 userFilteredPosts.map(async (post) => {
                     const like = await checkLike(post.id);
-                    console.log(`Post ${post.id} - Like data:`, like);
-                  
                     return {
                         ...post,
-                        liked: like.liked,
-                        likesCount: post.likesCount 
+                        liked: !!like?.liked,
+                        likesCount: post.likesCount
                     };
                 })
             );
 
-            console.log('Posts with likes:', postsWithLikes);
             setUserPosts(postsWithLikes);
         } catch (error) {
             console.error('Erro ao carregar posts:', error);
@@ -72,10 +70,39 @@ export default function Profile() {
         }
     };
 
+    const loadLikedPosts = async () => {
+        try {
+            setLoadingLiked(true);
+
+            const allPosts = await getPosts();
+
+            const filteredLiked = [];
+
+            for (const post of allPosts) {
+                const like = await checkLike(post.id);
+                if (like?.liked) {
+                    filteredLiked.push({
+                        ...post,
+                        liked: true,
+                        likesCount: post.likesCount
+                    });
+                }
+            }
+
+            setLikedPosts(filteredLiked);
+        } catch (error) {
+            console.error("Erro ao carregar posts curtidos:", error);
+            setLikedPosts([]);
+        } finally {
+            setLoadingLiked(false);
+        }
+    };
+
     const handleRemovePost = (id) => {
         setUserPosts(prevPosts => prevPosts.filter((post) => post.id !== id));
     };
 
+    // effect principal: carrega perfil + posts do usuário (não depende de activeTab)
     useEffect(() => {
         if (!token || !userId) {
             setError('Token ou userId não encontrado');
@@ -83,42 +110,28 @@ export default function Profile() {
             return;
         }
 
-     
         const loadProfileData = async () => {
             try {
-                
                 const profileRes = await axios.get(`${API_URL}/profile/${userId}`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
+                    headers: { Authorization: `Bearer ${token}` }
                 });
-
-                console.log('=== DADOS DO PERFIL ===');
-                console.log('Perfil:', profileRes.data);
 
                 setData(profileRes.data);
                 setFollowersCount(profileRes.data.followersCount || 0);
                 setFollowingCount(profileRes.data.followingCount || 0);
                 setPostsCount(profileRes.data.postsCount || 0);
 
-               
                 if (String(currentUserId) !== String(userId)) {
-                    try {
-                        const followStatus = await checkFollowStatus(userId);
-                        console.log('Status de seguir:', followStatus);
-                        setIsFollowing(followStatus.isFollowing || false);
-                    } catch (err) {
-                        console.error('Erro ao verificar status de seguir:', err);
-                        setIsFollowing(false);
-                    }
+                    const followStatus = await checkFollowStatus(userId);
+                    setIsFollowing(followStatus.isFollowing || false);
                 } else {
                     setIsFollowing(false);
                 }
 
                 setLoading(false);
             } catch (err) {
-                console.error('Erro:', err.response?.data || err);
-                setError(err.response?.data?.message || 'Erro ao carregar perfil');
+                console.error(err);
+                setError("Erro ao carregar perfil");
                 setLoading(false);
             }
         };
@@ -126,6 +139,13 @@ export default function Profile() {
         loadProfileData();
         loadUserPosts();
     }, [userId, token, currentUserId]);
+
+    // effect para curtidas: roda apenas quando a aba muda para 'likes'
+    useEffect(() => {
+        if (activeTab === "likes") {
+            loadLikedPosts();
+        }
+    }, [activeTab]);
 
     if (loading) {
         return (
@@ -161,7 +181,7 @@ export default function Profile() {
 
             <main className="profile-main">
                 <div className="profile-content">
-                   
+
                     <div className="profile-banner">
                         {data?.banner ? (
                             <img src={`${API_URL}/${data.banner}`} alt="Banner" />
@@ -171,7 +191,7 @@ export default function Profile() {
                     </div>
 
                     <div className="profile-child-container">
-                     
+
                         <div className="profile-info">
                             <div className="profile-avatar">
                                 {data?.profilePic ? (
@@ -221,7 +241,6 @@ export default function Profile() {
                             </div>
                         </div>
 
-                
                         <div className="profile-tabs">
                             <div className={`profile-tab ${activeTab === 'posts' ? 'profile-tab-active' : ''}`} onClick={() => setActiveTab('posts')}>
                                 Posts
@@ -231,8 +250,8 @@ export default function Profile() {
                             </div>
                         </div>
 
-                       
                         <div className="profile-grid">
+                            {/* POSTS */}
                             {activeTab === 'posts' && (
                                 <div className="col-span-3">
                                     {loadingPosts ? (
@@ -251,7 +270,7 @@ export default function Profile() {
                                                 url_image_perfil={post.author?.profilePic ? `${API_URL}/${post.author?.profilePic}` : "https://cdn-icons-png.flaticon.com/512/3177/3177440.png"}
                                                 url_image_post={post.media ? `${API_URL}/uploads/users/${post.media}` : ''}
                                                 initialLiked={post.liked}
-                                                like_num={post.likesCount}  
+                                                like_num={post.likesCount}
                                                 com_num={post.commentsCount}
                                                 onDelete={handleRemovePost}
                                             />
@@ -259,7 +278,33 @@ export default function Profile() {
                                     )}
                                 </div>
                             )}
-                           
+
+                            {/* CURTIDAS (fora do bloco de posts) */}
+                            {activeTab === 'likes' && (
+                                <div className="col-span-3">
+                                    {loadingLiked ? (
+                                        <div className="text-center text-gray-500 py-10">Carregando curtidas...</div>
+                                    ) : likedPosts.length === 0 ? (
+                                        <div className="text-center text-gray-400 py-10">Nenhum post curtido.</div>
+                                    ) : (
+                                        likedPosts.map((post) => (
+                                            <Post
+                                                key={post.id}
+                                                name={post.author?.nickname || "Usuário"}
+                                                id={post.author?.username || "@user"}
+                                                postId={post.id}
+                                                userId={post.author?.id}
+                                                description={post.description}
+                                                url_image_perfil={post.author?.profilePic ? `${API_URL}/${post.author.profilePic}` : "https://cdn-icons-png.flaticon.com/512/3177/3177440.png"}
+                                                url_image_post={post.media ? `${API_URL}/uploads/users/${post.media}` : ''}
+                                                initialLiked={true}
+                                                like_num={post.likesCount}
+                                                com_num={post.commentsCount}
+                                            />
+                                        ))
+                                    )}
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
