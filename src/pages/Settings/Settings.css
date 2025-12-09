@@ -1,0 +1,22 @@
+@import 'tailwindcss';
+
+.settingsLayout {
+  @apply flex min-h-screen;
+  background: var(--bg-primary, #0f1a33);
+}
+
+.settingsMain {
+  @apply flex-1 overflow-auto;
+  margin-left: 256px; /* Width of sidebar */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .settingsLayout {
+    @apply flex-col;
+  }
+
+  .settingsMain {
+    @apply ml-0;
+  }
+}

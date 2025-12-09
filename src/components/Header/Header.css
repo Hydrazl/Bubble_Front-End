@@ -22,11 +22,11 @@
 }
 
 .logo_content {
-    @apply flex rounded-xl pl-4 w-57 h-16 bg-[var(--bg-secondary)] shadow-[var(--bg-shadow)] border-[1px] border-[var(--bg-border)] text-3xl font-semibold text-[var(--text)] items-center gap-2 cursor-pointer select-none; 
+    @apply flex rounded-xl pl-4 w-57 h-16 bg-[var(--bg-primary)] shadow-[var(--shadow-color)] border-[1px] border-[var(--border-color)] text-3xl font-semibold text-[var(--text-primary)] items-center gap-2 cursor-pointer select-none; 
 }
 
 .nav {
-    @apply flex flex-col rounded-xl w-60 bg-[var(--bg-secondary)] shadow-[var(--bg-shadow)] border-[1px] border-[var(--bg-border)] text-2xl font-semibold text-[var(--text)] items-center overflow-hidden;
+    @apply flex flex-col rounded-xl w-60 bg-[var(--bg-primary)] shadow-[var(--shadow-color)] border-[1px] border-[var(--border-color)] text-2xl font-semibold text-[var(--text-primary)] items-center overflow-hidden;
 }
 
 #pages_nav {

@@ -1,87 +1,234 @@
 @import 'tailwindcss';
 
-.conteinerSetings {
-  @apply flex flex-col gap-8 p-8 w-full text-white bg-[#0f1a33] ml-60 mt-20;
+.containerSettings {
+  @apply flex flex-col gap-6 p-8 w-full min-h-screen ml-60 mt-20;
+  background: var(--bg-primary, #0f1a33);
+  color: var(--text-primary, #ffffff);
 }
 
-
-.conteinerEditinfoPrin {
-  @apply flex justify-between gap-8;
+.settingsHeader {
+  @apply mb-4;
 }
 
-.editTextNames {
-  @apply flex flex-col gap-6 w-[40%];
+.settingsHeader h1 {
+  @apply text-3xl font-bold mb-2;
+  color: var(--text-primary, #ffffff);
 }
 
-.yourName,
-.yourUsername {
+.settingsHeader p {
+  @apply text-base;
+  color: var(--text-secondary, #94a3b8);
+}
+
+/* Cards */
+.settingsCard {
+  @apply rounded-2xl p-6 transition-all;
+  background: var(--bg-secondary, #1c294b);
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+}
+
+.settingsCard:hover {
+  border-color: var(--border-color-hover, rgba(59, 130, 246, 0.3));
+}
+
+.cardHeader {
+  @apply mb-6 pb-4 border-b;
+  border-color: var(--border-color, rgba(255, 255, 255, 0.1));
+}
+
+.cardTitle {
+  @apply flex items-center gap-3 mb-2;
+}
+
+.cardTitle svg {
+  @apply text-xl;
+  color: var(--primary-color, #3b82f6);
+}
+
+.cardTitle h2 {
+  @apply text-xl font-semibold;
+  color: var(--text-primary, #ffffff);
+}
+
+.cardDescription {
+  @apply text-sm;
+  color: var(--text-secondary, #94a3b8);
+}
+
+/* Banner Container */
+.bannerContainer {
+  @apply w-full;
+}
+
+.bannerPreview {
+  @apply relative w-full h-[200px] rounded-xl overflow-hidden group;
+  background: var(--bg-tertiary, #0a1628);
+}
+
+.bannerPreview img {
+  @apply w-full h-full object-cover;
+}
+
+.editOverlay {
+  @apply absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 
+         flex flex-col items-center justify-center gap-2 cursor-pointer transition-all duration-300;
+}
+
+.editOverlay svg {
+  @apply text-3xl text-white;
+}
+
+.editOverlay span {
+  @apply text-white font-medium;
+}
+
+/* Two Column Grid */
+.twoColumnGrid {
+  @apply grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6;
+}
+
+/* Profile Picture Section */
+.profilePictureSection {
+  @apply flex flex-col gap-4;
+}
+
+.profilePictureGrid {
+  @apply grid grid-cols-2 gap-4 items-start;
+}
+
+.profilePreview {
+  @apply relative overflow-hidden border-2 transition-all;
+  border-color: var(--border-color, rgba(255, 255, 255, 0.1));
+  background: var(--bg-tertiary, #0a1628);
+}
+
+.profilePreview:hover {
+  border-color: var(--primary-color, #3b82f6);
+}
+
+.profilePreview.square {
+  @apply w-full aspect-square rounded-xl;
+}
+
+.profilePreview.circle {
+  @apply w-full aspect-square rounded-full;
+}
+
+.profilePreview img {
+  @apply w-full h-full object-cover;
+}
+
+.uploadButton {
+  @apply col-span-2 flex items-center justify-center gap-2 p-4 rounded-xl 
+         cursor-pointer transition-all border-2 border-dashed;
+  background: var(--bg-tertiary, #0a1628);
+  border-color: var(--border-color, rgba(255, 255, 255, 0.2));
+  color: var(--text-secondary, #94a3b8);
+}
+
+.uploadButton:hover {
+  border-color: var(--primary-color, #3b82f6);
+  color: var(--primary-color, #3b82f6);
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.uploadButton svg {
+  @apply text-lg;
+}
+
+/* Input Fields */
+.inputGroup {
+  @apply flex flex-col gap-4;
+}
+
+.inputField {
   @apply flex flex-col gap-2;
 }
 
-.inputText {
-  @apply p-3 rounded-lg bg-[#1c294b] text-white outline-none;
+.inputLabel {
+  @apply text-sm font-medium flex items-center justify-between;
+  color: var(--text-primary, #ffffff);
 }
 
-
-.editBanner {
-  @apply flex flex-col gap-2 w-[60%];
+.charCount {
+  @apply text-xs font-normal;
+  color: var(--text-secondary, #94a3b8);
 }
 
-.bannerWrapper {
-  @apply relative;
+.inputHelper {
+  @apply text-xs;
+  color: var(--text-secondary, #94a3b8);
 }
 
-.bannerWrapper img {
-  @apply w-full h-[150px] object-cover rounded-lg;
+.styledInput {
+  @apply w-full p-3 rounded-xl outline-none transition-all border-2;
+  background: var(--bg-tertiary, #0a1628);
+  color: var(--text-primary, #ffffff);
+  border-color: var(--border-color, rgba(255, 255, 255, 0.1));
 }
 
-.editIcon {
-  @apply absolute right-3 bottom-3 cursor-pointer text-xl transition;
+.styledInput:focus {
+  border-color: var(--primary-color, #3b82f6);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-.editIcon:hover {
-  @apply opacity-80;
+.styledInput::placeholder {
+  color: var(--text-secondary, rgba(148, 163, 184, 0.5));
 }
 
-
-.conteinerEditInfoSencu {
-  @apply flex justify-between gap-8;
+.inputWithPrefix {
+  @apply relative flex items-center;
 }
 
-.yourBio {
-  @apply flex flex-col gap-2 w-[50%];
+.inputPrefix {
+  @apply absolute left-3 text-base font-medium;
+  color: var(--text-secondary, #94a3b8);
 }
 
-.bioTextArea {
-  @apply w-full min-h-[120px] bg-[#1c294b] rounded-lg p-4 outline-none resize-none text-white;
+.styledInput.withPrefix {
+  @apply pl-8;
 }
 
-
-.editPhotoProfile {
-  @apply flex flex-col gap-2 w-[50%];
+.styledTextarea {
+  @apply w-full p-3 rounded-xl outline-none transition-all border-2 resize-none;
+  background: var(--bg-tertiary, #0a1628);
+  color: var(--text-primary, #ffffff);
+  border-color: var(--border-color, rgba(255, 255, 255, 0.1));
 }
 
-.photosConteiner {
-  @apply flex items-center gap-4 relative;
+.styledTextarea:focus {
+  border-color: var(--primary-color, #3b82f6);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-.photoProfileSquare {
-  @apply w-[100px] h-[100px] object-cover rounded-lg;
+.styledTextarea::placeholder {
+  color: var(--text-secondary, rgba(148, 163, 184, 0.5));
 }
 
-.photoProfileBall {
-  @apply w-[100px] h-[100px] object-cover rounded-full;
+/* Actions */
+.settingsActions {
+  @apply flex justify-end gap-4;
 }
-
-.photosConteiner .editIcon {
-  @apply absolute right-[-35px] top-[35px];
-}
-
 
 .saveButton {
-  @apply px-6 py-3 bg-[#2b4cff] text-white rounded-lg cursor-pointer text-base transition mt-4;
+  @apply px-8 py-3 rounded-xl font-medium cursor-pointer transition-all;
+  background: var(--primary-color, #3b82f6);
+  color: #ffffff;
 }
 
-.saveButton:hover {
-  @apply bg-[#1d37c7];
+.saveButton:hover:not(:disabled) {
+  background: var(--primary-color-hover, #2563eb);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
+}
+
+.saveButton:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .containerSettings {
+    @apply ml-0 mt-0;
+  }
 }

@@ -1,50 +1,79 @@
 @import 'tailwindcss';
+
 :root {
-  /* Tema Claro (White) - Ajustado */
-  --primary: #d1d1d1;
-  --hover: rgba(66, 135, 245, 0.12);
-  --terciary: #b8b8b8;
-  --segundary: #ececec;
-  --bg: #f8f9fa;
-  --bg-secondary: rgba(230, 240, 255, 0.7);
-  --bg-border: rgba(100, 180, 255, 0.35);
-  --bg-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  --text: #2c2c2c;
-  --text2: #E5E5E5;
-}
+  /* Tema Escuro (Padrão) */
+  --bg-primary: rgba(8, 20, 40, 0.4);
+  --bg-secondary: #1c294b;
+  --bg-tertiary: #0a1628;
 
-/* Tema Escuro (Dark) */
-body.theme-dark {
-  --primary: #464646;
-  --hover: rgba(22, 61, 129, 0.4);
-  --terciary: #525252;
-  --segundary: #333333;
+  --text-primary: #f2f2f2;
+  --text-secondary: #94a3b8;
+  --text-tertiary: #64748b;
+
+  --primary-color: #3b82f6;
+  --primary-color-hover: #2563eb;
+
+  --border-color: rgba(100, 180, 255, 0.15);
+  --border-color-hover: rgba(59, 130, 246, 0.3);
+
+  --shadow-color: 0 8px 32px rgba(0, 0, 0, 0.3),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --error-color: #ef4444;
+
+  /* Mapeamento global */
   --bg: #1d1d1d;
-  --bg-secondary: rgba(10, 25, 50, 0.5);
-  --bg-border: rgba(120, 200, 255, 0.25);
-  --bg-shadow: 
-    0 12px 40px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  --text: #E5E5E5;
-  --text2: #2c2c2c
 }
 
-body{
-    @apply bg-[var(--bg)];
+/* Tema Claro */
+[data-theme="light"] {
+  --bg-primary: rgba(8, 20, 40, 0.212);
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f1f5f9;
+
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+
+  --primary-color: #3b82f6;
+  --primary-color-hover: #2563eb;
+
+  --border-color: rgba(15, 23, 42, 0.1);
+  --border-color-hover: rgba(59, 130, 246, 0.3);
+
+  --shadow-color: 0 8px 32px rgba(0, 0, 0, 0.3),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --error-color: #ef4444;
+
+  --bg: #d9d9d9;
 }
 
-*{
-    font-family:  "Quicksand", sans-serif;
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.no-theme-transition {
+  transition: none !important;
+}
+
+body {
+  @apply bg-[var(--bg)];
+}
+
+* {
+  font-family: "Quicksand", sans-serif;
 
 }
 
-input{
-    outline: none;
-    @apply bg-[var(--bg)] rounded-lg
+input {
+  outline: none;
+  @apply bg-[var(--bg)] rounded-lg
 }
 
 input:focus {
-    @apply outline-none focus:ring-0;
+  @apply outline-none focus:ring-0;
 }

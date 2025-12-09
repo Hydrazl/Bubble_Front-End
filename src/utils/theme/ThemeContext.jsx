@@ -1,49 +1,46 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
-import { themes } from './Theme';
+// src/utils/theme/ThemeContext.jsx
+import { createContext, useContext, useState, useEffect } from 'react';
 
 const ThemeContext = createContext();
 
-export const useTheme = () => {
-  const context = useContext(ThemeContext);
-  if (!context) {
-    throw new Error('useTheme deve ser usado dentro de um ThemeProvider');
-  }
-  return context;
-};
-
-export const ThemeProvider = ({ children }) => {
-  // Pega o tema salvo ou usa 'light' como padrão
-  const [currentTheme, setCurrentTheme] = useState(() => {
-    const saved = localStorage.getItem('app-theme');
-    return saved || 'light';
+export function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState(() => {
+    // Recupera o tema salvo ou usa 'light' como padrão
+    const savedTheme = localStorage.getItem('bubble-theme');
+    return savedTheme || 'light';
   });
 
-  // Salva no localStorage quando mudar
+  const isDark = theme === 'dark';
+
   useEffect(() => {
-    localStorage.setItem('app-theme', currentTheme);
-    // Adiciona classe no body para estilização global
-    document.body.className = `theme-${currentTheme}`;
-  }, [currentTheme]);
+    // Aplica o atributo 'data-theme' no elemento html (root)
+    document.documentElement.setAttribute('data-theme', theme);
+
+    // Mantém compatibilidade com classes se necessário (opcional, mas bom pra garantir)
+    if (theme === 'dark') {
+      document.body.classList.add('theme-dark');
+    } else {
+      document.body.classList.remove('theme-dark');
+    }
+
+    // Salva no localStorage
+    localStorage.setItem('bubble-theme', theme);
+  }, [theme]);
 
   const toggleTheme = () => {
-    setCurrentTheme(prev => prev === 'light' ? 'dark' : 'light');
+    setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
   };
 
-  const setTheme = (themeName) => {
-    if (themes[themeName]) {
-      setCurrentTheme(themeName);
-    }
-  };
-
-  const theme = themes[currentTheme];
+  const setLightTheme = () => setTheme('light');
+  const setDarkTheme = () => setTheme('dark');
 
   const value = {
     theme,
-    currentTheme,
+    isDark,
     toggleTheme,
-    setTheme,
-    isDark: currentTheme === 'dark',
-    isLight: currentTheme === 'light'
+    setLightTheme,
+    setDarkTheme,
+    currentTheme: theme
   };
 
   return (
@@ -51,4 +48,14 @@ export const ThemeProvider = ({ children }) => {
       {children}
     </ThemeContext.Provider>
   );
-};
+}
+
+export function useTheme() {
+  const context = useContext(ThemeContext);
+
+  if (!context) {
+    throw new Error('useTheme deve ser usado dentro de um ThemeProvider');
+  }
+
+  return context;
+}

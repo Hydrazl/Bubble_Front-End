@@ -2,7 +2,7 @@
 
 /* Login Containers */
 .login-page {
-    @apply w-screen h-screen grid grid-cols-2 text-white; 
+    @apply w-screen h-screen grid grid-cols-2 text-[var(--text-primary)]; 
 }
 
 .container-login {
@@ -109,7 +109,7 @@ input[type="file"]::before {
 }
 
 .toggle-password {
-    @apply cursor-pointer absolute top-0 right-0 h-full z-1 pr-3 text-[var(--text2)] text-2xl;
+    @apply cursor-pointer absolute top-0 right-0 h-full z-1 pr-3 text-[var(--text-tertiary)] text-2xl;
 }
 
 .login-form small {
@@ -125,7 +125,7 @@ input[type="file"]::before {
 }
 
 .separator p {
-    @apply text-[1rem] text-white;
+    @apply text-[1rem] text-[var(--text-primary)];
 }
 
 .account-form {
