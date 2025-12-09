@@ -8,6 +8,8 @@ import PopupShared from '../PopupShared';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
 
+
+
 export default function Post({
   name, id, postId, userId, description, url_image_perfil,
   url_image_post, like_num, com_num, onDelete, initialLiked = false
@@ -20,6 +22,9 @@ export default function Post({
 
   const [likesCount, setLikesCount] = useState(like_num);
   const [isLiked, setIsLiked] = useState(initialLiked);
+
+  const [commentText, setCommentText] = useState("");
+
 
   useEffect(() => {
     if (openPopupshared) document.body.classList.add('no-scroll');
@@ -68,6 +73,51 @@ export default function Post({
     }
   }
 
+async function sendComment() {
+    if (!commentText.trim()) return;
+
+    try {
+        const token = localStorage.getItem('token');
+
+        const response = await fetch(`${backendURL}/comments`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                postId,
+                content: commentText
+            })
+        });
+
+        const data = await response.json();
+
+
+        setCommentText("");
+
+        window.dispatchEvent(new CustomEvent('commentCreated', {
+          detail: {
+            postId,
+            comment: {
+              ...data,
+              
+              author: {
+                id: (user && user.id) || null,
+                username: (user && (user.username || userParsed?.username)) || null,
+                profilePic: (user && user.profilePic) || null
+              }
+            }
+          }
+        }));
+
+
+    } catch (err) {
+        console.error("Erro ao enviar comentário:", err);
+    }
+}
+
+
   return (
     <>
       <section className='conteiner-post'>
@@ -92,7 +142,7 @@ export default function Post({
         {(isAdmin === true || currentUserId === userId) && (
           <div>
 
-            {/* EDITAR — CORRIGIDO */}
+       
             <div
               className="edit-post cursor-pointer"
               onClick={() => navigate(`/newpost?edit=${postId}`)}
@@ -100,7 +150,7 @@ export default function Post({
               <FontAwesomeIcon icon={faPenToSquare} />
             </div>
 
-            {/* DELETAR */}
+          
             <div
               className="delete-post cursor-pointer"
               onClick={handleDeletePost}
@@ -142,12 +192,16 @@ export default function Post({
               <FontAwesomeIcon icon={faComments} className='coment' />
             </div>
 
-            <div className='input-coments'>
-              <input
-                placeholder='Comente algo!!!'
-                className='pero-insput-coments'
-              />
-            </div>
+            <input
+              value={commentText}
+              onChange={(e) => setCommentText(e.target.value)}
+              onKeyDown={(e) => {
+              if (e.key === "Enter") sendComment();
+              }}
+              placeholder="Comente algo!!!"
+              className='pero-insput-coments'
+            />
+
 
             <div
               className='share'
@@ -163,9 +217,10 @@ export default function Post({
       {openPopup && (
         <Popup
           fechar={() => setOpenPopup(false)}
-          post={{ name, id, url_image_perfil, url_image_post }}
+          post={{ name, id, url_image_perfil, url_image_post, description, postId }}
         />
       )}
+
 
       {openPopupshared && (
         <PopupShared fechar={() => setOpenshared(false)} />

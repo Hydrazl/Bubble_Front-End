@@ -4,7 +4,7 @@ export default function Contatos({name, url_img_profile, last_msg}) {
     return (
         <>
             <div className='contato'>
-                <picture> {/* div da img */}
+                <picture> 
                     <img src={url_img_profile}/>
                 </picture>
                 <div className='contato-info'>
@@ -12,7 +12,7 @@ export default function Contatos({name, url_img_profile, last_msg}) {
                     <p>{last_msg}</p>
                 </div>
             </div>
-             {/* div q será a barra de baixo do txt */}
+         
         </>
     )
 }

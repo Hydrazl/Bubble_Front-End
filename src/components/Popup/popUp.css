@@ -15,7 +15,7 @@
 }
 
 .popup-content {
-  background: #333333;
+  background: #000000;
   padding: 20px;
   border-radius: 10px;
   max-width: 100%;
@@ -30,11 +30,63 @@
   top: 20px;
   right: 10px;
   border: none;
-  background: #1d1d1d;
+  background-color: #1d1d1d;
   color: aliceblue;
   padding: 5px 10px;
   cursor: pointer;
   border-radius: 5px;
+  scrollbar-width: none;
+}
+
+
+.post-dentro-popup{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #090D13;
+  border-radius: 10px;
+  margin-top: 50px;
+}
+
+.perfil{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 90px;
+  color: white;
+  gap: 20px;
+  font-weight: bold;
+  padding: 10px;
+}
+
+
+
+.perfil img{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+
+.midia{
+  width: 1000px;
+  height: 600px;
+  max-height: 600px;
+  border-radius: 10px;
+}
+
+.conteiner-img{
+  margin: 0 auto;
+  max-width: 80%;
+  padding: 10px;
+}
+
+.conteinerCommentsPost{
+  margin: 10px 0 10px 120px;
+  font-weight: bold;
+  font-size: 20px;
+  color: white;
 }
 
 .Coments{
@@ -43,8 +95,8 @@
   width: 100%;
   height: auto;
   border-radius: 10px;
-  margin-top: -50px;
-  background-color: #1d1d1d;
+  margin-top: 20px;
+  background-color: #090D13;
   gap: 20px;
 }
 
