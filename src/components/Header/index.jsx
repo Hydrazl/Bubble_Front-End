@@ -4,9 +4,38 @@ import { useAuth } from '../../context/AuthContext';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faHouse, faCompass, faComments, faGear, faUser } from "@fortawesome/free-solid-svg-icons";
 import whiteBubbling from '../../assets/white_icon_bubbling.png'
+import { useEffect, useState } from 'react';
+import { getUnreadNotificationsCount } from '../../services/api';
 
 export default function Header() {
-    const { user } = useAuth(); 
+    const { user } = useAuth();
+    const [unreadCount, setUnreadCount] = useState(0);
+
+    useEffect(() => {
+        loadUnreadCount();
+        const interval = setInterval(() => {
+            loadUnreadCount();
+        }, 30000);
+
+        return () => clearInterval(interval);
+    }, []);
+
+    const loadUnreadCount = async () => {
+        try {
+            const data = await getUnreadNotificationsCount();
+            setUnreadCount(data.count || 0);
+        } catch (error) {
+            console.error('Erro ao carregar contagem de notificações:', error);
+        }
+    };
+
+    useEffect(() => {
+        window.updateNotificationCount = loadUnreadCount;
+        
+        return () => {
+            delete window.updateNotificationCount;
+        };
+    }, []);
 
     return (
         <header>
@@ -19,10 +48,17 @@ export default function Header() {
                 </div>
                 <nav>
                     <ul className='nav' id='pages_nav'>
-                        <Link to='/home' className='header-link'><li><FontAwesomeIcon icon={faHouse}/> Início</li></Link>
+                        <Link to='/home' className='header-link'><li><FontAwesomeIcon icon={faHouse} /> Início</li></Link>
                         <Link to='/trending' className='borbulhando header-link'><li><img src={whiteBubbling} alt="Borbulhando" /> Borbulhando</li></Link>
-                        <Link to='/explorer' className='header-link'><li><FontAwesomeIcon icon={faCompass}/> Explorar</li></Link>
-                        <Link to='/notifications' className='mt-20 lg:mt-40 xl:mt-80 mb-5 header-link'><li><FontAwesomeIcon icon={faBell}/> Flops</li></Link>
+                        <Link to='/explorer' className='header-link'><li><FontAwesomeIcon icon={faCompass} /> Explorar</li></Link>
+                        <Link to='/notifications' className='mt-20 lg:mt-40 xl:mt-80 mb-5 header-link notification-link'>
+                            <li>
+                                <FontAwesomeIcon icon={faBell} /> Flops
+                                {unreadCount > 0 && (
+                                    <span className="notification-badge">{unreadCount > 99 ? '99+' : unreadCount}</span>
+                                )}
+                            </li>
+                        </Link>
                     </ul>
 
                     <ul className='nav' id='person_nav'>

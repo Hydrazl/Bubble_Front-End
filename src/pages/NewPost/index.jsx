@@ -5,17 +5,20 @@ import { faComments, faShareNodes } from "@fortawesome/free-solid-svg-icons";
 import Like from "../../components/LikeButton";
 import ProfilePic from "../../assets/tl.png";
 import ImgUpload from "./ImgUpload";
-import { useState } from "react";
-import { usePosts } from "../../context/PostContext";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 function NewPost() {
   const [postText, setPostText] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
   const [bubbleId, setBubbleId] = useState("");
-  const { addPost } = usePosts();
-  const navigate = useNavigate()
+  const [existingMediaPath, setExistingMediaPath] = useState("");
+  const [bubbles, setBubbles] = useState([]);
+
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const editId = searchParams.get("edit");
 
   const user = JSON.parse(localStorage.getItem("user")) || null;
   const backendURL = import.meta.env.VITE_API_URL;
@@ -25,11 +28,49 @@ function NewPost() {
       ? `${backendURL}/${user.profilePic}`
       : user?.profilePic || ProfilePic;
 
+  useEffect(() => {
+    async function fetchBubbles() {
+      try {
+        const res = await fetch(`${backendURL}/bubbles`);
+        const data = await res.json();
+        setBubbles(data);
+      } catch (err) {
+        console.error("Erro ao carregar bolhas:", err);
+      }
+    }
+
+    fetchBubbles();
+  }, []);
+
+  useEffect(() => {
+    if (!editId) return;
+
+    async function fetchPost() {
+      try {
+        const res = await fetch(`${backendURL}/posts/${editId}`);
+        const data = await res.json();
+
+        setPostText(data.description || "");
+        setBubbleId(data.bubbleId || "");
+
+        if (data.media) {
+          setExistingMediaPath(data.media);
+          const fullImage = `${backendURL}/uploads/users/${data.media}`;
+          setImagePreviewUrl(fullImage);
+        }
+      } catch (error) {
+        console.log("Erro ao carregar post:", error);
+      }
+    }
+
+    fetchPost();
+  }, [editId]);
+
   function handleSelectedImage(file) {
     if (!file) return;
     setSelectedImage(file);
-    const url = URL.createObjectURL(file);
-    setImagePreviewUrl(url);
+    setImagePreviewUrl(URL.createObjectURL(file));
+    setExistingMediaPath("");
   }
 
   async function handlePublish() {
@@ -44,15 +85,25 @@ function NewPost() {
     const formData = new FormData();
     formData.append("userId", userId);
     formData.append("description", postText);
-    formData.append("bubbleId", bubbleId);
+    formData.append("bubbleId", bubbleId ? parseInt(bubbleId) : null);
+
+    if (editId && !selectedImage && existingMediaPath) {
+      formData.append("existingMedia", existingMediaPath);
+    }
 
     if (selectedImage) {
       formData.append("postImage", selectedImage);
     }
 
+    const url = editId
+      ? `${backendURL}/posts/${editId}`
+      : `${backendURL}/posts`;
+
+    const method = editId ? "PUT" : "POST";
+
     try {
-      const res = await fetch(`${backendURL}/posts`, {
-        method: "POST",
+      const res = await fetch(url, {
+        method,
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -62,11 +113,11 @@ function NewPost() {
       const data = await res.json();
 
       if (!res.ok) {
-        alert(data.message || "Erro ao criar post.");
+        alert(data.message || "Erro ao criar/editar post.");
         return;
       }
 
-      window.location.href = '/home';
+      navigate("/home");
     } catch (error) {
       alert("Erro no servidor.");
     }
@@ -77,10 +128,11 @@ function NewPost() {
       <Header />
 
       <main className="mainNewPost">
-        <h1 className="titlenewpost">New Post</h1>
+        <h1 className="titlenewpost">
+          {editId ? "Editar Post" : "Novo Post"}
+        </h1>
 
         <section className="inputsnewpost">
-
           <div className="conteiner-title">
             <textarea
               placeholder="Publique algo... Como foi o seu dia?..."
@@ -118,10 +170,11 @@ function NewPost() {
                 onChange={(e) => setBubbleId(e.target.value)}
               >
                 <option value="">Selecione uma bolha...</option>
-                <option value="1">Tecnologia</option>
-                <option value="2">Fotografia</option>
-                <option value="3">Games</option>
-                <option value="4">Esportes</option>
+                {bubbles.map((b) => (
+                  <option key={b.id} value={b.id}>
+                    {b.name}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
@@ -129,7 +182,6 @@ function NewPost() {
           <div className="imgPost">
             <ImgUpload onSelect={handleSelectedImage} />
           </div>
-
         </section>
       </main>
 
@@ -185,11 +237,11 @@ function NewPost() {
 
         <div className="conteinerPublicar">
           <div className="ButtonsPublicar" onClick={handlePublish}>
-            <span>Publicar</span>
+            <span>{editId ? "Salvar Alterações" : "Publicar"}</span>
           </div>
 
-          <div className="ButtonCancel">
-            <span onClick={(e) => navigate('/home') }>Cancelar</span>
+          <div className="ButtonCancel" onClick={() => navigate("/home")}>
+            <span>Cancelar</span>
           </div>
         </div>
       </aside>

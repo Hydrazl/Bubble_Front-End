@@ -1,23 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, forwardRef, useImperativeHandle } from "react";
 import Post from "../../components/Postagem";
 import { getPosts, checkLike } from "../../services/api";
 
-export default function Feed() {
+const Feed = forwardRef(({ selectedBubbleId }, ref) => {
     const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         loadPosts();
-    }, []);
+    }, [selectedBubbleId]);
 
     const loadPosts = async () => {
         try {
             setLoading(true);
-            const data = await getPosts();
+            const data = await getPosts(selectedBubbleId);
             console.log('Posts carregados:', data);
-
-            // Verifica o status de like para cada post
+            
             const postsWithLikeStatus = await Promise.all(
                 data.map(async (post) => {
                     try {
@@ -35,8 +34,6 @@ export default function Feed() {
                     }
                 })
             );
-
-            console.log('Posts com status de like:', postsWithLikeStatus);
             setPosts(postsWithLikeStatus);
         } catch (error) {
             console.error('Erro ao carregar posts:', error);
@@ -45,8 +42,12 @@ export default function Feed() {
         }
     };
 
+    useImperativeHandle(ref, () => ({
+        reloadPosts: loadPosts
+    }));
+
     const handleRemovePost = (id) => {
-        setPosts(prevPosts => prevPosts.filter((posts) => posts.id !== id));
+        setPosts(prevPosts => prevPosts.filter((post) => post.id !== id));
     };
 
     if (loading) {
@@ -55,25 +56,24 @@ export default function Feed() {
 
     return (
         <main>
-            {/* Posts do banco de dados */}
             {posts.map((post) => (
-                <>
-                    <Post
-                        key={post.id}
-                        name={post.author?.nickname || "Usuário"}
-                        id={post.author?.username || "@user"}
-                        postId={post.id}
-                        userId={post.author?.id || ""}
-                        description={post.description || ""}
-                        url_image_perfil={post.author?.profilePic ? `${API_URL}/${post.author?.profilePic}` : "https://cdn-icons-png.flaticon.com/512/3177/3177440.png"}
-                        url_image_post={post.media ? `${API_URL}/uploads/users/${post.media}` : ''}
-                        initialLiked={post.liked}
-                        like_num={post.likesCount}
-                        com_num={post.commentsCount}
-                        onDelete={handleRemovePost}
-                    />
-                </>
+                <Post
+                    key={post.id}
+                    name={post.author?.nickname || "Usuário"}
+                    id={post.author?.username || "@user"}
+                    postId={post.id}
+                    userId={post.author?.id || ""}
+                    description={post.description || ""}
+                    url_image_perfil={post.author?.profilePic ? `${API_URL}/${post.author?.profilePic}` : "https://cdn-icons-png.flaticon.com/512/3177/3177440.png"}
+                    url_image_post={post.media ? `${API_URL}/uploads/users/${post.media}` : ''}
+                    initialLiked={post.liked}
+                    like_num={post.likesCount}
+                    com_num={post.commentsCount}
+                    onDelete={handleRemovePost}
+                />
             ))}
         </main>
     );
-}
+});
+
+export default Feed;
