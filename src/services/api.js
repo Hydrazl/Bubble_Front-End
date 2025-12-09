@@ -60,24 +60,20 @@ export async function createPost(formData) {
   }
 }
 
-export async function getPosts(filter) {
+export async function getPosts(bubbleId = null) {
   try {
-    const endpoint = `${API_URL}/posts${filter ? `?filter=${filter}` : ""
-      }`;
+    const endpoint = `${API_URL}/posts${bubbleId ? `?bubbleId=${bubbleId}` : ""}`;
     const token = localStorage.getItem("token");
 
     const { data } = await axios.get(endpoint, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token ? `Bearer ${token}` : undefined,
       },
     });
     return data;
-
   } catch (err) {
     console.log("Erro ao tentar buscar posts", err);
-    throw new Error(
-      err.response?.data?.message || "Erro ao buscar posts"
-    );
+    throw new Error(err.response?.data?.message || "Erro ao buscar posts");
   }
 }
 

@@ -14,6 +14,7 @@ function NewPost() {
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
   const [bubbleId, setBubbleId] = useState("");
   const [existingMediaPath, setExistingMediaPath] = useState("");
+  const [bubbles, setBubbles] = useState([]);
 
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -26,6 +27,20 @@ function NewPost() {
     user?.profilePic && !user.profilePic.startsWith("http")
       ? `${backendURL}/${user.profilePic}`
       : user?.profilePic || ProfilePic;
+
+  useEffect(() => {
+    async function fetchBubbles() {
+      try {
+        const res = await fetch(`${backendURL}/bubbles`);
+        const data = await res.json();
+        setBubbles(data);
+      } catch (err) {
+        console.error("Erro ao carregar bolhas:", err);
+      }
+    }
+
+    fetchBubbles();
+  }, []);
 
   useEffect(() => {
     if (!editId) return;
@@ -70,7 +85,7 @@ function NewPost() {
     const formData = new FormData();
     formData.append("userId", userId);
     formData.append("description", postText);
-    formData.append("bubbleId", bubbleId);
+    formData.append("bubbleId", bubbleId ? parseInt(bubbleId) : null);
 
     if (editId && !selectedImage && existingMediaPath) {
       formData.append("existingMedia", existingMediaPath);
@@ -105,7 +120,6 @@ function NewPost() {
       navigate("/home");
     } catch (error) {
       alert("Erro no servidor.");
-      console.error("Erro:", error);
     }
   }
 
@@ -156,10 +170,11 @@ function NewPost() {
                 onChange={(e) => setBubbleId(e.target.value)}
               >
                 <option value="">Selecione uma bolha...</option>
-                <option value="1">Tecnologia</option>
-                <option value="2">Fotografia</option>
-                <option value="3">Games</option>
-                <option value="4">Esportes</option>
+                {bubbles.map((b) => (
+                  <option key={b.id} value={b.id}>
+                    {b.name}
+                  </option>
+                ))}
               </select>
             </div>
           </div>

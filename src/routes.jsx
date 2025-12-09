@@ -28,6 +28,7 @@ function AppRoutes() {
                 <Route path="/bulhufas" element={<Chat />}></Route>
                 <Route path="/notifications" element={<Notification />}></Route>
                 <Route path="/home" element={<Home />}></Route>
+                <Route path="/bubble/:id" element={<Home />}></Route>
                 <Route path="/profile/:userId" element={<Profile />}></Route>
                 <Route path="/register" element={<Register />}></Route>
                 <Route path="/login/forgot" element={<Forgot />}></Route>
