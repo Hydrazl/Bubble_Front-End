@@ -59,7 +59,7 @@ export default function Header() {
                             <li><FontAwesomeIcon icon={faPlus} /> Novo Post</li>
                         </Link>
 
-                        <Link to='/notifications' className='mt-20 lg:mt-40 xl:mt-106 mb-5 header-link notification-link'>
+                        <Link to='/notifications' className='mt-20 lg:mt-40 xl:mt-80 mb-5 header-link notification-link'>
                             <li>
                                 <FontAwesomeIcon icon={faBell} /> Flops
                                 {unreadCount > 0 && (
@@ -75,7 +75,7 @@ export default function Header() {
                         </Link>
 
                         <Link to='/settings' className='header-link'>
-                            <li><FontAwesomeIcon icon={faGear} /> Configurações</li>
+                            <li><FontAwesomeIcon icon={faGear} /> Config.</li>
                         </Link>
                     </ul>
                 </nav>

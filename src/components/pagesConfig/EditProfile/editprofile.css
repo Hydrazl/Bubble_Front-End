@@ -7,7 +7,7 @@
 
 /* Left Column: Form */
 .ep-form-section {
-  @apply bg-gray-200 rounded-2xl p-8 shadow-sm h-full;
+  @apply bg-gray-200 rounded-2xl p-8 shadow-sm h-[95%];
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
 }
@@ -169,7 +169,7 @@
 }
 
 .ep-preview-bio-label {
-  @apply absolute -bottom-3 left-4 px-2 text-xs font-semibold text-gray-400 bg-[#2a2a3e];
+  @apply absolute -top-3 left-4 px-2 text-xs font-semibold text-gray-400 bg-[#2a2a3e];
 }
 
 /* Responsive */
