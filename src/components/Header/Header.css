@@ -9,7 +9,7 @@
 
 /* Agora o Link recebe os estilos que eram do li */
 .content a.header-link{
-    @apply my-[-30] cursor-pointer px-3 gap-2 flex w-[82%] h-11 items-center transform transition duration-300 hover:bg-[var(--hover)] hover:scale-105 select-none rounded-xl text-[--text];
+    @apply my-[-30] cursor-pointer px-3 gap-2 flex w-[82%] h-11 items-center transform transition duration-300 hover:bg-[var(--bg-secondary)] hover:scale-105 select-none rounded-xl text-[var(--text-primary)];
 }
 
 .content a.header-link:hover{

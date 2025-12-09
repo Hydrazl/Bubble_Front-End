@@ -136,7 +136,7 @@ export default function Notifications() {
                 </section>
                 <div className="notifications-box">
                     {notifications.length === 0 ? (
-                        <p style={{ textAlign: 'center', padding: '20px' }}>
+                        <p style={{ textAlign: 'center', padding: '20px', color: 'var(--text-secondary)' }}>
                             Você não tem notificações ainda
                         </p>
                     ) : (

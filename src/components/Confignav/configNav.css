@@ -6,31 +6,31 @@
 
 .configNavSidebar {
   @apply h-full w-64 flex flex-col;
-  background: var(--bg-secondary, #1c294b);
-  border-right: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
 }
 
 /* Header */
 .navHeader {
   @apply flex items-center gap-4 p-6 border-b;
-  border-color: var(--border-color, rgba(255, 255, 255, 0.1));
+  border-color: var(--border-color);
 }
 
 .backButton {
   @apply w-10 h-10 rounded-xl flex items-center justify-center transition-all;
-  background: var(--bg-tertiary, #0a1628);
-  color: var(--text-secondary, #94a3b8);
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
 }
 
 .backButton:hover {
-  background: var(--primary-color, #3b82f6);
-  color: #ffffff;
+  background: var(--primary-color);
+  color: var(--text-primary);
   transform: translateX(-2px);
 }
 
 .navHeader h1 {
   @apply text-xl font-bold;
-  color: var(--text-primary, #ffffff);
+  color: var(--text-primary);
 }
 
 /* Content */
@@ -68,22 +68,22 @@
 
 .navItem {
   @apply flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all;
-  color: var(--text-secondary, #94a3b8);
+  color: var(--text-secondary);
 }
 
 .navItem:hover {
-  background: var(--bg-tertiary, rgba(10, 22, 40, 0.5));
-  color: var(--text-primary, #ffffff);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
   transform: translateX(4px);
 }
 
 .navItem.active {
-  background: var(--primary-color, #3b82f6);
-  color: #ffffff;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
 }
 
 .navItem.active .navIcon {
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .navIcon {
@@ -92,11 +92,11 @@
 }
 
 .navItem:hover .navIcon {
-  color: var(--primary-color, #3b82f6);
+  color: var(--text-primary);
 }
 
 .navItem.active .navIcon {
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .navItem span {
