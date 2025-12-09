@@ -41,10 +41,10 @@ export default function Profile() {
     const loadUserPosts = async () => {
         try {
             setLoadingPosts(true);
-            // Fetch all posts and filter by userId
+          
             const allPosts = await getPosts();
 
-            // Filter posts to only show posts from this user
+           
             const userFilteredPosts = allPosts.filter(post =>
                 String(post.author?.id) === String(userId)
             );
@@ -53,11 +53,11 @@ export default function Profile() {
                 userFilteredPosts.map(async (post) => {
                     const like = await checkLike(post.id);
                     console.log(`Post ${post.id} - Like data:`, like);
-                    // Preserve the original likesCount from the post, only update the liked status
+                  
                     return {
                         ...post,
                         liked: like.liked,
-                        likesCount: post.likesCount // Keep the original likesCount from getPosts()
+                        likesCount: post.likesCount 
                     };
                 })
             );
@@ -83,10 +83,10 @@ export default function Profile() {
             return;
         }
 
-        // Função para carregar dados do perfil
+     
         const loadProfileData = async () => {
             try {
-                // Carrega dados do perfil
+                
                 const profileRes = await axios.get(`${API_URL}/profile/${userId}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -101,7 +101,7 @@ export default function Profile() {
                 setFollowingCount(profileRes.data.followingCount || 0);
                 setPostsCount(profileRes.data.postsCount || 0);
 
-                // Verifica status de seguir apenas se não for o próprio perfil
+               
                 if (String(currentUserId) !== String(userId)) {
                     try {
                         const followStatus = await checkFollowStatus(userId);
@@ -161,7 +161,7 @@ export default function Profile() {
 
             <main className="profile-main">
                 <div className="profile-content">
-                    {/* Banner */}
+                   
                     <div className="profile-banner">
                         {data?.banner ? (
                             <img src={`${API_URL}/${data.banner}`} alt="Banner" />
@@ -171,7 +171,7 @@ export default function Profile() {
                     </div>
 
                     <div className="profile-child-container">
-                        {/* Info do Perfil */}
+                     
                         <div className="profile-info">
                             <div className="profile-avatar">
                                 {data?.profilePic ? (
@@ -221,7 +221,7 @@ export default function Profile() {
                             </div>
                         </div>
 
-                        {/* Tabs */}
+                
                         <div className="profile-tabs">
                             <div className={`profile-tab ${activeTab === 'posts' ? 'profile-tab-active' : ''}`} onClick={() => setActiveTab('posts')}>
                                 Posts
@@ -231,7 +231,7 @@ export default function Profile() {
                             </div>
                         </div>
 
-                        {/* Conteúdo baseado na tab ativa */}
+                       
                         <div className="profile-grid">
                             {activeTab === 'posts' && (
                                 <div className="col-span-3">
@@ -259,7 +259,7 @@ export default function Profile() {
                                     )}
                                 </div>
                             )}
-                            {/* Adicione conteúdo para outras tabs aqui */}
+                           
                         </div>
                     </div>
                 </div>

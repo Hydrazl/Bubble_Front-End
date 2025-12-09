@@ -70,9 +70,9 @@ export default function Status({ onPostCreated }) {
     return (
         <div className='container-status'>
             <div className="music">
-                <FontAwesomeIcon icon={faMusic} id="icons" />
+                <FontAwesomeIcon icon={faMusic} id="icons" className="text-[var(--text-primary)]" />
             </div>
-            <div className='inside-line' />
+            <div className='inside-line'/>
             <div className="input-bubble">
                 <input
                     placeholder='Qual a bolha de hoje?'
@@ -82,7 +82,7 @@ export default function Status({ onPostCreated }) {
                     disabled={isLoading}
                 />
                 <div style={{ cursor: 'pointer' }}>
-                    <FontAwesomeIcon icon={faFaceSmile} id="smile-icon" />
+                    <FontAwesomeIcon icon={faFaceSmile} id="smile-icon" className="text-[var(--text-primary)]" />
                 </div>
             </div>
             <div className='inside-line' />
@@ -90,7 +90,7 @@ export default function Status({ onPostCreated }) {
                 onClick={handleSendPost}
                 style={{ cursor: isLoading ? 'not-allowed' : 'pointer', opacity: isLoading ? 0.5 : 1 }}
             >
-                <FontAwesomeIcon icon={faPaperPlane} id="arrow-icon" />
+                <FontAwesomeIcon icon={faPaperPlane} id="arrow-icon" className="text-[var(--text-primary)]" />
             </div>
         </div>
     )

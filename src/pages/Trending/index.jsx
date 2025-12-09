@@ -8,7 +8,7 @@ import AsideBorbulhando from '../../components/AsideBorbulhando';
 
 function Trending() {
 
-    const [posts, setPosts] = useState([]); // declara o estado
+    const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
