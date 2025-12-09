@@ -31,43 +31,43 @@ export default function ConfigNav() {
             title: "Configuração do perfil",
             items: [
                 { icon: faUser, text: "Editar perfil", path: "/settings/editprofile" },
-                { icon: faHeart, text: "Histórico e likes", path: "/history" },
-                { icon: faBan, text: "Bloqueados", path: "/blocked" },
-                { icon: faLock, text: "Privacidade", path: "/privacy" }
+                { icon: faHeart, text: "Histórico e likes", path: "#" },
+                { icon: faBan, text: "Bloqueados", path: "#" },
+                { icon: faLock, text: "Privacidade", path: "#" }
             ]
         },
         {
             title: "Configuração Geral",
             items: [
                 { icon: faPalette, text: "Personalizar", path: "/settings/persoprofile" },
-                { icon: faBell, text: "Notificações", path: "/notifications" },
-                { icon: faRss, text: "Recomendações e Feed", path: "/feed" },
-                { icon: faFilter, text: "Filtro de conteúdo", path: "/blockprofile" },
-                { icon: faVolumeHigh, text: "Voz e áudio", path: "/audio" },
-                { icon: faUniversalAccess, text: "Acessibilidade", path: "/acessebilidade" }
+                { icon: faBell, text: "Notificações", path: "#" },
+                { icon: faRss, text: "Recomendações e Feed", path: "#" },
+                { icon: faFilter, text: "Filtro de conteúdo", path: "#" },
+                { icon: faVolumeHigh, text: "Voz e áudio", path: "#" },
+                { icon: faUniversalAccess, text: "Acessibilidade", path: "#" }
             ]
         },
         {
             title: "Configuração For Creators",
             items: [
-                { icon: faStar, text: "Bubble for creators", path: "/forcreators" },
-                { icon: faCheckCircle, text: "Verificação oficial", path: "/verification" }
+                { icon: faStar, text: "Bubble for creators", path: "#" },
+                { icon: faCheckCircle, text: "Verificação oficial", path: "#" }
             ]
         },
         {
             title: "Segurança e conta",
             items: [
-                { icon: faKey, text: "Senha e Verificação", path: "/security" },
-                { icon: faDesktop, text: "Gerenciar Dispositivos", path: "/devices" },
-                { icon: faTrash, text: "Excluir Conta", path: "/deleteprofile" }
+                { icon: faKey, text: "Senha e Verificação", path: "/settings/security" },
+                { icon: faDesktop, text: "Gerenciar Dispositivos", path: "#" },
+                { icon: faTrash, text: "Excluir Conta", path: "/settings/deleteprofile" }
             ]
         },
         {
             title: "Suporte e Políticas",
             items: [
-                { icon: faShield, text: "Segurança e privacidade", path: "/securyandpriva" },
-                { icon: faFileContract, text: "Termos de Uso", path: "/termos" },
-                { icon: faCircleQuestion, text: "Central de Ajuda", path: "/help" }
+                { icon: faShield, text: "Segurança e privacidade", path: "#" },
+                { icon: faFileContract, text: "Termos de Uso", path: "#" },
+                { icon: faCircleQuestion, text: "Central de Ajuda", path: "#" }
             ]
         }
     ];
@@ -101,6 +101,15 @@ export default function ConfigNav() {
                             </ul>
                         </div>
                     ))}
+                    <button 
+                        className="logout-btn"
+                        onClick={() => {
+                            localStorage.removeItem("token");
+                            window.location.href = "/";
+                        }}
+                    >
+                        Sair da Conta
+                    </button>
                 </nav>
 
                 <div className="navFooter">

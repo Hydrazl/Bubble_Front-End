@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare, faImage, faUser } from "@fortawesome/free-solid-svg-icons";
-import "./editprofile.css";
+import { faSpinner, faSave } from "@fortawesome/free-solid-svg-icons";
+import { LuCamera, LuUpload } from "react-icons/lu";
+import "./EditProfile.css";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
 
 export default function EditProfile() {
   const token = localStorage.getItem("token");
-  const userId = JSON.parse(atob(token.split(".")[1])).id;
+  const userId = token ? JSON.parse(atob(token.split(".")[1])).id : null;
 
   const [profile, setProfile] = useState({
     nickname: "",
@@ -20,6 +21,11 @@ export default function EditProfile() {
 
   const [bannerFile, setBannerFile] = useState(null);
   const [profilePicFile, setProfilePicFile] = useState(null);
+
+  // Preview states
+  const [bannerPreview, setBannerPreview] = useState(null);
+  const [profilePreview, setProfilePreview] = useState(null);
+
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -30,23 +36,49 @@ export default function EditProfile() {
         });
 
         const data = res.data;
-
         setProfile({
           nickname: data.nickname || "",
           username: data.username || "",
           description: data.description || "",
-          banner: data.banner ? `${API_URL}/${data.banner}` : "",
-          profilePic: data.profilePic ? `${API_URL}/${data.profilePic}` : ""
+          banner: data.banner || "",
+          profilePic: data.profilePic || ""
         });
+
+        // Initial previews from existing data
+        if (data.banner) setBannerPreview(`${API_URL}/${data.banner}`);
+        if (data.profilePic) setProfilePreview(`${API_URL}/${data.profilePic}`);
+
       } catch (error) {
         console.error("Erro ao carregar perfil:", error);
       }
     }
 
-    fetchProfile();
+    if (token) fetchProfile();
   }, [token]);
 
+  const handleFileChange = (e, type) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        if (type === 'profile') {
+          setProfilePicFile(file);
+          setProfilePreview(reader.result);
+        } else if (type === 'banner') {
+          setBannerFile(file);
+          setBannerPreview(reader.result);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   async function handleSave() {
+    if (!profile.nickname.trim()) {
+      alert("O nome de exibição é obrigatório.");
+      return;
+    }
+
     setLoading(true);
     try {
       const formData = new FormData();
@@ -63,7 +95,7 @@ export default function EditProfile() {
           "Content-Type": "multipart/form-data"
         }
       });
-      
+
       alert("Perfil atualizado com sucesso!");
     } catch (error) {
       console.error("Erro ao salvar:", error);
@@ -74,140 +106,132 @@ export default function EditProfile() {
   }
 
   return (
-    <div className="containerSettings">
-      <div className="settingsHeader">
-        <h1>Editar Perfil</h1>
-        <p>Personalize suas informações e aparência</p>
-      </div>
+    <div className="ep-container">
 
-      {/* Banner Section */}
-      <div className="settingsCard">
-        <div className="cardHeader">
-          <div className="cardTitle">
-            <FontAwesomeIcon icon={faImage} />
-            <h2>Banner do Perfil</h2>
-          </div>
-          <span className="cardDescription">Imagem de capa (recomendado: 1500x500px)</span>
+      {/* Left Column: Form */}
+      <div className="ep-form-section">
+        <div className="ep-header-section">
+          <h1>Editar Perfil</h1>
+          <p>Personalize suas informações e aparência</p>
         </div>
-        
-        <div className="bannerContainer">
-          <div className="bannerPreview">
-            <img
-              src={bannerFile ? URL.createObjectURL(bannerFile) : (profile.banner || "https://via.placeholder.com/1500x500/1c294b/ffffff?text=Sem+Banner")}
-              alt="banner"
+
+        <div className="ep-input-group">
+          {/* Nickname Input */}
+          <div className="ep-input-field">
+            <label className="ep-label" htmlFor="nickname">Nome de Exibição</label>
+            <input
+              type="text"
+              id="nickname"
+              className="ep-input"
+              value={profile.nickname}
+              onChange={(e) => setProfile({ ...profile, nickname: e.target.value })}
+              placeholder="Digite o seu nome de exibição"
             />
-            <label className="editOverlay">
-              <FontAwesomeIcon icon={faPenToSquare} />
-              <span>Alterar Banner</span>
-              <input
-                type="file"
-                accept="image/*"
-                style={{ display: "none" }}
-                onChange={(e) => setBannerFile(e.target.files[0])}
-              />
+          </div>
+
+          {/* Profile Pic Input */}
+          <div className="ep-input-field">
+            <label className="ep-label">Foto de Perfil</label>
+            <label htmlFor="profilePic" className="ep-photo-input">
+              <LuCamera size={20} />
+              <span>Escolher Foto</span>
             </label>
-          </div>
-        </div>
-      </div>
-
-      {/* Profile Info Section */}
-      <div className="settingsCard">
-        <div className="cardHeader">
-          <div className="cardTitle">
-            <FontAwesomeIcon icon={faUser} />
-            <h2>Informações do Perfil</h2>
-          </div>
-        </div>
-
-        <div className="twoColumnGrid">
-          {/* Profile Picture */}
-          <div className="profilePictureSection">
-            <label className="inputLabel">Foto de Perfil</label>
-            <div className="profilePictureGrid">
-              <div className="profilePreview square">
-                <img
-                  src={profilePicFile ? URL.createObjectURL(profilePicFile) : (profile.profilePic || "https://via.placeholder.com/150/1c294b/ffffff?text=User")}
-                  alt="profile square"
-                />
-              </div>
-              
-              <div className="profilePreview circle">
-                <img
-                  src={profilePicFile ? URL.createObjectURL(profilePicFile) : (profile.profilePic || "https://via.placeholder.com/150/1c294b/ffffff?text=User")}
-                  alt="profile circle"
-                />
-              </div>
-
-              <label className="uploadButton">
-                <FontAwesomeIcon icon={faPenToSquare} />
-                <span>Alterar Foto</span>
-                <input
-                  type="file"
-                  accept="image/*"
-                  style={{ display: "none" }}
-                  onChange={(e) => setProfilePicFile(e.target.files[0])}
-                />
-              </label>
-            </div>
-            <span className="inputHelper">Visualização: quadrada e circular</span>
+            <input
+              type="file"
+              id="profilePic"
+              accept="image/*"
+              hidden
+              onChange={(e) => handleFileChange(e, 'profile')}
+            />
           </div>
 
-          {/* Name and Username */}
-          <div className="inputGroup">
-            <div className="inputField">
-              <label className="inputLabel">Nome de Exibição</label>
-              <input
-                type="text"
-                value={profile.nickname}
-                onChange={(e) => setProfile({ ...profile, nickname: e.target.value })}
-                className="styledInput"
-                placeholder="Seu nome"
-              />
-            </div>
+          {/* Banner Input */}
+          <div className="ep-input-field">
+            <label className="ep-label">Banner</label>
+            <label htmlFor="banner" className="ep-banner-input">
+              <LuUpload size={24} className="text-gray-500" />
+              <span>Clique para fazer upload</span>
+              <span className="text-xs text-gray-400 mt-1">PNG, JPG até 10MB</span>
+            </label>
+            <input
+              type="file"
+              id="banner"
+              accept="image/*"
+              hidden
+              onChange={(e) => handleFileChange(e, 'banner')}
+            />
+          </div>
 
-            <div className="inputField">
-              <label className="inputLabel">Nome de Usuário</label>
-              <div className="inputWithPrefix">
-                <span className="inputPrefix">@</span>
-                <input
-                  type="text"
-                  value={profile.username}
-                  onChange={(e) => setProfile({ ...profile, username: e.target.value })}
-                  className="styledInput withPrefix"
-                  placeholder="username"
-                />
-              </div>
-            </div>
+          {/* Description Input */}
+          <div className="ep-input-field">
+            <label className="ep-label" htmlFor="description">Descrição</label>
+            <textarea
+              id="description"
+              className="ep-textarea"
+              maxLength={150}
+              value={profile.description}
+              onChange={(e) => setProfile({ ...profile, description: e.target.value })}
+              placeholder="Conte um pouco sobre você..."
+              rows={4}
+            />
+            <small className="ep-char-count">{profile.description.length}/150</small>
           </div>
         </div>
 
-        {/* Bio */}
-        <div className="inputField">
-          <label className="inputLabel">
-            Biografia
-            <span className="charCount">{profile.description.length}/200</span>
-          </label>
-          <textarea
-            value={profile.description}
-            onChange={(e) => setProfile({ ...profile, description: e.target.value })}
-            className="styledTextarea"
-            maxLength={200}
-            placeholder="Conte um pouco sobre você..."
-            rows={4}
-          />
-        </div>
-      </div>
-
-      {/* Save Button */}
-      <div className="settingsActions">
-        <button 
-          className="saveButton" 
+        <button
+          className="ep-save-button"
           onClick={handleSave}
           disabled={loading}
         >
-          {loading ? "Salvando..." : "Salvar Alterações"}
+          {loading ? <FontAwesomeIcon icon={faSpinner} spin /> : <FontAwesomeIcon icon={faSave} />}
+          <span>{loading ? "Salvando..." : "Salvar Alterações"}</span>
         </button>
       </div>
+
+      {/* Right Column: Live Preview */}
+      <div className="ep-preview-section">
+        <div className="ep-header-section">
+          <h1>Pré-visualização</h1>
+        </div>
+
+        <div className="ep-preview-card">
+          {/* Banner */}
+          <div className="ep-preview-banner">
+            {bannerPreview ? (
+              <img src={bannerPreview} alt="Banner Preview" />
+            ) : (
+              <div className="ep-preview-banner-placeholder">
+                <LuUpload size={32} />
+                <span>Sem banner</span>
+              </div>
+            )}
+          </div>
+
+          {/* Info */}
+          <div className="ep-preview-info">
+            <div className="ep-preview-avatar">
+              {profilePreview ? (
+                <img src={profilePreview} alt="Profile Preview" />
+              ) : (
+                <div className="ep-preview-avatar-placeholder">
+                  <LuCamera size={24} />
+                </div>
+              )}
+            </div>
+
+            <div className="ep-preview-details">
+              <h2>{profile.nickname || "Seu Nome"}</h2>
+              <h6>@{profile.username || "username"}</h6>
+
+              <div className="ep-preview-bio">
+                <span className="ep-preview-bio-label">Bio:</span>
+                <p>{profile.description || "Sua biografia aparecerá aqui..."}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   );
 }

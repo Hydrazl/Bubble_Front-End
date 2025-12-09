@@ -1,7 +1,7 @@
 import { useTheme } from '../../../utils/theme/ThemeContext';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSun, faMoon, faPalette, faDesktop } from "@fortawesome/free-solid-svg-icons";
-import "./themeSettings.css";
+import "./ThemeSettings.css";
 
 export default function ThemeSettings() {
     const { theme, toggleTheme, isDark, setLightTheme, setDarkTheme } = useTheme();

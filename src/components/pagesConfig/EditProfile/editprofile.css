@@ -1,234 +1,184 @@
 @import 'tailwindcss';
 
-.containerSettings {
-  @apply flex flex-col gap-6 p-8 w-full min-h-screen ml-60 mt-20;
-  background: var(--bg-primary, #0f1a33);
-  color: var(--text-primary, #ffffff);
+.ep-container {
+  @apply w-full max-w-7xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start;
+  color: var(--text-primary);
 }
 
-.settingsHeader {
-  @apply mb-4;
+/* Left Column: Form */
+.ep-form-section {
+  @apply bg-gray-200 rounded-2xl p-8 shadow-sm h-full;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
 }
 
-.settingsHeader h1 {
+.ep-header-section {
+  @apply mb-8;
+}
+
+.ep-header-section h1 {
   @apply text-3xl font-bold mb-2;
-  color: var(--text-primary, #ffffff);
+  color: var(--text-primary);
 }
 
-.settingsHeader p {
+.ep-header-section p {
   @apply text-base;
-  color: var(--text-secondary, #94a3b8);
+  color: var(--text-secondary);
 }
 
-/* Cards */
-.settingsCard {
-  @apply rounded-2xl p-6 transition-all;
-  background: var(--bg-secondary, #1c294b);
-  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+.ep-input-group {
+  @apply flex flex-col gap-6;
 }
 
-.settingsCard:hover {
-  border-color: var(--border-color-hover, rgba(59, 130, 246, 0.3));
-}
-
-.cardHeader {
-  @apply mb-6 pb-4 border-b;
-  border-color: var(--border-color, rgba(255, 255, 255, 0.1));
-}
-
-.cardTitle {
-  @apply flex items-center gap-3 mb-2;
-}
-
-.cardTitle svg {
-  @apply text-xl;
-  color: var(--primary-color, #3b82f6);
-}
-
-.cardTitle h2 {
-  @apply text-xl font-semibold;
-  color: var(--text-primary, #ffffff);
-}
-
-.cardDescription {
-  @apply text-sm;
-  color: var(--text-secondary, #94a3b8);
-}
-
-/* Banner Container */
-.bannerContainer {
-  @apply w-full;
-}
-
-.bannerPreview {
-  @apply relative w-full h-[200px] rounded-xl overflow-hidden group;
-  background: var(--bg-tertiary, #0a1628);
-}
-
-.bannerPreview img {
-  @apply w-full h-full object-cover;
-}
-
-.editOverlay {
-  @apply absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 
-         flex flex-col items-center justify-center gap-2 cursor-pointer transition-all duration-300;
-}
-
-.editOverlay svg {
-  @apply text-3xl text-white;
-}
-
-.editOverlay span {
-  @apply text-white font-medium;
-}
-
-/* Two Column Grid */
-.twoColumnGrid {
-  @apply grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6;
-}
-
-/* Profile Picture Section */
-.profilePictureSection {
-  @apply flex flex-col gap-4;
-}
-
-.profilePictureGrid {
-  @apply grid grid-cols-2 gap-4 items-start;
-}
-
-.profilePreview {
-  @apply relative overflow-hidden border-2 transition-all;
-  border-color: var(--border-color, rgba(255, 255, 255, 0.1));
-  background: var(--bg-tertiary, #0a1628);
-}
-
-.profilePreview:hover {
-  border-color: var(--primary-color, #3b82f6);
-}
-
-.profilePreview.square {
-  @apply w-full aspect-square rounded-xl;
-}
-
-.profilePreview.circle {
-  @apply w-full aspect-square rounded-full;
-}
-
-.profilePreview img {
-  @apply w-full h-full object-cover;
-}
-
-.uploadButton {
-  @apply col-span-2 flex items-center justify-center gap-2 p-4 rounded-xl 
-         cursor-pointer transition-all border-2 border-dashed;
-  background: var(--bg-tertiary, #0a1628);
-  border-color: var(--border-color, rgba(255, 255, 255, 0.2));
-  color: var(--text-secondary, #94a3b8);
-}
-
-.uploadButton:hover {
-  border-color: var(--primary-color, #3b82f6);
-  color: var(--primary-color, #3b82f6);
-  background: rgba(59, 130, 246, 0.05);
-}
-
-.uploadButton svg {
-  @apply text-lg;
-}
-
-/* Input Fields */
-.inputGroup {
-  @apply flex flex-col gap-4;
-}
-
-.inputField {
+.ep-input-field {
   @apply flex flex-col gap-2;
 }
 
-.inputLabel {
-  @apply text-sm font-medium flex items-center justify-between;
-  color: var(--text-primary, #ffffff);
+.ep-label {
+  @apply text-lg font-medium mb-1 flex items-center gap-2;
+  color: var(--text-primary);
 }
 
-.charCount {
-  @apply text-xs font-normal;
-  color: var(--text-secondary, #94a3b8);
+/* Custom File Inputs */
+.ep-photo-input {
+  @apply flex items-center justify-center gap-2 w-full py-3 rounded-xl cursor-pointer transition-all font-medium text-white;
+  background: var(--primary-color);
 }
 
-.inputHelper {
-  @apply text-xs;
-  color: var(--text-secondary, #94a3b8);
+.ep-photo-input:hover {
+  background: var(--primary-color-hover);
 }
 
-.styledInput {
-  @apply w-full p-3 rounded-xl outline-none transition-all border-2;
-  background: var(--bg-tertiary, #0a1628);
-  color: var(--text-primary, #ffffff);
-  border-color: var(--border-color, rgba(255, 255, 255, 0.1));
+.ep-banner-input {
+  @apply flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-xl cursor-pointer transition-all;
+  border-color: var(--border-color);
+  background: transparent;
 }
 
-.styledInput:focus {
-  border-color: var(--primary-color, #3b82f6);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+.ep-banner-input:hover {
+  border-color: var(--primary-color);
+  background: rgba(59, 130, 246, 0.05);
 }
 
-.styledInput::placeholder {
-  color: var(--text-secondary, rgba(148, 163, 184, 0.5));
+.ep-banner-input span {
+  @apply text-sm mt-2;
+  color: var(--text-secondary);
 }
 
-.inputWithPrefix {
-  @apply relative flex items-center;
+/* Text Inputs */
+.ep-input {
+  @apply w-full p-4 rounded-xl outline-none transition-all border text-lg;
+  background: var(--bg-primary);
+  /* Slightly lighter/darker than form bg */
+  color: var(--text-primary);
+  border-color: var(--border-color);
 }
 
-.inputPrefix {
-  @apply absolute left-3 text-base font-medium;
-  color: var(--text-secondary, #94a3b8);
+.ep-input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
 }
 
-.styledInput.withPrefix {
-  @apply pl-8;
+.ep-textarea {
+  @apply w-full p-4 rounded-xl outline-none transition-all border resize-none text-base;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+  min-height: 120px;
 }
 
-.styledTextarea {
-  @apply w-full p-3 rounded-xl outline-none transition-all border-2 resize-none;
-  background: var(--bg-tertiary, #0a1628);
-  color: var(--text-primary, #ffffff);
-  border-color: var(--border-color, rgba(255, 255, 255, 0.1));
+.ep-textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
 }
 
-.styledTextarea:focus {
-  border-color: var(--primary-color, #3b82f6);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+.ep-char-count {
+  @apply text-xs text-right mt-1;
+  color: var(--text-secondary);
 }
 
-.styledTextarea::placeholder {
-  color: var(--text-secondary, rgba(148, 163, 184, 0.5));
+.ep-save-button {
+  @apply w-full py-4 mt-8 rounded-xl font-bold text-lg text-white transition-all flex items-center justify-center gap-2;
+  background: var(--primary-color);
 }
 
-/* Actions */
-.settingsActions {
-  @apply flex justify-end gap-4;
-}
-
-.saveButton {
-  @apply px-8 py-3 rounded-xl font-medium cursor-pointer transition-all;
-  background: var(--primary-color, #3b82f6);
-  color: #ffffff;
-}
-
-.saveButton:hover:not(:disabled) {
-  background: var(--primary-color-hover, #2563eb);
+.ep-save-button:hover:not(:disabled) {
+  background: var(--primary-color-hover);
   transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
-.saveButton:disabled {
-  @apply opacity-50 cursor-not-allowed;
+.ep-save-button:disabled {
+  @apply opacity-70 cursor-not-allowed;
+}
+
+/* Right Column: Live Preview */
+.ep-preview-section {
+  @apply sticky top-6;
+}
+
+.ep-preview-card {
+  @apply w-full overflow-hidden rounded-2xl shadow-2xl;
+  background: #2a2a3e;
+  /* Fixed dark bg for preview as per design, or use var if desired */
+}
+
+/* Preview Banner */
+.ep-preview-banner {
+  @apply w-full h-40 relative overflow-hidden bg-gradient-to-br from-gray-700 to-gray-800;
+}
+
+.ep-preview-banner img {
+  @apply w-full h-full object-cover;
+}
+
+.ep-preview-banner-placeholder {
+  @apply w-full h-full flex flex-col items-center justify-center text-gray-400 gap-2;
+}
+
+/* Preview Info */
+.ep-preview-info {
+  @apply px-6 -mt-12 relative z-10 pb-6;
+}
+
+.ep-preview-avatar {
+  @apply w-24 h-24 rounded-full border-4 overflow-hidden shadow-xl mb-4;
+  background: #1a1a2e;
+  border-color: #2a2a3e;
+}
+
+.ep-preview-avatar img {
+  @apply w-full h-full object-cover;
+}
+
+.ep-preview-avatar-placeholder {
+  @apply w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-600 to-gray-700 text-gray-300;
+}
+
+.ep-preview-details h2 {
+  @apply text-2xl font-bold text-white;
+}
+
+.ep-preview-details h6 {
+  @apply text-sm text-gray-400 mb-4;
+}
+
+.ep-preview-bio {
+  @apply w-full min-h-[100px] text-justify break-words border-2 border-[#1a1a2e] rounded-lg px-4 py-3 relative bg-[#2a2a3e]/50;
+  color: #e2e8f0;
+}
+
+.ep-preview-bio-label {
+  @apply absolute -bottom-3 left-4 px-2 text-xs font-semibold text-gray-400 bg-[#2a2a3e];
 }
 
 /* Responsive */
 @media (max-width: 1024px) {
-  .containerSettings {
-    @apply ml-0 mt-0;
+  .ep-container {
+    @apply grid-cols-1 p-4;
+  }
+
+  .ep-preview-section {
+    @apply static mt-8;
   }
 }

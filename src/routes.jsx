@@ -14,6 +14,8 @@ import Status from './components/Status';
 import NewPost from './pages/NewPost';
 import EditProfile from "./components/pagesConfig/EditProfile";
 import ThemeSettings from "./components/pagesConfig/ThemeSettings";
+import PasswordSecurity from "./components/pagesConfig/PasswordSecurity";
+import DeleteAccount from "./components/pagesConfig/DeleteAccount";
 
 function AppRoutes() {
     return (
@@ -31,12 +33,14 @@ function AppRoutes() {
                 <Route path="/login/forgot/sent-email" element={<Sent />}></Route>
                 <Route path="/login/forgot/unfound" element={<Unfound />}></Route>
                 <Route path="/settings/" element={<Settings />}>
+                    <Route index element={<EditProfile />} />
                     <Route path="editprofile" element={<EditProfile />} />
                     <Route path="persoprofile" element={<ThemeSettings />} />
+                    <Route path="security" element={<PasswordSecurity />} />
+                    <Route path="deleteprofile" element={<DeleteAccount />} />
                 </Route>
                 <Route path="/status" element={<Status/>}></Route>
                 <Route path="/newpost" element={<NewPost/>}></Route>
-                <Route path="/config/edit-profile/:userId" element={<EditProfile />} />
             </Routes>
         </BrowserRouter>
     )
